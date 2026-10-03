@@ -7,10 +7,10 @@
 ## 결론
 
 - 재정·물가: IMF DataMapper v2가 공통 경로다. 순부채 API의 SVK 결측은 같은 April 2026 Fiscal Monitor 공식 부록 A8 표로 보완할 수 있다. 총부채로 대체할 필요가 없다.
-- 5년물: 13개국에서 일별 5년물 자료 다운로드와 숫자·관측일을 확인했다. 단, SVK는 공식 추정 제로쿠폰 곡선이고 DEU/NLD/FRA/GBR는 Riksbank가 제공하는 Refinitiv 계열이다. 그대로 같은 정의의 Baseline 입력으로 승인된 것은 아니다.
+- 5년물: 14개국에서 일별 5년물 자료 다운로드와 숫자·관측일을 확인했다. 단, SVK는 공식 추정 제로쿠폰 곡선이고 DEU/NLD/FRA/GBR는 Riksbank가 제공하는 Refinitiv 계열이다. 그대로 같은 정의의 Baseline 입력으로 승인된 것은 아니다.
 - ISR: 월평균 명목 5년 제로쿠폰 자료까지 확인했다. 일별 기준의 최신성 요건에는 별도 보류가 필요하다.
 - NZL: 공식 일별 자료와 다운로드 주소는 찾았지만 직접 다운로드는 403이었다.
-- 12개국은 이 조사에서 사용할 수 있는 일별 무인증 수집 경로를 아직 확정하지 못했다. 이는 공식 자료가 존재하지 않는다는 결론이 아니다.
+- 11개국은 이 조사에서 사용할 수 있는 일별 무인증 수집 경로를 아직 확정하지 못했다. 이는 공식 자료가 존재하지 않는다는 결론이 아니다.
 - 시장품질: BIS 국채 잔액과 일부 국가의 거래량은 확보 가능하다. 27개국 공통 유동성·등급·자본통제 자료 및 하나의 완성된 점수는 확보하지 못했다. Adjusted의 해당 축을 임의 수치로 채우거나 가중치를 재배분하지 않는다.
 
 ## 1. 재정·물가: IMF
@@ -58,7 +58,7 @@ GGXONLB는 primary balance이므로 전체 재정수지 대체값으로 사용�
 | AUS | 호주 | 수신 | RBA F2, FCMYGBAG5D | 2026-09-30, 4.983; 보간 고정만기 |
 | NZL | 뉴질랜드 | 후보 | RBNZ B2 daily close workbook | 공식 화면 5Y 존재; 직접 파일 요청 403 |
 | KOR | 한국 | 미확정 | BOK ECOS / KOFIA 채권정보 후보 | ECOS key 요구; KOFIA의 무인증 자동수집 경로 미확정 |
-| CZE | 체코 | 후보 | CNB ARAD bond-yield metadata / REST | 월별 5년 basket은 잔존 3–7년; 일별 정확한 경로 미확정 |
+| CZE | 체코 | 후보 | CNB ARAD bond-yield metadata / REST | 월별 5년 basket은 잔존 3.5–6.5년; 일별 정확한 경로 미확정 |
 | BGR | 불가리아 | 미확정 | BNB / 재무부 국채 자료 | 원래 5년 발행물의 재입찰 금리는 현재 고정 5년물이 아님 |
 | CAN | 캐나다 | 수신 | BoC Valet BD.CDN.5YR.DQ.YLD | 2026-10-01, 3.62; benchmark bond |
 | IRL | 아일랜드 | 미확정 | NTMA 발행·입찰 자료 | 개별 발행물 결과를 일별 5Y로 대체하지 않음 |
@@ -77,12 +77,12 @@ GGXONLB는 primary balance이므로 전체 재정수지 대체값으로 사용�
 | GBR | 영국 | 수신 | Riksbank GBGVB5Y | 2026-10-02, 4.932; 원천 Refinitiv; BoE curve는 정의 별도 |
 | FRA | 프랑스 | 수신 | Riksbank FRGVB5Y | 2026-10-02, 4.2843; 원천 Refinitiv |
 | ITA | 이탈리아 | 미확정 | Banca d’Italia / MEF 후보 | Rendistato 전체·만기구간 평균은 정확한 5Y 아님 |
-| BEL | 벨기에 | 후보 | NBB Data Explorer | 월별 5Y 후보 있음; 실제 API 식별자·응답 미확정 |
+| BEL | 벨기에 | 수신·검증 진행 | NBB DF_IROLOBE2, D.5Y.F | 2026-10-02, 원값 3.89; 고정 잔존만기 OLO; 단위·방법론 최종 확인 필요 |
 | USA | 미국 | 수신 | US Treasury daily curve BC_5YEAR | 2026-10-02, 5.06; par constant maturity |
 | JPN | 일본 | 수신 | MoF JGB constant maturity, 5年 | 2026-10-01, 2.407; 명목 국채 곡선 |
 
-13개국 일별 수신 = ISL NOR AUS CAN SWE NLD DEU SVK ESP GBR FRA USA JPN.
-월별 ISR까지 14개국에서 실제 숫자를 받았다. 나머지 13개국 중 NZL은 공식 화면·다운로드 주소까지 확인, 12개국은 경로 또는 지표를 미확정 상태로 남긴다.
+14개국 일별 수신 = ISL NOR AUS CAN SWE NLD DEU SVK ESP GBR FRA BEL USA JPN.
+월별 ISR까지 15개국에서 실제 숫자를 받았다. 나머지 12개국 중 NZL은 공식 화면·다운로드 주소까지 확인, 11개국은 경로 또는 지표를 미확정 상태로 남긴다. 수신 수는 전체 입력 검증 완료 수가 아니다.
 
 ### 인증 없이 수신한 주소와 파싱 주의
 
@@ -146,7 +146,7 @@ CP932 CSV, 헤더 5年, 일본 연호 R8.10.1=2026-10-01. 월별 최신 파일�
 ### 남은 경로에 대한 구체적 후속 조사
 
 - NZL: [B2 공식 페이지](https://www.rbnz.govt.nz/statistics/series/exchange-and-interest-rates/wholesale-interest-rates), [daily close XLSX](https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b2/hb2-daily-close.xlsx). 직접 요청 403은 인증필수라는 증거가 아니다. 사이트가 지원하는 공개 다운로드 방식·원천 NZFMA/LSEG 조건을 확인한다.
-- CZE: [CNB bond metadata](https://www.cnb.cz/docs/ARADY/MET_LIST/cmir_en.pdf), [ARAD REST 문서](https://www.cnb.cz/docs/arad20/dokumentace/arad_rest_api_cs.pdf). API base https://www.cnb.cz/aradb/api/v1 . 월별 3–7년 basket과 정확한 일별 고정5Y를 구분한다.
+- CZE: [CNB bond metadata](https://www.cnb.cz/docs/ARADY/MET_LIST/cmir_en.pdf), [ARAD REST 문서](https://www.cnb.cz/docs/arad20/dokumentace/arad_rest_api_cs.pdf). API base https://www.cnb.cz/aradb/api/v1 . 월별 3.5–6.5년 basket과 정확한 일별 고정5Y를 구분한다.
 - BEL: [NBB 금융시장 통계](https://www.nbb.be/en/statistics/financial-markets/publications-and-figures), [Data Explorer 안내](https://www.nbb.be/en/statistics/contact-and-more-information/nbbstat-data-explorer). 실제 공개 계열 코드·주기를 찾기 전에는 확보 처리하지 않는다.
 - KOR: ECOS key를 배포판에 내장하지 않는다. KOFIA 최종호가수익률의 공개 다운로드·재사용 조건을 우선 확인한다. 협회 통계는 정부기관 통계와 출처 유형을 구분한다.
 - DNK/PRT/IRL/LTU/HRV/SVN/BGR/AUT/ITA: 공식 중앙은행·부채관리기관의 일별 5Y 파일 또는 공개 통계 계열을 추가 확인한다. 입찰금리, 10년 convergence yield, 정책금리, 원래 5년 만기로 발행된 오래된 종목, 만기구간 평균, 그래프 픽셀 판독은 대체 입력으로 승인하지 않는다.
@@ -202,3 +202,44 @@ IMF AREAER 온라인 데이터베이스의 [접근 안내](https://www.elibrary-
 5. 시장품질 미확정 상태를 그대로 출력한다. 모든 국가가 계산 가능한 완성 랭킹이라고 홍보하지 않는다.
 
 조사 결과는 원자료 수집 구현의 근거다. 승인된 수식·가중치·결측 원칙은 유지한다. 자료가 없는 국가의 숫자를 추정해서 채우는 방식으로 ‘27개국 완성’을 주장하지 않는다.
+
+
+## 6. 추가 조사 및 구현 착수 조건 (2026-10-04 KST)
+
+사용자 지시: **자료 확보를 완료한 다음 구현한다.** 자료 미확보 상태에서 제품을 먼저 만들고 빈 항목을 나중에 채우는 방식은 사용하지 않는다. 승인된 설계의 DATA_HOLD는 향후 운영 중 장애·결측에 대한 보호 장치이며, 초기 자료 확보 완료의 대체 조건이 아니다.
+
+현재 착수 상태: **BLOCKED — DATA ACQUISITION INCOMPLETE**.
+
+### 추가로 수신한 벨기에 5Y
+
+공식 Explorer https://dataexplorer.nbb.be/ 의 공개 설정에서 API base https://nsidisseminate-stat.nbb.be/rest 를 확인했다. 무인증 catalogue, structure 및 실제 자료를 받았다.
+
+- dataflow: BE2, DF_IROLOBE2, 1.0
+- dimension order: FREQ, IROLOBE2_MATUR, IROLOBE2_TYPE
+- 정확한 key: D.5Y.F
+- 자료: https://nsidisseminate-stat.nbb.be/rest/data/BE2,DF_IROLOBE2,1.0/D.5Y.F?startPeriod=2026-09-25
+- 구조: https://nsidisseminate-stat.nbb.be/rest/datastructure/BE2/DSD_IROLOBE2/1.0?references=all
+- F: fixed residual term을 기준으로 한 OLO reference rate. T는 전체 대출·채권 평균, A는 OLO 평균이므로 동일 key로 취급하지 않는다.
+- 2026-10-02 원값 3.89, OBS_STATUS=A, DECIMALS=2. 요청에서 관측행이 날짜순으로 오지 않았으므로 최대 날짜를 명시적으로 고른다.
+- 실제 수신은 완료했지만 단위·세부 방법론 대조 및 반복 수집 검증은 남아 있다.
+- [공식 재사용 안내](https://www.nbb.be/en/statistics/contact-and-more-information/nbbstat-data-explorer): 별도 표시가 없으면 비상업적 재사용 및 출처 표시가 가능하다는 안내. 배포 방식·개별 데이터 예외를 최종 확인한다.
+
+### 잘못된 후보 배제·정정
+
+- CNB REST 문서 3.4.1: api_key는 필수이며 계정에서 생성. 공개 웹 데이터와 REST 무인증은 다르다. REST를 무인증 수집 후보로 확정하지 않는다. 월별 5년 basket에 들어갈 수 있는 개별채권 잔존만기 범위는 **3.5–6.5년**이며 이전 초안의 3–7년 표현을 정정했다.
+- 실제 https://api.statbank.dk/v1/tableinfo/DNRENTD?format=JSON&lang=en 응답의 INSTRUMENT 목록에는 중앙은행 정책금리·DESTR·preDESTR 10개 계열만 있었다. 이 표는 현재 조사한 응답 기준으로 5Y 국채 공급원이 아니다.
+- ECB 공개 5년 Euro Area benchmark 및 AAA/all-issuer 곡선은 유로권 집계. 개별 국가 5Y 결측을 채우는 데 쓰지 않는다.
+- BPstat 공식 quadro 484는 10/5/2년 **월평균**을 명시한다. 정확한 5년 계열 ID와 일별 가능 여부는 미확정이다. 공식 페이지 존재를 자동수집 확보로 계산하지 않는다.
+- NZL 다운로드 403 및 KOFIA 공개 XML 접근은 확인했으나 최신 5Y 수집 경로가 검증 완료된 것은 아니다.
+
+### 착수 전 필수 확인 목록
+
+- [ ] 27개국 각각의 재정·물가 필수 전망연도 값과 동일 판본 확보
+- [ ] 27개국 각각의 5Y 원자료 수신, 정확한 명목/실질·만기·수익률 유형·단위 확인
+- [ ] 필요한 원화 FX 이력과 통화 전환·공통 날짜·창 길이 검증
+- [ ] MarketQuality의 규모·유동성·신용·접근성 원자료 및 공통 정의 확보
+- [ ] 각 자료의 최신성·누락·파싱 가능성, 반복 수집과 호출 제한 확인
+- [ ] 커뮤니티 배포에 맞는 사용·출처 표시·재배포 조건 확인
+- [ ] 실제 수신 표본으로 전체 입력표를 채워 빈 필수 항목이 없는지 확인
+
+문헌 조사·다운로드·진단용 파싱은 허용된 자료 검증 작업이다. 수집기 제품화, 점수 엔진, UI, 배포 workflow는 위 조건 충족 전 시작하지 않는다. 어떤 항목이 현재 조건으로 확보 불가능하면 그 근거와 영향부터 사용자에게 알리고, 동의 없이 국가·필수 축을 삭제하거나 다른 만기·자료로 대체하지 않는다.
