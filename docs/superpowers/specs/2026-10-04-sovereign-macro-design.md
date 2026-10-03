@@ -76,7 +76,7 @@ R_baseline = 25*(sqrt(1 + yield_5y_pct) - 1).
 S_baseline = 2*sqrt(F*R_baseline).
 
 Preserve full precision internally, round only for display. Use a numerically stable logistic evaluation.
-A negative nominal yield produces a negative R, so the original final formula is generally outside its real-valued domain. Mark BASELINE_DOMAIN_ERROR rather than clipping, taking an absolute value, or changing the original model. For yield <= -1 percentage point the inner square-root domain also fails. Validate finite values before scoring.
+A negative nominal yield produces a negative R, so the original final formula is generally outside its real-valued domain. Mark BASELINE_DOMAIN_ERROR rather than clipping, taking an absolute value, or changing the original model. For yield < -1 percentage point the inner square-root domain also fails; at exactly -1 the inner root is zero but R remains negative. Validate finite values before scoring.
 F is bounded by 50; R may exceed 50 and S may exceed 100. These are disclosed properties, not a reason to truncate Baseline. Net debt below zero gets NET_ASSET_SOVEREIGN without country-specific corrections.
 
 ## Adjusted v0.1 candidate
