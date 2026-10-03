@@ -8,7 +8,7 @@
 
 - 재정·물가: IMF DataMapper v2가 공통 경로다. 순부채 API의 SVK 결측은 같은 April 2026 Fiscal Monitor 공식 부록 A8 표로 보완할 수 있다. 총부채로 대체할 필요가 없다.
 - 5년물: 16개국에서 일별 5년물 자료 다운로드와 숫자·관측일을 확인했다. 이번 후속 조사에서 KOR와 ITA가 추가되었으나 ITA의 응답은 8월말까지만 포함하여 최신성 보류다. 단, SVK는 공식 추정 제로쿠폰 곡선이고 DEU/NLD/FRA/GBR는 Riksbank가 제공하는 Refinitiv 계열이다. 그대로 같은 정의의 Baseline 입력으로 승인된 것은 아니다.
-- ISR: 월평균 명목 5년 제로쿠폰 자료까지 확인했다. 일별 기준의 최신성 요건에는 별도 보류가 필요하다.
+- ISR: 월평균 명목 5년 제로쿠폰 자료까지 확인했다. HRV도 공식 월별 엑셀의 5년 열 숫자를 받았지만 정의·단위 대조가 남아 있다. 일별 기준 입력으로 바로 승인하지 않는다.
 - NZL: 공식 일별 자료와 다운로드 주소는 찾았지만 직접 다운로드는 403이었다.
 - PRT는 정확한 일별 계열과 숫자까지 연구용 대행 조회로 확인했지만 배포 환경의 직접 요청은 403이었다. 일별 원자료·경로가 아직 미확정인 국가는 9개국이다. 이는 공식 자료가 존재하지 않는다는 결론이 아니다.
 - 시장품질: BIS 국채 잔액과 일부 국가의 거래량은 확보 가능하다. 27개국 공통 유동성·등급·자본통제 자료 및 하나의 완성된 점수는 확보하지 못했다. Adjusted의 해당 축을 임의 수치로 채우거나 가중치를 재배분하지 않는다.
@@ -66,12 +66,12 @@ GGXONLB는 primary balance이므로 전체 재정수지 대체값으로 사용�
 | DNK | 덴마크 | 후보 | Nationalbank secondary-market / MTS 공개 호가 | DNRENTD는 5Y 없음; MTS 종목별 호가는 고정5Y 아님·직접 403 |
 | LTU | 리투아니아 | 미확정 | 재무부 시장 리뷰·입찰 | 리뷰 중단 / 개별 입찰; 고정만기 5Y 미확정 |
 | SWE | 스웨덴 | 수신 | Riksbank SEGVB5YC | 2026-10-02, 2.948; 원천 Refinitiv |
-| HRV | 크로아티아 | 미확정 | HNB / 재무부 후보 | 일별 5Y 미확정; 민간 ‘5-year’ 종목명만으로 식별 금지 |
+| HRV | 크로아티아 | 후보·월표 수신 | HNB G8b XLSX, HRV 시트의 5 g. 열 | 2026-08, 국내 EUR 원값 3.02 / 해외 EUR 3.21; 월평균·만기 정의/단위 대조 필요 |
 | NLD | 네덜란드 | 수신 | Riksbank NLGVB5Y | 2026-10-02, 3.3104; 원천 Refinitiv |
 | SVN | 슬로베니아 | 미확정 | 중앙은행 / 재무부 후보 | 확인된 10Y convergence를 5Y로 대체하지 않음 |
 | DEU | 독일 | 수신 | Riksbank DEGVB5Y | 2026-10-02, 3.1969; 원천 Refinitiv |
 | SVK | 슬로바키아 | 조건부·일별 수신 | NBS Yields_SK, ZCY5Y | 2026-09-25, 3.86; NSS 추정 제로쿠폰, 주 1회 배포 |
-| AUT | 오스트리아 | 미확정 | OeNB / debt office 후보 | UDRB는 잔존 1년 초과 채권 가중평균이며 5Y 아님 |
+| AUT | 오스트리아 | 후보·종목 식별 | OeKB benchmark 5Y: AT0000A2NW83 | 공식 기준종목은 식별; 표는 쿠폰·ISIN뿐이며 일별 시장수익률 미수신; UDRB 대체 금지 |
 | PRT | 포르투갈 | 연구용 수신·직접 접근 보류 | Banco de Portugal BPstat 12099457, daily | 2026-10-01, 3.60; 일별·주간 갱신·LSEG 원천; 직접 403 |
 | ISR | 이스라엘 | 조건부·월별 수신 | BOI ZCM, ZC_TSB_ZND_05Y_MA | 2026-09, 3.716070154; nominal zero-coupon 월평균 |
 | ESP | 스페인 | 수신 | Banco de España TI_1_3, D_G0B1F0ZO | 2026-09-30, 3.645; secondary market 5 años |
@@ -83,7 +83,7 @@ GGXONLB는 primary balance이므로 전체 재정수지 대체값으로 사용�
 | JPN | 일본 | 수신 | MoF JGB constant maturity, 5年 | 2026-10-01, 2.407; 명목 국채 곡선 |
 
 16개국 일별 직접 수신 = ISL NOR AUS KOR CAN SWE NLD DEU SVK ESP GBR FRA ITA BEL USA JPN. ITA는 실제 수신한 이력이 일별이라는 뜻이며 최신 관측을 확보한 것은 아니다.
-월별 ISR까지 직접 수신은 17개국. PRT 연구용 대행 수신까지 숫자를 확인한 국가는 18개국이지만 PRT를 배포판의 직접 수집 성공 수에 포함하지 않는다. 나머지 9개국 = NZL CZE BGR IRL DNK LTU HRV SVN AUT. 수신 수는 전체 입력 검증 완료 수가 아니다.
+월별 ISR까지 직접 수신은 17개국. PRT 연구용 대행 수신까지 숫자를 확인한 국가는 18개국이지만 PRT를 배포판의 직접 수집 성공 수에 포함하지 않는다. 나머지 일별 경로 미확정 9개국 = NZL CZE BGR IRL DNK LTU HRV SVN AUT. 후속 HRV 월별 표 숫자까지 포함하면 숫자를 본 국가 수는 19개국이지만, HRV의 정의 미확정·PRT의 대행 수신까지 합한 숫자이며 최신 일별 계산 입력 확보 수가 아니다. 수신 수는 전체 입력 검증 완료 수가 아니다.
 
 ### 인증 없이 수신한 주소와 파싱 주의
 
@@ -235,7 +235,7 @@ IMF AREAER 온라인 데이터베이스의 [접근 안내](https://www.elibrary-
 
 ### 착수 전 필수 확인 목록
 
-- [ ] 27개국 각각의 재정·물가 필수 전망연도 값과 동일 판본 확보
+- [x] 27개국 각각의 재정·물가 필수 전망연도 값과 동일 판본 확보 — 8절의 실제 연도별 수신 및 순부채 PDF 대조. 사용 조건·공표 달력의 후속 검증은 별도 항목이다.
 - [ ] 27개국 각각의 5Y 원자료 수신, 정확한 명목/실질·만기·수익률 유형·단위 확인
 - [ ] 필요한 원화 FX 이력과 통화 전환·공통 날짜·창 길이 검증
 - [ ] MarketQuality의 규모·유동성·신용·접근성 원자료 및 공통 정의 확보
@@ -334,3 +334,80 @@ https://bpstat.bportugal.pt/data/v1/domains/26/datasets/690b7b36fd36c0dbe249c48c
 - 이탈리아 5Y: 공식 일별 ZIP 두 방식으로 직접 수신. 최신 관측 부족 및 개별 사용 조건으로 보류.
 - 원자료·경로 미확정 9개국과 ISR 월주기, ITA 최신성, PRT 직접 접근, 시장품질 및 각 자료의 사용 조건은 남아 있다.
 - **BLOCKED — DATA ACQUISITION INCOMPLETE** 유지. 제품 구현은 시작하지 않았다.
+
+
+## 8. 필수 연도·환율 이력 검증 및 남은 국가 후속 조사 (2026-10-04 KST)
+
+### 재정·물가: 국가 키 확인에서 실제 27×6 입력 확인으로 진전
+
+네 DataMapper 지표를 인증 없이 다시 내려받아 27개 ISO3 각각의 2026~2031년 값이 숫자이며 유한한지 검사했다. 승인된 설계의 ND_current 기준연도는 실행일의 서울 달력연도이므로 이번 검증은 2026년을 포함한다.
+
+| 지표 | API 유효값 / 필수값 | 결측 | 공식 보완 후 상태 |
+|---|---:|---|---|
+| 순부채 GGXWDN_G01_GDP_PT | 156 / 162 | SVK의 2026~2031년 6개 | 같은 April 2026 PDF A8의 6개 값으로 162개 확보 |
+| 전체 재정수지 GGXCNL_G01_GDP_PT | 162 / 162 | 없음 | 필수 전망연도 모두 수신 |
+| 총부채 G_XWDG_G01_GDP_PT | 162 / 162 | 없음 | 필수 전망연도 모두 수신; 순부채 대체에 사용하지 않음 |
+| 연평균 물가 PCPIPCH | 162 / 162 | 없음 | 필수 전망연도 모두 수신 |
+
+순부채 PDF A8에서 API와 겹치는 **26개국 × 6년 = 156개 값**을 대조했다. PDF가 표시하는 0.1%p 정밀도로 반올림한 API 값과 **156개 전부 일치**, 차이 0개. SVK 보완은 이와 동일한 표의 58.0, 60.5, 62.8, 65.3, 68.2, 71.5다. PDF만의 반올림 정밀도를 유지하며 API 수준의 더 정밀한 숫자를 생성하지 않는다.
+
+별도 indicators metadata 응답에서 재정 세 지표는 Fiscal Monitor (April 2026), 물가는 WEO (April 2026), projection-year=2026임을 다시 확인했다. 재정 단위는 % of GDP, 물가는 Annual percent change. indicators의 last-modified는 재정 2026-04-15, 물가 2026-04-08로 표시되어 있으며 조회시각·판본 공개일과 혼동하지 않는다.
+
+이번 실제 응답의 SHA-256:
+
+| 원자료 | SHA-256 |
+|---|---|
+| 순부채 JSON | 336d4184e7a73a26c8cff7767e14f3ba0223b7a241eaf76a0e1778eb7fbe9586 |
+| 전체 재정수지 JSON | f5af1ba8b855973eddb50a1e174e8f2560134bffc19779ab8ae08cca88b22835 |
+| 총부채 JSON | 78c4e05c7e313e551c134209be2b984d8db183c02544bea9751f8fbda418247d |
+| 물가 JSON | 0c327da1a2f429c24bcaa79586509bb6358a43bf642067c925777318cc5cbc97 |
+| 순부채 공식 부록 PDF | e928d3df31fc5f7848392d8bff61095a019985c50be0d9fd12c8f15fed1ad5e3 |
+
+자료 확보 항목의 연도별 존재·판본 일치 확인은 완료했다. 향후 판본 변경·릴리스 달력 확인·사용 조건 및 운영 시 재조회 검증을 생략한다는 뜻은 아니다. 이번 작업에서 점수를 계산하거나 제품 수집기를 작성하지 않았다.
+
+### FX: 필요한 주요 통화의 1년·3년 창 실제 점검
+
+ECB 역사 XML을 다시 직접 수신했다. 이번 파일도 총 7,106개 날짜, 마지막 2026-10-02. 파일 SHA-256:
+807ad53568c849e894f9ea496c91684f530f23f60afc564d96f46702be494ceb
+
+- 검증 창: 2023-10-04~2026-10-02. 서울 기준 조사일 2026-10-04에서 3년 전 날짜를 시작으로, 제공자의 마지막 관측일까지 검사했다.
+- 전체 제공 날짜: 765개. 중복 날짜 없음.
+- ISK, NOK, AUD, NZD, KRW, CZK, CAD, DKK, SEK, ILS, GBP, USD, JPY 각각 KRW와 같은 날짜로 **765개 전부 연결**.
+- 해당 통화 값은 모두 양수·유한하며 위 창 안에서 통화별 누락 날짜 없음.
+- 연속 제공 날짜의 최대 간격은 5 **달력일**. 제공자 영업일 5일 기준과 같은 개념으로 표시하지 않는다.
+- 1년 검증 창 2025-10-04~2026-10-02는 254개 날짜. 승인된 최소 200/600개 관측수 조건을 위 주요 통화가 충족한다.
+- EUR는 기준통화 분모 1, KRW/KRW는 모든 날짜에서 정확히 1. 실제 통화 선택 및 개별 국가의 5Y 관측일과의 결합은 별도 검증한다.
+
+BGR 전환은 근거와 원자료 형태까지 확인했다.
+
+- [ECB의 2026-01-01 도입 공지](https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260101~c830245e42.en.html): 2026-01-01 EUR 도입, 1 EUR=1.95583 BGN.
+- [ECB reference-rate 제거 안내](https://www.ecb.europa.eu/services/using-our-site/technical-updates/html/ecb.technical_update251211.en.html): 전환 이후 BGN 기준환율 계열을 제거한다고 명시.
+- 실제 3년 창에서 BGN+KRW 짝은 572개, 마지막 2025-12-31. 2026-01-02부터 EUR 기간의 제공 날짜가 193개.
+- 과거 XML의 BGN 기준환율은 1.9558로 표시된다. 공인 전환비율 1.95583과 표시 정밀도가 다르다. 정확한 전환비율로 EUR 단위에 환산하면 약 0.001534%의 표시 정밀도 차이가 생긴다. 이를 시장의 FX 충격이라고 해석하거나 설명 없이 이어 붙이지 않는다.
+- effective-dated 통화 선택·고정 환산·정밀도 차이 처리·5Y 채권 통화와의 결합은 여전히 명시적 검증 대상이다. 이번 통화별 이력 점검만으로 27개국 FX 전체 완료 체크를 하지 않는다.
+
+### HRV: 공개 데이터 catalogue에서 공식 월별 엑셀 수신
+
+공식 Croatian open-data catalogue의 공개 CKAN 응답:
+https://data.gov.hr/ckan/api/3/action/package_show?id=711cb511-fbfc-49c3-a6c3-7ae40cca5bdf
+
+이 응답에 들어 있는 G8b resource e8900684-dbb8-4193-9686-e4627925bf5a의 실제 HNB 파일:
+https://www.hnb.hr/documents/20182/1f79bc1c-dfb5-17fd-1571-cdd52a4a9619
+
+- 직접 무인증 HTTP 200, XLSX, 83,373 bytes, HRV 시트.
+- resource 설명은 **월·연평균**의 채권 만기수익률이라고 명시한다. 일별 자료가 아니다.
+- 5 g. 열이 세 개다: 해외 발행 USD, 해외 발행 EUR, 국내 발행 EUR. 같은 국가라는 이유로 통화·발행시장을 섞지 않는다.
+- 마지막 월 2026년 8월. 국내 EUR 5년 열 원값 3.02, 해외 EUR 5년 열 원값 3.21, 해외 USD 5년 열은 '-'.
+- 국내 EUR 5년 열은 2026년 1~6월 결측, 7월 3.04, 8월 3.02. 없는 월을 해외 EUR 값으로 조용히 보완하지 않는다.
+- 5 g.가 의미하는 만기 구분과 단위·계산방법을 최종 대조해야 한다. 최신 일별 5Y 입력으로 승인하지 않는다.
+- catalogue의 license_id는 open-license였지만 실제 라이선스 문구와 HNB 원천의 적용 범위 대조는 남아 있다. 이 식별자만 보고 아무 조건 없는 재배포로 판단하지 않는다.
+
+### AUT·CZE 및 공통 후보의 좁혀진 조사 결과
+
+- [OeKB 공식 benchmark 목록](https://www.oekb.at/kapitalmarkt-services/unser-datenangebot/daten-zu-bundesanleihen-der-republik-oesterreich/benchmarks.html)을 직접 수신했다. 2026-07-31부터 5년 benchmark는 **AT0000A2NW83, 쿠폰 0.00%, 2021-2031/1**. 이 표는 ISIN·쿠폰·발행물 정보를 제공하며 현재 시장수익률은 없다. 쿠폰 0%를 국채 수익률 0%로 넣지 않는다. 기준종목 식별은 진전됐지만 수익률 확보는 아니다.
+- CZE 공식 ARAD REST 문서는 등록 계정의 API key를 요구하고 자동 수집의 지원 경로가 REST라고 설명한다. API key 필수 경로를 무인증 경로라고 바꾸어 기록하지 않는다. 공개 화면의 수동 다운로드 가능성과 일별 5Y 존재는 따로 확인할 항목이다.
+- [Czech MoF 2026 Q1 보고서](https://mf.gov.cz/assets/attachments/2026-04-17_Debt-Portfolio-Management-Quarterly-Report-2026-Q1.pdf)는 공식 Svensson par yield curve와 bid-offer/거래량 그림을 제공하는 후보지만, 이번에 정확한 최신 일별 5Y 수치 다운로드를 확보하지 못했다. 그래프 판독으로 채우지 않는다.
+- ECB FM 구조 조회는 직접 요청과 연구용 조회 모두 timeout. 무인증 자료가 없다는 판정이 아니라 이 회차 미수신으로 기록한다. 확인한 euro-area 5년 집계나 국가별 10년 convergence를 결측에 적용하지 않는다.
+- [AREAER 2023 eLibrary 서지](https://www.elibrary.imf.org/display/book/9798400260391/9798400260391.xml)에서 전체 PDF 안내와 [공개 Overview](https://www.elibrary.imf.org/fileasset/downloads/AEIEA2023001-S001.pdf) 후보를 확인했으나 직접 서지 요청은 403이었다. 서지상 4,938페이지라는 표시만으로 27개국 자본통제 본문을 수신했다고 선언하지 않는다. 온라인 DB의 subscription 요구, Overview와 전체 국가 보고서, 판본·기준일은 구분한다.
+
+**착수 상태 유지: BLOCKED — DATA ACQUISITION INCOMPLETE.** 이번에 재정·물가 필수 연도 검증과 주요 통화 이력 점검은 진전됐지만, 일별 5Y 경로 미확정 9개국 및 기존 주기·최신성·직접 접근·정의 문제, MarketQuality와 사용 조건은 남아 있다.
