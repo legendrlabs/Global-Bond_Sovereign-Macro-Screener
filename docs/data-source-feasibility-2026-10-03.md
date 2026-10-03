@@ -7,10 +7,10 @@
 ## 결론
 
 - 재정·물가: IMF DataMapper v2가 공통 경로다. 순부채 API의 SVK 결측은 같은 April 2026 Fiscal Monitor 공식 부록 A8 표로 보완할 수 있다. 총부채로 대체할 필요가 없다.
-- 5년물: 14개국에서 일별 5년물 자료 다운로드와 숫자·관측일을 확인했다. 단, SVK는 공식 추정 제로쿠폰 곡선이고 DEU/NLD/FRA/GBR는 Riksbank가 제공하는 Refinitiv 계열이다. 그대로 같은 정의의 Baseline 입력으로 승인된 것은 아니다.
+- 5년물: 16개국에서 일별 5년물 자료 다운로드와 숫자·관측일을 확인했다. 이번 후속 조사에서 KOR와 ITA가 추가되었으나 ITA의 응답은 8월말까지만 포함하여 최신성 보류다. 단, SVK는 공식 추정 제로쿠폰 곡선이고 DEU/NLD/FRA/GBR는 Riksbank가 제공하는 Refinitiv 계열이다. 그대로 같은 정의의 Baseline 입력으로 승인된 것은 아니다.
 - ISR: 월평균 명목 5년 제로쿠폰 자료까지 확인했다. 일별 기준의 최신성 요건에는 별도 보류가 필요하다.
 - NZL: 공식 일별 자료와 다운로드 주소는 찾았지만 직접 다운로드는 403이었다.
-- 11개국은 이 조사에서 사용할 수 있는 일별 무인증 수집 경로를 아직 확정하지 못했다. 이는 공식 자료가 존재하지 않는다는 결론이 아니다.
+- PRT는 정확한 일별 계열과 숫자까지 연구용 대행 조회로 확인했지만 배포 환경의 직접 요청은 403이었다. 일별 원자료·경로가 아직 미확정인 국가는 9개국이다. 이는 공식 자료가 존재하지 않는다는 결론이 아니다.
 - 시장품질: BIS 국채 잔액과 일부 국가의 거래량은 확보 가능하다. 27개국 공통 유동성·등급·자본통제 자료 및 하나의 완성된 점수는 확보하지 못했다. Adjusted의 해당 축을 임의 수치로 채우거나 가중치를 재배분하지 않는다.
 
 ## 1. 재정·물가: IMF
@@ -49,6 +49,7 @@ GGXONLB는 primary balance이므로 전체 재정수지 대체값으로 사용�
 - **수신**: 인증 없이 실제 파일/API에서 5년 지표·값·관측일 확인.
 - **조건부**: 수신했지만 주기·정의 차이 때문에 일별 Baseline에 바로 투입하지 않음.
 - **후보**: 공식 페이지나 다운로드 경로만 확인했으며 파싱·가용성 미확정.
+- **연구용 수신·직접 접근 보류**: 연구용 대행 조회에서 숫자를 받았지만 배포 환경의 무인증 직접 수집은 검증되지 않음.
 - **미확정**: 이 조사에서 사용할 정확한 5년물 경로를 확정하지 못함.
 
 | ISO3 | 국가 | 상태 | 공급자 / 정확한 식별자 | 확인 관측일·값 (%) / 남은 사항 |
@@ -57,12 +58,12 @@ GGXONLB는 primary balance이므로 전체 재정수지 대체값으로 사용�
 | NOR | 노르웨이 | 수신 | Norges GOVT_GENERIC_RATES, TENOR=5Y, GBON | 2026-10-01, 4.71; 가장 가까운 만기 기준채권 정의 |
 | AUS | 호주 | 수신 | RBA F2, FCMYGBAG5D | 2026-09-30, 4.983; 보간 고정만기 |
 | NZL | 뉴질랜드 | 후보 | RBNZ B2 daily close workbook | 공식 화면 5Y 존재; 직접 파일 요청 403 |
-| KOR | 한국 | 미확정 | BOK ECOS / KOFIA 채권정보 후보 | ECOS key 요구; KOFIA의 무인증 자동수집 경로 미확정 |
+| KOR | 한국 | 수신·조건 검증 진행 | KOFIA BISLastAskPrcROPSrchSO, listTrm, 3007 | 2026-10-02, 오후 4.129; 잔존 4년6월–5년; 재사용 조건 미확정 |
 | CZE | 체코 | 후보 | CNB ARAD bond-yield metadata / REST | 월별 5년 basket은 잔존 3.5–6.5년; 일별 정확한 경로 미확정 |
 | BGR | 불가리아 | 미확정 | BNB / 재무부 국채 자료 | 원래 5년 발행물의 재입찰 금리는 현재 고정 5년물이 아님 |
 | CAN | 캐나다 | 수신 | BoC Valet BD.CDN.5YR.DQ.YLD | 2026-10-01, 3.62; benchmark bond |
 | IRL | 아일랜드 | 미확정 | NTMA 발행·입찰 자료 | 개별 발행물 결과를 일별 5Y로 대체하지 않음 |
-| DNK | 덴마크 | 후보 | Nationalbank DNRENTD | 정확한 일별 5Y 계열 미확정; 10Y 대체 금지 |
+| DNK | 덴마크 | 후보 | Nationalbank secondary-market / MTS 공개 호가 | DNRENTD는 5Y 없음; MTS 종목별 호가는 고정5Y 아님·직접 403 |
 | LTU | 리투아니아 | 미확정 | 재무부 시장 리뷰·입찰 | 리뷰 중단 / 개별 입찰; 고정만기 5Y 미확정 |
 | SWE | 스웨덴 | 수신 | Riksbank SEGVB5YC | 2026-10-02, 2.948; 원천 Refinitiv |
 | HRV | 크로아티아 | 미확정 | HNB / 재무부 후보 | 일별 5Y 미확정; 민간 ‘5-year’ 종목명만으로 식별 금지 |
@@ -71,18 +72,18 @@ GGXONLB는 primary balance이므로 전체 재정수지 대체값으로 사용�
 | DEU | 독일 | 수신 | Riksbank DEGVB5Y | 2026-10-02, 3.1969; 원천 Refinitiv |
 | SVK | 슬로바키아 | 조건부·일별 수신 | NBS Yields_SK, ZCY5Y | 2026-09-25, 3.86; NSS 추정 제로쿠폰, 주 1회 배포 |
 | AUT | 오스트리아 | 미확정 | OeNB / debt office 후보 | UDRB는 잔존 1년 초과 채권 가중평균이며 5Y 아님 |
-| PRT | 포르투갈 | 후보 | IGCP 월보 / Banco de Portugal BPstat | 그래프는 있음; 정확한 기계판독 일별 5Y 미확정 |
+| PRT | 포르투갈 | 연구용 수신·직접 접근 보류 | Banco de Portugal BPstat 12099457, daily | 2026-10-01, 3.60; 일별·주간 갱신·LSEG 원천; 직접 403 |
 | ISR | 이스라엘 | 조건부·월별 수신 | BOI ZCM, ZC_TSB_ZND_05Y_MA | 2026-09, 3.716070154; nominal zero-coupon 월평균 |
 | ESP | 스페인 | 수신 | Banco de España TI_1_3, D_G0B1F0ZO | 2026-09-30, 3.645; secondary market 5 años |
 | GBR | 영국 | 수신 | Riksbank GBGVB5Y | 2026-10-02, 4.932; 원천 Refinitiv; BoE curve는 정의 별도 |
 | FRA | 프랑스 | 수신 | Riksbank FRGVB5Y | 2026-10-02, 4.2843; 원천 Refinitiv |
-| ITA | 이탈리아 | 미확정 | Banca d’Italia / MEF 후보 | Rendistato 전체·만기구간 평균은 정확한 5Y 아님 |
+| ITA | 이탈리아 | 조건부·일별 수신·최신성 보류 | Banca d’Italia BMK0200, MFN_BMK.D.020.922.0.EUR.205 | 2026-08-31, 원값 3.50655; benchmark 5-year BTP; 최근 관측 미수신 |
 | BEL | 벨기에 | 수신·검증 진행 | NBB DF_IROLOBE2, D.5Y.F | 2026-10-02, 원값 3.89; 고정 잔존만기 OLO; 단위·방법론 최종 확인 필요 |
 | USA | 미국 | 수신 | US Treasury daily curve BC_5YEAR | 2026-10-02, 5.06; par constant maturity |
 | JPN | 일본 | 수신 | MoF JGB constant maturity, 5年 | 2026-10-01, 2.407; 명목 국채 곡선 |
 
-14개국 일별 수신 = ISL NOR AUS CAN SWE NLD DEU SVK ESP GBR FRA BEL USA JPN.
-월별 ISR까지 15개국에서 실제 숫자를 받았다. 나머지 12개국 중 NZL은 공식 화면·다운로드 주소까지 확인, 11개국은 경로 또는 지표를 미확정 상태로 남긴다. 수신 수는 전체 입력 검증 완료 수가 아니다.
+16개국 일별 직접 수신 = ISL NOR AUS KOR CAN SWE NLD DEU SVK ESP GBR FRA ITA BEL USA JPN. ITA는 실제 수신한 이력이 일별이라는 뜻이며 최신 관측을 확보한 것은 아니다.
+월별 ISR까지 직접 수신은 17개국. PRT 연구용 대행 수신까지 숫자를 확인한 국가는 18개국이지만 PRT를 배포판의 직접 수집 성공 수에 포함하지 않는다. 나머지 9개국 = NZL CZE BGR IRL DNK LTU HRV SVN AUT. 수신 수는 전체 입력 검증 완료 수가 아니다.
 
 ### 인증 없이 수신한 주소와 파싱 주의
 
@@ -147,9 +148,9 @@ CP932 CSV, 헤더 5年, 일본 연호 R8.10.1=2026-10-01. 월별 최신 파일�
 
 - NZL: [B2 공식 페이지](https://www.rbnz.govt.nz/statistics/series/exchange-and-interest-rates/wholesale-interest-rates), [daily close XLSX](https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b2/hb2-daily-close.xlsx). 직접 요청 403은 인증필수라는 증거가 아니다. 사이트가 지원하는 공개 다운로드 방식·원천 NZFMA/LSEG 조건을 확인한다.
 - CZE: [CNB bond metadata](https://www.cnb.cz/docs/ARADY/MET_LIST/cmir_en.pdf), [ARAD REST 문서](https://www.cnb.cz/docs/arad20/dokumentace/arad_rest_api_cs.pdf). API base https://www.cnb.cz/aradb/api/v1 . 월별 3.5–6.5년 basket과 정확한 일별 고정5Y를 구분한다.
-- BEL: [NBB 금융시장 통계](https://www.nbb.be/en/statistics/financial-markets/publications-and-figures), [Data Explorer 안내](https://www.nbb.be/en/statistics/contact-and-more-information/nbbstat-data-explorer). 실제 공개 계열 코드·주기를 찾기 전에는 확보 처리하지 않는다.
-- KOR: ECOS key를 배포판에 내장하지 않는다. KOFIA 최종호가수익률의 공개 다운로드·재사용 조건을 우선 확인한다. 협회 통계는 정부기관 통계와 출처 유형을 구분한다.
-- DNK/PRT/IRL/LTU/HRV/SVN/BGR/AUT/ITA: 공식 중앙은행·부채관리기관의 일별 5Y 파일 또는 공개 통계 계열을 추가 확인한다. 입찰금리, 10년 convergence yield, 정책금리, 원래 5년 만기로 발행된 오래된 종목, 만기구간 평균, 그래프 픽셀 판독은 대체 입력으로 승인하지 않는다.
+- BEL: 공개 계열 D.5Y.F의 실제 일별 값은 수신했다. 단위·방법론·반복 수집 검증은 남아 있으며 상세 주소는 6절에 기록한다.
+- KOR: ECOS key를 배포판에 내장하지 않는다. KOFIA 무인증 기간 조회는 수신 검증했으며 재사용 조건을 추가 확인한다. 협회 통계는 정부기관 통계와 출처 유형을 구분한다. 상세 요청은 7절에 기록한다.
+- DNK/IRL/LTU/HRV/SVN/BGR/AUT: 공식 중앙은행·부채관리기관의 일별 5Y 파일 또는 공개 통계 계열을 추가 확인한다. PRT는 직접 접근·사용 조건, ITA는 최근 관측·공표 지연·사용 조건이 후속 검증 대상이다. 입찰금리, 10년 convergence yield, 정책금리, 원래 5년 만기로 발행된 오래된 종목, 만기구간 평균, 그래프 픽셀 판독은 대체 입력으로 승인하지 않는다.
 
 ## 3. 원화 FX
 
@@ -195,7 +196,7 @@ IMF AREAER 온라인 데이터베이스의 [접근 안내](https://www.elibrary-
 
 ## 5. 구현 전에 남은 항목
 
-1. 나머지 5Y 경로를 확정하거나 데이터 보류 범위를 문서화한다.
+1. 나머지 5Y 경로 및 사용 가능한 원자료를 확정한다. 보류 범위 문서화만으로 초기 자료 확보 완료 조건을 대신하지 않는다.
 2. 수익률 정의의 primary/fallback 호환 규칙을 검사한다. 정부가 만든 공식 추정곡선과 개발자가 결측 채우려고 만든 추정값을 구분하되, 공식 곡선이라는 이유만으로 원본 YTM과 동등하게 취급하지 않는다.
 3. Refinitiv/NZFMA/LSEG 등 제3자 원천 자료의 커뮤니티 재배포 조건을 확인한다. no-auth와 open redistribution은 별개다.
 4. IMF 판본 고정과 PDF 반올림·교차대조를 검증한다.
@@ -229,8 +230,8 @@ IMF AREAER 온라인 데이터베이스의 [접근 안내](https://www.elibrary-
 - CNB REST 문서 3.4.1: api_key는 필수이며 계정에서 생성. 공개 웹 데이터와 REST 무인증은 다르다. REST를 무인증 수집 후보로 확정하지 않는다. 월별 5년 basket에 들어갈 수 있는 개별채권 잔존만기 범위는 **3.5–6.5년**이며 이전 초안의 3–7년 표현을 정정했다.
 - 실제 https://api.statbank.dk/v1/tableinfo/DNRENTD?format=JSON&lang=en 응답의 INSTRUMENT 목록에는 중앙은행 정책금리·DESTR·preDESTR 10개 계열만 있었다. 이 표는 현재 조사한 응답 기준으로 5Y 국채 공급원이 아니다.
 - ECB 공개 5년 Euro Area benchmark 및 AAA/all-issuer 곡선은 유로권 집계. 개별 국가 5Y 결측을 채우는 데 쓰지 않는다.
-- BPstat 공식 quadro 484는 10/5/2년 **월평균**을 명시한다. 정확한 5년 계열 ID와 일별 가능 여부는 미확정이다. 공식 페이지 존재를 자동수집 확보로 계산하지 않는다.
-- NZL 다운로드 403 및 KOFIA 공개 XML 접근은 확인했으나 최신 5Y 수집 경로가 검증 완료된 것은 아니다.
+- BPstat 공식 quadro 484는 10/5/2년 **월평균**을 명시한다. 이후 조사에서 별도 일별 계열 12099457과 숫자를 확인했다(7절). 월평균 표를 일별로 바꾼 것이 아니다. 배포 환경의 직접 수집은 여전히 403으로 미확정이다.
+- NZL 다운로드 403은 남아 있다. KOFIA는 후속 조사에서 최신 5Y와 날짜가 있는 기간 조회를 직접 수신했다(7절). 재사용 조건 등 전체 검증 완료를 뜻하지 않는다.
 
 ### 착수 전 필수 확인 목록
 
@@ -243,3 +244,93 @@ IMF AREAER 온라인 데이터베이스의 [접근 안내](https://www.elibrary-
 - [ ] 실제 수신 표본으로 전체 입력표를 채워 빈 필수 항목이 없는지 확인
 
 문헌 조사·다운로드·진단용 파싱은 허용된 자료 검증 작업이다. 수집기 제품화, 점수 엔진, UI, 배포 workflow는 위 조건 충족 전 시작하지 않는다. 어떤 항목이 현재 조건으로 확보 불가능하면 그 근거와 영향부터 사용자에게 알리고, 동의 없이 국가·필수 축을 삭제하거나 다른 만기·자료로 대체하지 않는다.
+
+
+## 7. 후속 실제 조회: KOR·PRT·ITA 및 배포 조건 (2026-10-04 KST)
+
+이 절의 표본도 수집 검증용이다. 최신성·정의·재사용 조건을 모두 통과한 계산 입력이라는 의미가 아니다. 기존 판정은 새로운 증거가 있는 항목만 갱신한다.
+
+### KOR: 협회 공개 조회에서 날짜가 있는 5Y 직접 수신
+
+[금융투자협회 채권정보센터](https://www.kofiabond.or.kr/) 공개 화면의 XML·JavaScript를 확인해, 로그인·API key·인증 cookie 없이 실제 읽기 전용 조회를 수행했다. KOFIA는 정부 통계기관이 아니라 공식 협회 공시 주체다.
+
+- 공개 화면 XML: /xml/bondint/lastrop/BISLastAskPrcDay.xml. 기간 조회의 listTrm 및 시간값은 실제 내려받은 공개 기간 XML에서 확인했다.
+- 실제 dispatcher: POST https://www.kofiabond.or.kr/proframeWeb/XMLSERVICES/
+- Content-Type: application/x-www-form-urlencoded; charset=UTF-8 이지만 본문은 공개 frontend와 같은 raw XML이다.
+- proframeHeader: pfmAppName=BIS-KOFIABOND, pfmSvcName=BISLastAskPrcROPSrchSO.
+- getExistMaxDate: 응답 val1=20261002.
+- listDay: BISComDspDatDTO/val1=20261002. 국고채권(5년), val20=3007, 잔존만기 4년6월–5년, 오전 val3=4.152, 오후 val4=4.129.
+- listDay를 20261001로 다시 조회하면 같은 국고채 5년 오후 값은 4.200. 날짜 파라미터가 실제 관측 선택에 반영된다.
+- listTrm: val1=DD, val2=20260928, val3=20261002, val4=1530, val5=3007.
+- 기간 응답의 val1은 날짜, val2는 선택한 첫 번째 채권의 값. 2026-10-02=4.129, 10-01=4.200, 09-30=4.203, 09-29=4.276, 09-28=4.345. 일자별 조회와 겹치는 값이 일치했다.
+
+주의사항:
+
+- 기간 조회의 오후 선택값은 공개 XML에 있는 **1530**이다. 실제 화면의 변경 후 공시시각은 오후 16시 안내가 있으므로 API 선택 토큰을 관측시각 15:30으로 해석하지 않는다.
+- PM 문자열을 시간값으로 보내면 HTTP 200이어도 자료행을 받지 못했다. frontend의 정확한 선택값을 사용한다.
+- 기간 응답의 최고·최저 요약행을 날짜별 관측으로 파싱하지 않는다. 선택하지 않은 열의 0.000도 새로운 국채값이 아니다.
+- listDay의 val11/val12는 연중 최고/최저 발생일이다. 이번 관측일로 쓰지 않는다. 메인 화면 일부 응답의 날짜 필드가 비어 있으므로 날짜 있는 기간 조회를 우선 검증 경로로 둔다.
+- 국민주택1종(5년)은 국고채권(5년)과 다른 행이다. 이름에 5년이 있다는 이유로 섞지 않는다.
+- 공개 화면의 조회 경로이지 문서화된 안정적 외부 개발자 API로 확정한 것은 아니다. 반복 수집의 안정성·호출 제한·사용 및 재배포 조건은 남아 있다. 이번 무인증 수신 성공으로 허가된 재배포를 주장하지 않는다.
+
+### PRT: 정확한 일별 계열 확인, 배포 환경 직접 접근은 보류
+
+[BPstat domain 26](https://bpstat.bportugal.pt/dominios/26/), [공식 방법론](https://bpstat.bportugal.pt/conteudos/metainformacao/472), [프로그램 접근 안내](https://bpstat.bportugal.pt/data/docs/).
+
+연구용 대행 조회에서 공개 metadata와 JSON-stat 관측을 받았다. 이 대행 조회는 배포판 의존성으로 채택하지 않는다. 동일한 공식 주소에 대한 이번 실행 환경의 직접 HTTP 요청은 403이었다. 인증필수라는 결론도, 직접 무인증 수집 가능하다는 결론도 아직 내리지 않는다.
+
+| 식별 항목 | 확인 값 |
+|---|---|
+| domain | 26 |
+| series ID | 12099457 |
+| dataset ID | 690b7b36fd36c0dbe249c48cbbc39524 |
+| 내용 | 포르투갈 고정금리 국채, 잔존만기 5년 수익률 |
+| 주기 / 단위 | Daily / Percent |
+| 공급 원천 | LSEG |
+| metadata 갱신일 | 2026-10-02T16:00Z |
+| 마지막 관측일 / 값 | 2026-10-01 / 3.60% |
+
+metadata:
+https://bpstat.bportugal.pt/data/v1/series/?series_ids=12099457&lang=EN
+
+실제로 JSON-stat를 받은 연구 조회:
+https://bpstat.bportugal.pt/data/v1/domains/26/datasets/690b7b36fd36c0dbe249c48cbbc39524/?lang=EN&series_ids=12099457&last_n=5
+
+응답은 마지막 5개만이 아니라 전체 7,966개 관측이었다. 마지막 5영업일은 09-25=3.62, 09-28=3.66, 09-29=3.63, 09-30=3.58, 10-01=3.60. last_n 및 시험한 날짜 필터가 반영되었다고 가정하지 않는다. 공식 문서에서 지원하는 필터명을 추가 검증해야 한다. reference_date와 value를 응답의 정확한 index 순서로 결합한다.
+
+공식 설명은 일별 관측을 주 단위로 갱신하는 구조다. 갱신일 10월2일을 관측일로 바꾸지 않는다. 월별 5년 계열 **12099462**는 다른 계열이며 daily 12099457과 교체하지 않는다. 공개 월보 그래프의 픽셀을 읽어 만든 값이 아니다. LSEG 원천의 사용·재배포 조건 및 배포 환경 직접 접근을 해결하기 전에는 확보 완료로 취급하지 않는다.
+
+### ITA: 공식 무인증 ZIP 실제 수신, 최신성·재배포는 보류
+
+[중앙은행 BDS 안내](https://www.bancaditalia.it/statistiche/basi-dati/bds/index.html), [공식 export 매뉴얼](https://infostat.bancaditalia.it/inquiry/GetDocumentFile?type=export_help), [May 2026 Financial Market 방법론](https://www.bancaditalia.it/pubblicazioni/metodi-e-fonti-note/metodi-note-2026/MFN_note-met_en_20260515.pdf?language_id=1).
+
+- 일별 표: BMK0200.
+- 정확한 계열: **MFN_BMK.D.020.922.0.EUR.205**.
+- metadata: Daily, BTPs, Gross yield, EUR, 5 years; 설명은 Gross yield of benchmark 5-year BTP.
+- ALL ZIP에서 DATA, DOMAIN, STRUCTURE, LEGEND CSV 네 파일을 실제 수신했다. CSV는 세미콜론 구분.
+- ALL export:
+  https://a2a.bancaditalia.it/infostat/dataservices/export/EN/CSV/ALL/CUBE/BANKITALIA/DIFF/BMK0200
+- DATA export:
+  https://a2a.bancaditalia.it/infostat/dataservices/export/EN/CSV/DATA/CUBE/BANKITALIA/DIFF/BMK0200
+- 두 주소 모두 로그인·API key 없이 HTTP 200. 두 export의 실제 DATA CSV 내용이 동일함을 확인했다. DATA ZIP의 내부 이름은 생성시각을 포함하므로 고정 이름을 전제하지 않는다.
+- 5Y 유효 관측 9,587개, 최초 1988-11-10, **마지막 2026-08-31, 원값 3.50655**. 이번 최신성 검증에서는 최근 9월말/10월초 관측이 없으므로 현재 주간 입력으로 보류한다.
+- DATA에 달력 날짜별 빈 행이 포함된다. 마지막 배열 위치나 마지막 달력 날짜를 유효 관측으로 간주하지 않는다.
+- metadata SCALA=-2는 소수점 정밀도 안내다. 임의로 값을 100배/100분의1로 바꾸지 않는다. UNMIS=NP라는 일반 단위 표기가 있으므로 공개 수익률 표의 percent 표기·월평균과 최종 단위 대조도 필요하다.
+
+공식 방법론은 MTS 거래 기반이며 가장 활발히 거래되는 신규 발행물을 benchmark로 선택한다고 설명한다. metadata의 DURORI는 Original maturity다. 따라서 정확한 잔존만기 5년 보간곡선이라고 표시하지 않는다. 이것은 Rendistato의 전체 또는 만기구간 평균을 5년물로 대체한 것이 아니다. 비교 가능한 수익률 정의와 publication lag는 별도로 확인한다.
+
+[공식 copyright](https://www.bancaditalia.it/footer/copyright)는 일반 사이트 자료의 복제·외부 정보시스템 게시를 제한하고, AgID open data에는 별도 CC BY 4.0 예외를 둔다. [공식 RDF catalogue](https://www.bancaditalia.it/footer/open-data/Open_Data_BdI.rdf)는 실제 수신했고 80개 Dataset을 확인했지만 이번 파일에서 BMK0200/BMK 또는 benchmark yield 항목과의 대응은 확인하지 못했다. 전체 BDS가 자동으로 CC BY 대상이라고 단정하지 않는다. **개별 BMK0200의 재사용 허용 근거는 미확정**이다.
+
+### 사용 조건과 잘못된 대체 후보의 후속 판정
+
+- [Riksbank 일반 open-data 조건](https://www.riksbank.se/en-gb/about-the-riksbank/about-the-website/open-data--information-available-for-re-use/): 별도 합의 없이 재사용 가능하다는 안내와 원자료의 기관·날짜 표시 조건을 확인했다. 가공한 통계를 Riksbank 출처로 표시하지 말라는 조건 및 공식 협업·제휴로 표현하지 말라는 조건도 있다. 원자료 provenance와 자체 계산 결과의 저자를 구분해야 한다. 이것은 SWESTR만의 조건을 5년물에 적용한 결론이 아니다. Refinitiv 원천 계열의 개별 예외 여부와 적용 범위는 추가 확인한다.
+- [덴마크 공식 secondary-market 안내](https://www.nationalbanken.dk/en/government-debt/trading-and-data/secondary-market-data)는 MTS의 15분 지연 개별 국채 호가로 연결한다. 링크 https://www.mtsdata.com/content/data/public/dkk/best/ 및 https://www.mtsdata.com/content/data/public/dkk/fixing/fixing_dkk.html 는 직접 403이었다. 개별 종목 호가를 고정5Y 계열로 확보했다고 세지 않는다.
+- [OECD Global Debt Report 2026](https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html)의 유동성 부분을 추가 확인했다. 2025년 37개국 조사와 개선/악화 응답 집계는 27개국 각각의 유동성 수준·공통 점수 자료가 아니다. 10년물 변동성의 국가간 분위수도 bid-ask 또는 거래량을 대신하지 않는다. MarketQuality 확보 판정은 그대로 UNAVAILABLE다.
+
+### 이번 회차 종료 상태
+
+- 한국 5Y: 무인증 직접 수신 및 날짜·교차 조회 확인. 출처 유형·잔존만기 basket·재사용 조건은 별도 기록.
+- 포르투갈 5Y: 정확한 계열·관측을 연구용 조회로 확인. 직접 수집은 403으로 보류.
+- 이탈리아 5Y: 공식 일별 ZIP 두 방식으로 직접 수신. 최신 관측 부족 및 개별 사용 조건으로 보류.
+- 원자료·경로 미확정 9개국과 ISR 월주기, ITA 최신성, PRT 직접 접근, 시장품질 및 각 자료의 사용 조건은 남아 있다.
+- **BLOCKED — DATA ACQUISITION INCOMPLETE** 유지. 제품 구현은 시작하지 않았다.
