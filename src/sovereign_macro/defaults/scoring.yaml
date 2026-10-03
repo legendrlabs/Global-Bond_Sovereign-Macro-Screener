@@ -1,0 +1,14 @@
+baseline_comparability: explicit metadata; benchmark by default
+fx_scale: 0.15
+market_quality_status: UNAVAILABLE
+real_center: 1.0
+real_scale: 1.5
+stale_days: 7
+version: 0.1.0-provisional
+watch_markets:
+- USA
+weights:
+  fiscal: 0.4
+  fx: 0.2
+  market_quality: 0.1
+  real_yield: 0.3

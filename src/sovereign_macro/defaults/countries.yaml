@@ -1,0 +1,339 @@
+countries:
+- iso3: ISL
+  name: 아이슬란드
+  currency: ISK
+  pdf_label: Iceland
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: NOR
+  name: 노르웨이
+  currency: NOK
+  pdf_label: Norway
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: norway
+    series: GOVT_GENERIC_RATES:5Y:GBON
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: AUS
+  name: 호주
+  currency: AUD
+  pdf_label: Australia
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: rba
+    series: FCMYGBAG5D
+    yield_type: interpolated_constant_maturity
+    baseline_compatible: false
+    redistribution: pending
+- iso3: NZL
+  name: 뉴질랜드
+  currency: NZD
+  pdf_label: New Zealand
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: KOR
+  name: 한국
+  currency: KRW
+  pdf_label: Korea
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: kofia
+    series: '3007'
+    yield_type: final_quotation_basket
+    baseline_compatible: false
+    redistribution: pending
+- iso3: CZE
+  name: 체코
+  currency: CZK
+  pdf_label: Czech Republic
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: BGR
+  name: 불가리아
+  currency: EUR
+  pdf_label: Bulgaria
+  currency_from: '2026-01-01'
+  fx_continuity: false
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: CAN
+  name: 캐나다
+  currency: CAD
+  pdf_label: Canada
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: canada
+    series: BD.CDN.5YR.DQ.YLD
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: IRL
+  name: 아일랜드
+  currency: EUR
+  pdf_label: Ireland
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: DNK
+  name: 덴마크
+  currency: DKK
+  pdf_label: Denmark
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: LTU
+  name: 리투아니아
+  currency: EUR
+  pdf_label: Lithuania
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: SWE
+  name: 스웨덴
+  currency: SEK
+  pdf_label: Sweden
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: SEGVB5YC
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: HRV
+  name: 크로아티아
+  currency: EUR
+  pdf_label: Croatia
+  currency_from: '2023-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: NLD
+  name: 네덜란드
+  currency: EUR
+  pdf_label: The Netherlands
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: NLGVB5Y
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: SVN
+  name: 슬로베니아
+  currency: EUR
+  pdf_label: Slovenia
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: DEU
+  name: 독일
+  currency: EUR
+  pdf_label: Germany
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: DEGVB5Y
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: SVK
+  name: 슬로바키아
+  currency: EUR
+  pdf_label: Slovak Republic
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: AUT
+  name: 오스트리아
+  currency: EUR
+  pdf_label: Austria
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: PRT
+  name: 포르투갈
+  currency: EUR
+  pdf_label: Portugal
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: ISR
+  name: 이스라엘
+  currency: ILS
+  pdf_label: Israel
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: ESP
+  name: 스페인
+  currency: EUR
+  pdf_label: Spain
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: GBR
+  name: 영국
+  currency: GBP
+  pdf_label: United Kingdom
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: GBGVB5Y
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: FRA
+  name: 프랑스
+  currency: EUR
+  pdf_label: France
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: FRGVB5Y
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: ITA
+  name: 이탈리아
+  currency: EUR
+  pdf_label: Italy
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: italy
+    series: MFN_BMK.D.020.922.0.EUR.205
+    yield_type: benchmark
+    baseline_compatible: false
+    redistribution: pending
+- iso3: BEL
+  name: 벨기에
+  currency: EUR
+  pdf_label: Belgium
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: belgium
+    series: D.5Y.F
+    yield_type: fixed_residual_reference
+    baseline_compatible: false
+    redistribution: pending
+- iso3: USA
+  name: 미국
+  currency: USD
+  pdf_label: United States
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: treasury
+    series: BC_5YEAR
+    yield_type: par_constant_maturity
+    baseline_compatible: false
+    redistribution: pending
+- iso3: JPN
+  name: 일본
+  currency: JPY
+  pdf_label: Japan
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: japan
+    series: 5年
+    yield_type: constant_maturity
+    baseline_compatible: false
+    redistribution: pending
