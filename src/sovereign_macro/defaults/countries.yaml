@@ -6,12 +6,11 @@ countries:
   currency_from: '2000-01-01'
   fx_continuity: true
   yield:
-    adapter: unavailable
-    series: ''
-    yield_type: unverified
+    adapter: iceland
+    series: FLV:nominal:par:5Y
+    yield_type: par_constant_maturity
     baseline_compatible: false
     redistribution: pending
-    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: NOR
   name: 노르웨이
   currency: NOK
@@ -207,12 +206,11 @@ countries:
   currency_from: '2000-01-01'
   fx_continuity: true
   yield:
-    adapter: unavailable
-    series: ''
-    yield_type: unverified
+    adapter: slovakia
+    series: ZCY5Y
+    yield_type: estimated_zero_coupon
     baseline_compatible: false
     redistribution: pending
-    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: AUT
   name: 오스트리아
   currency: EUR
@@ -246,12 +244,11 @@ countries:
   currency_from: '2000-01-01'
   fx_continuity: true
   yield:
-    adapter: unavailable
-    series: ''
-    yield_type: unverified
+    adapter: israel
+    series: ZC_TSB_ZND_05Y_MA
+    yield_type: monthly_zero_coupon
     baseline_compatible: false
     redistribution: pending
-    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: ESP
   name: 스페인
   currency: EUR
@@ -259,12 +256,11 @@ countries:
   currency_from: '2000-01-01'
   fx_continuity: true
   yield:
-    adapter: unavailable
-    series: ''
-    yield_type: unverified
+    adapter: spain
+    series: D_G0B1F0ZO
+    yield_type: secondary_market_bucket
     baseline_compatible: false
     redistribution: pending
-    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: GBR
   name: 영국
   currency: GBP

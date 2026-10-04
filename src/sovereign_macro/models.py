@@ -32,6 +32,8 @@ class Observation:
     yield_type: str = ""
     compounding: str = "provider convention (not converted)"
     redistribution: str = "pending"
+    frequency: str = "daily"
+    notes: str = ""
 
     def to_dict(self):
         return asdict(self)

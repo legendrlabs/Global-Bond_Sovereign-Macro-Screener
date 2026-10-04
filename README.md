@@ -50,12 +50,12 @@ python -m sovereign_macro run --output results/public --public-output
 - IMF Fiscal Monitor / WEO 발행판 일치 확인, 완전한 재정·CPI 기간 검증
 - 같은 발행판 Table A8 PDF의 API 대조 후 순부채 결측 보완
 - ECB 환율의 KRW 교차환율, 1Y/3Y 변동성, 최대낙폭
-- 13개국 5Y 수집 경로 및 미국 10Y 감시 경로
+- 17개국 5Y 수집 경로(일별 16개국·월평균 1개국) 및 미국 10Y 감시 경로
 - 원본 Baseline, 부분 유효 국가 순위, Adjusted 계산 인터페이스
 - 실패 격리, 날짜·만기·결측·음수금리·자료권리 상태 표시
 - 로컬 HTML, CSV·JSON·Markdown, 주간 GitHub Actions
 
-2026-10-03 실제 점검: 13개국 5Y 원자료 파싱, 이탈리아는 관측일이 오래되어 제외하고 벨기에는 단위 검증 보류, 정의가 호환되는 7개국 Baseline만 순위 사용 가능. 전체는 **DATA_HOLD**입니다. 다른 14개국은 미연결 슬롯으로 남습니다. Market Quality의 검증된 입력이 없어 Adjusted는 모두 비어 있습니다. [데이터 경로](docs/data-sources.md), [방법론](docs/methodology.md), [조사 기록](docs/data-source-feasibility-2026-10-03.md)을 참고하세요.
+2026-10-03 실제 점검: 13개국 5Y 원자료 파싱, 이탈리아는 관측일이 오래되어 제외하고 벨기에는 단위 검증 보류, 정의가 호환되는 7개국 Baseline만 순위 사용 가능. 전체는 **DATA_HOLD**입니다. 2026-10-04에 ISL·ESP·SVK·ISR 공식 어댑터를 추가해 미연결 슬롯은 10개국으로 줄었습니다. ISR은 월평균이며 일별 검사에서 제외되고, SVK는 주간 배포와 최신성 검사를 유지합니다. 추가 4개국은 금리 정의 호환성 및 재배포 승인 대기 상태입니다. [추가 연결 검증](docs/research/2026-10-04-connected-sources.md)을 참고하세요. Market Quality의 검증된 입력이 없어 Adjusted는 모두 비어 있습니다. [데이터 경로](docs/data-sources.md), [방법론](docs/methodology.md), [조사 기록](docs/data-source-feasibility-2026-10-03.md)을 참고하세요.
 
 ## 품질과 자동 실행
 
@@ -67,7 +67,7 @@ python -m sovereign_macro run --output results/public --public-output
 
 ## 보강 순서
 
-1. 미연결 14개국의 공식 5Y 자료와 단위·주기·만기 검증
+1. 미연결 10개국의 공식 5Y 자료와 단위·주기·만기 검증
 2. benchmark / par / interpolated / fixed residual 정의의 비교 가능성 확정
 3. 공급자별 커뮤니티 재배포 조건 확인
 4. Market Quality의 실제 자료·정규화 기준 연결

@@ -5,6 +5,8 @@ from io import StringIO, BytesIO
 import re
 import time
 import zipfile
+import calendar
+import openpyxl
 import xml.etree.ElementTree as ET
 from .models import DataError, Observation, finite
 
@@ -125,6 +127,135 @@ def parse_belgium(body):
         if day and value is not None: rows.append((day,value))
     return rows
 
+def parse_spain(body,series):
+    if series!='D_G0B1F0ZO': raise DataError('SPAIN_SERIES_CONTRACT')
+    rows=list(csv.reader(StringIO(body.decode('cp1252'))))
+    if not rows or rows[0].count(series)!=1: raise DataError('SPAIN_SERIES_MISSING')
+    col=rows[0].index(series)
+    metadata={r[0]:r for r in rows[:6] if r}
+    def field(label):
+        r=metadata.get(label,[])
+        return r[col] if len(r)>col else ''
+    description=field('DESCRIPCIÓN DE LA SERIE').lower()
+    if 'bonos' not in description or 'del estado' not in description or not re.search(r'\b5 años\b',description):
+        raise DataError('SPAIN_MATURITY_OR_ISSUER')
+    if field('DESCRIPCIÓN DE LAS UNIDADES')!='Porcentaje' or field('FRECUENCIA')!='DIARIA':
+        raise DataError('SPAIN_UNIT_OR_FREQUENCY')
+    months={m:i+1 for i,m in enumerate(('ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'))}
+    result=[]
+    for r in rows[6:]:
+        if not r: continue
+        if r[0] in ('FUENTE','NOTAS'): continue
+        match=re.fullmatch(r'(\d{1,2}) ([A-Z]{3}) (\d{4})',r[0].strip())
+        if not match: raise DataError('SPAIN_DATE_SCHEMA')
+        d,m,y=match.groups()
+        if m not in months or len(r)<=col: raise DataError('SPAIN_ROW_SCHEMA')
+        day=date(int(y),months[m],int(d)).isoformat()
+        if r[col] in ('','_'): continue
+        value=numeric(r[col])
+        if value is None: raise DataError('SPAIN_VALUE_SCHEMA')
+        result.append((day,value))
+    return result
+
+def parse_slovakia(body,series):
+    if series!='ZCY5Y': raise DataError('SLOVAKIA_SERIES_CONTRACT')
+    w=openpyxl.load_workbook(BytesIO(body),read_only=True,data_only=True)
+    try:
+        if 'Yields_SK' not in w.sheetnames: raise DataError('SLOVAKIA_SHEET_SCHEMA')
+        rows=iter(w['Yields_SK'].rows)
+        header=next((r for r in rows if [c.value for c in r[:3]]==['YYYY','MM','DD']),None)
+        if header is None: raise DataError('SLOVAKIA_DATE_SCHEMA')
+        values=[c.value for c in header]
+        if values.count(series)!=1: raise DataError('SLOVAKIA_MATURITY_SCHEMA')
+        col=values.index(series); result=[]
+        for r in rows:
+            if all(c.value is None for c in r): continue
+            if len(r)<=col: raise DataError('SLOVAKIA_ROW_SCHEMA')
+            parts=[c.value for c in r[:3]]
+            if not all(isinstance(v,(int,float)) and not isinstance(v,bool) and v==int(v) for v in parts):
+                raise DataError('SLOVAKIA_DATE_SCHEMA')
+            day=date(*(int(v) for v in parts)).isoformat()
+            if r[col].value is None: continue
+            if '%' in r[col].number_format: raise DataError('SLOVAKIA_UNIT_SCHEMA')
+            value=numeric(r[col].value)
+            if value is None: raise DataError('SLOVAKIA_VALUE_SCHEMA')
+            result.append((day,value))
+        return result
+    finally: w.close()
+
+def parse_iceland(body):
+    w=openpyxl.load_workbook(BytesIO(body),read_only=True,data_only=True)
+    try:
+        if 'FLV' not in w.sheetnames: raise DataError('ICELAND_SHEET_SCHEMA')
+        rows=list(w['FLV'].rows)
+        header=next((i for i,r in enumerate(rows) if r and r[0].value=='Dagsetning (Date)'),None)
+        if header is None or header==0: raise DataError('ICELAND_DATE_SCHEMA')
+        groups=rows[header-1]; labels=[str(c.value or '') for c in groups]
+        matches=[i for i,label in enumerate(labels) if '(Par-yield, nominal)' in label or label=='Par-yield, nominal']
+        if len(matches)!=1: raise DataError('ICELAND_NOMINAL_PAR_SCHEMA')
+        start=matches[0]
+        end=next((i for i in range(start+1,len(groups)) if groups[i].value is not None),len(groups))
+        cols=[i for i in range(start,end) if rows[header][i].value==5]
+        if len(cols)!=1: raise DataError('ICELAND_MATURITY_SCHEMA')
+        col=cols[0]
+        correction=next((i for i,label in enumerate(labels) if i>0 and 'corrected calculation' in label),None)
+        note=next((i for i,label in enumerate(labels) if label=='Athugasemd'),None)
+        result=[]; notes={}
+        for r in rows[header+1:]:
+            observed=r[0].value
+            if observed is None: continue
+            if not isinstance(observed,(datetime,date)): raise DataError('ICELAND_DATE_SCHEMA')
+            day=observed.date().isoformat() if isinstance(observed,datetime) else observed.isoformat()
+            cell=r[col]
+            if cell.value is None: continue
+            # Only inspected Excel scaling formats; quoted/escaped % is literal.
+            if cell.number_format not in ('0%','0.00%','#,##0.00%'):
+                raise DataError('ICELAND_PERCENT_FORMAT_REQUIRED')
+            value=numeric(cell.value)
+            if value is None: raise DataError('ICELAND_VALUE_SCHEMA')
+            result.append((day,value*100))
+            flags='; '.join(f'{label}={r[i].value}' for label,i in [('correction',correction),('note_reference',note)]
+                            if i is not None and r[i].value is not None)
+            if day in notes and notes[day]!=flags: raise DataError('ICELAND_CONFLICTING_NOTES')
+            notes[day]=flags
+        return result,notes
+    finally: w.close()
+
+def parse_israel(body,series):
+    if series!='ZC_TSB_ZND_05Y_MA': raise DataError('ISRAEL_SERIES_CONTRACT')
+    matches=[n for n in ET.fromstring(body).iter() if local(n.tag)=='Series' and n.attrib.get('SERIES_CODE')==series]
+    if len(matches)!=1: raise DataError('ISRAEL_SERIES_MISSING_OR_DUPLICATE')
+    node=matches[0]
+    contract={'FREQ':'M','NOMINAL_REAL':'N','DATA_TYPE':'ZC_YTM','TIME_TO_MATURITY':'Y05T05',
+              'TIME_COLLECT':'A','DATA_SOURCE':'BOI_IS','UNIT_MULT':'0','UNIT_MEASURE':'PT'}
+    if any(node.attrib.get(k)!=v for k,v in contract.items()): raise DataError('ISRAEL_DIMENSION_CONTRACT')
+    rows=[]
+    for obs in node:
+        if local(obs.tag)!='Obs': continue
+        period=obs.attrib.get('TIME_PERIOD','')
+        if not re.fullmatch(r'\d{4}-(0[1-9]|1[0-2])',period): raise DataError('ISRAEL_MONTH_SCHEMA')
+        raw=obs.attrib.get('OBS_VALUE')
+        if raw in (None,''): continue
+        value=numeric(raw)
+        if value is None: raise DataError('ISRAEL_VALUE_SCHEMA')
+        rows.append((period,value))
+    return rows
+
+def select_latest_month(rows,as_of):
+    # Only complete months; preserve the actual monthly period in Observation.
+    eligible=[]
+    for period,value in rows:
+        if not re.fullmatch(r'\d{4}-(0[1-9]|1[0-2])',period): raise DataError('MONTH_SCHEMA')
+        y,m=map(int,period.split('-'))
+        if date(y,m,calendar.monthrange(y,m)[1])<=as_of: eligible.append((period,value))
+    parsed={}
+    for period,value in eligible:
+        if period in parsed and parsed[period]!=value: raise DataError('CONFLICTING_DUPLICATE_YIELD')
+        parsed[period]=value
+    if not parsed: raise DataError('YIELD_EMPTY_AS_OF')
+    period=max(parsed)
+    return period,parsed[period]
+
 def select_latest(rows,as_of):
     parsed={}
     for period,value in rows:
@@ -142,7 +273,7 @@ def collect_yield(client,country,as_of,tenor=5):
     if tenor!=5 and adapter not in ('norway','treasury','japan'):
         raise DataError('TENOR_NOT_IMPLEMENTED')
     start=(as_of-timedelta(days=21)).isoformat()
-    body=None
+    body=None; notes={}; frequency='daily'
     if adapter=='canada':
         if tenor!=5: raise DataError('TENOR_NOT_IMPLEMENTED')
         url=f'https://www.bankofcanada.ca/valet/observations/{series}/json?start_date={start}&end_date={as_of}'
@@ -184,11 +315,32 @@ def collect_yield(client,country,as_of,tenor=5):
     elif adapter=='belgium':
         url=f'https://nsidisseminate-stat.nbb.be/rest/data/BE2,DF_IROLOBE2,1.0/D.5Y.F?startPeriod={start}'
         parser=lambda p:parse_belgium(p.body)
+    elif adapter=='spain':
+        url='https://www.bde.es/webbe/es/estadisticas/compartido/datos/csv/ti_1_3.csv'
+        parser=lambda p:parse_spain(p.body,series)
+    elif adapter=='slovakia':
+        url='https://nbs.sk/dokument/b912f986-f5ab-4a02-9033-97976d6dc849/stiahnut?force=false'
+        parser=lambda p:parse_slovakia(p.body,series)
+    elif adapter=='iceland':
+        if series!='FLV:nominal:par:5Y': raise DataError('ICELAND_SERIES_CONTRACT')
+        url='https://sedlabanki.is/library?itemid=4b7a7e67-a647-4e98-9190-0c1ca772179f'
+        def parser(p):
+            rows,annotations=parse_iceland(p.body)
+            notes.update(annotations)
+            return rows
+    elif adapter=='israel':
+        # Three calendar months, so monthly series are not filtered out by a daily window.
+        month_index=as_of.year*12+as_of.month-1-3
+        monthly_start=date(month_index//12,month_index%12+1,1).isoformat()
+        url=f'https://edge.boi.gov.il/FusionEdgeServer/sdmx/v2/data/dataflow/BOI.STATISTICS/ZCM/1.0/{series}?startPeriod={monthly_start}'
+        parser=lambda p:parse_israel(p.body,series)
+        frequency='monthly'
     else: raise DataError(route.get('reason','ADAPTER_UNAVAILABLE'))
     p=client.fetch(url,method='POST' if body else 'GET',body=body)
-    period,value=select_latest(parser(p),as_of)
+    period,value=(select_latest_month if frequency=='monthly' else select_latest)(parser(p),as_of)
     return Observation(country['iso3'],f'yield_{tenor}y',value,period,country['currency'],
                        unit='unverified' if adapter=='belgium' else 'percent',
                        provider=adapter,dataset=adapter,series=series,source_date=p.source_date,
                        retrieved_at=p.retrieved_at,url=p.url,raw_sha256=p.sha256,
-                       tenor_years=tenor,yield_type=route['yield_type'],redistribution=route['redistribution'])
+                       tenor_years=tenor,yield_type=route['yield_type'],redistribution=route['redistribution'],
+                       frequency=frequency,notes=notes.get(period,''))

@@ -19,8 +19,12 @@ This initial release deliberately distinguishes researched candidates from calla
 | JPN | MOF 5年 | Constant maturity, CP932 / Japanese era date | Pending definition decision |
 | ITA | Bank of Italy MFN_BMK.D.020.922.0.EUR.205 | Benchmark, latest collected 2026-08-31 | Stale; not ranked |
 | BEL | NBB D.5Y.F | Fixed residual reference | Pending definition and unit metadata confirmation |
+| ISL | CBI FLV nominal par 5Y | Synthetic par constant maturity; Excel percent fractions converted ×100 | Pending definition decision |
+| ESP | Banco de España D_G0B1F0ZO | Daily secondary-market sovereign 5Y bucket | Pending definition decision |
+| SVK | NBS Yields_SK / ZCY5Y | Estimated zero-coupon; daily observations, weekly publication | Pending definition; existing 7-day stale gate |
+| ISR | BOI ZC_TSB_ZND_05Y_MA | Nominal zero-coupon monthly average, percent (PT / multiplier 0) | Monthly frequency fails daily gate |
 
-ISL, NZL, CZE, BGR, IRL, DNK, LTU, HRV, SVN, SVK, AUT, PRT, ISR, ESP remain unimplemented slots. Some already have promising researched files, but research coverage is not implementation coverage. The source research document contains those candidates.
+NZL, CZE, BGR, IRL, DNK, LTU, HRV, SVN, AUT, PRT remain unimplemented slots. Some already have promising researched files, but research coverage is not implementation coverage. The source research document contains those candidates.
 
 ## Provenance and fallback
 
@@ -40,3 +44,14 @@ The April 2026 statistical appendix Table A8 is on physical PDF page 23 (printed
 6. Update both editable and packaged YAML defaults, the coverage table and tests.
 
 All provider redistribution flags are `pending` in this release. No raw provider downloads are bundled or committed. Public mode conservatively suppresses an entire row's provider-derived numbers and classifications when any required provider is pending. Observation metadata remains inspectable without values. RBA units must explicitly be percent per annum; the Japan header must declare %. BoC response metadata must still identify a 5-year series, and the Riksbank series catalogue is checked once each run for maturity and closure. For metadata-poor sources, unit interpretation remains the researched source contract; Belgium is explicitly unverified and its raw observation is excluded from derived metrics until unit evidence is accepted. Market Quality is an explicit unpopulated extension point; no manually invented quality score is supplied.
+
+## 2026-10-04 extension
+
+The four additional adapters are connected routes, not approved scoring inputs. ISL
+selects nominal par rather than indexed or zero-coupon columns and preserves
+correction flags / workbook note references in observation provenance. ESP checks
+5Y sovereign, percentage and daily metadata; source/notes footer rows are metadata.
+SVK keeps the actual date of the estimate, never the workbook retrieval date. ISR
+keeps YYYY-MM and frequency=monthly and excludes incomplete future months; no
+month-end daily observation is invented. The daily gate rejects monthly periods.
+See [live evidence and remaining gaps](research/2026-10-04-connected-sources.md).
