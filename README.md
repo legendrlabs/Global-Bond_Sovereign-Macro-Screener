@@ -46,6 +46,10 @@ python -m sovereign_macro run --output results/public --public-output
 
 ## 대화형 실행과 자동 업데이트 확인
 
+`run`의 기본 터미널 출력과 `latest.md`·HTML 보고서 상단은 공통 Executive Summary를 사용합니다. 전체 GLOBAL STATUS / SAFE_TO_USE, 커버리지, 사용 가능한 부분 Baseline 순위, 수집·품질 HOLD 사유, 기존 거시 지표와 KRW 기준 FX 분류, 데이터 사용 가능성 Decision을 순서대로 표시합니다. 전체 DATA_HOLD에서도 사용 가능한 부분 순위는 표시하지만, 전체 국가 비교가 준비됐다는 뜻은 아닙니다. `app`에서 갱신을 거절하면 기존 보고서의 수집 시점과 함께 저장된 summary를 보여줍니다. 이전 버전 보고서에 summary 파일이 없으면 기존 안내를 유지합니다.
+
+랭킹은 `usable_baseline=True`이고 기존 `baseline_rank`가 있는 행만 표시합니다. demo는 SYNTHETIC DEMO로 표시하고 실사용 랭킹을 보여주지 않습니다. 공개 모드 summary도 redaction 이후 결과만 사용합니다. 5Y observations parsed는 실제 수집 bundle에 존재한 5년물 관측 수이며, 최신성·정의 등 검증을 통과한 수와 다릅니다. 등록 경로 수처럼 정확한 실행 메타데이터가 없는 값은 UNKNOWN입니다. `executive_summary.json`은 같은 내용을 저장하며 실행 manifest의 해시 목록에 포함됩니다. 원래 전체 국가 테이블·CSV·근거 상세도 유지합니다.
+
 ```bash
 python -m sovereign_macro app
 # 명령을 생략해도 app으로 실행

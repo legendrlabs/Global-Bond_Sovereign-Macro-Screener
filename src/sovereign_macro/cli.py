@@ -6,6 +6,7 @@ from .http import HttpClient
 from .collect import collect
 from .pipeline import evaluate, demo_bundle
 from .report import publish
+from .summary import build_executive_summary, render_summary_text
 from .interactive import run_app
 
 def main(argv=None):
@@ -31,7 +32,7 @@ def run_pipeline(args,synthetic):
     result=evaluate(config,bundle,args.as_of,public_output=args.public_output,demo=synthetic)
     destination=publish(result,args.output)
     q=result['quality']
-    print(f"{q['status']}: Baseline {q['baseline_usable']}/27; Adjusted {q['adjusted_usable']}/27")
+    print(render_summary_text(build_executive_summary(result)))
     print(f'Report: {destination / "index.html"}')
     print(f'Current pointer: {args.output}/current.json')
     return destination,2 if args.require_complete and not q['safe_to_use'] else 0

@@ -123,6 +123,8 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
         if not quality['safe_to_use']: quality['status']='DATA_HOLD'
     rank_rows(rows,'baseline');rank_rows(rows,'adjusted')
     return {'as_of':as_of.isoformat(),'model_version':config['scoring']['version'],'rows':rows,'quality':quality,
+            'coverage':{'yield5_observations_parsed':sum(bundle.get('yields',{}).get(c['iso3']+':5') is not None
+                                                       for c in config['countries']['countries'])},
             'http_records':bundle.get('http_records',[])}
 
 def demo_bundle(config,as_of):

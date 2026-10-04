@@ -7,6 +7,7 @@ import re
 import sys
 import webbrowser
 from . import __version__, updates
+from .summary import render_summary_text
 
 @dataclass(frozen=True)
 class DataState:
@@ -48,7 +49,15 @@ def run_app(output,as_of,public_output,run_data,*,interactive=None,input_fn=None
     if interactive is None: interactive=sys.stdin.isatty() and sys.stdout.isatty()
     state=data_state(output,as_of,public_output)
     print(f'프로그램 {__version__} · '+state.summary)
+    def show_saved_summary():
+        if not state.report: return
+        try:
+            saved=json.loads((state.report.parent/'executive_summary.json').read_text(encoding='utf-8'))
+            if saved.get('public_output') is public_output and saved.get('demo') is False:
+                print(render_summary_text(saved))
+        except (OSError,ValueError,TypeError,KeyError,AttributeError): pass
     if not interactive:
+        show_saved_summary()
         print('대화형 입력이 없어 프로그램 설치와 자료 갱신을 건너뜁니다. 자동 수집은 run 명령을 사용하세요.')
         return 0
     print('새 프로그램 버전을 확인합니다…')
@@ -63,17 +72,18 @@ def run_app(output,as_of,public_output,run_data,*,interactive=None,input_fn=None
             return 0
         if not release: print('공개된 새 안정 버전이 없습니다.')
     except updates.UpdateError as exc: print(str(exc))
-    report=state.report;status=0
+    report=state.report;status=0;refreshed=False
     if state.due:
         if confirm('국채·거시 자료를 새로 수집할까요?',interactive=True,input_fn=input_fn):
             print('자료 수집을 시작합니다. 공급자별 요청은 시간이 걸릴 수 있습니다…')
             try:
-                destination,status=run_data();report=destination/'index.html'
+                destination,status=run_data();report=destination/'index.html';refreshed=True
                 print('자료 갱신 실행이 끝났습니다. 원자료 품질과 부분 순위는 새 보고서에서 확인하세요.')
             except Exception as exc:
                 print(f'자료 갱신 실행 실패: {type(exc).__name__}. 기존 결과는 새 자료로 취급하지 않습니다.')
                 status=2
         else: print('자료를 갱신하지 않았습니다. 저장된 결과의 수집 시점과 기준일을 확인하세요.')
+    if not refreshed: show_saved_summary()
     if report:
         print('보고서: '+str(report.resolve()))
         if open_browser: webbrowser.open(report.resolve().as_uri())
