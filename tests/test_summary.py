@@ -81,6 +81,12 @@ class SummaryTests(unittest.TestCase):
         self.assertIsNone(s['coverage']['yield5_observations_parsed'])
         self.assertIn('UNKNOWN',summary.render_summary_text(s))
 
+    def test_krw_view_pairs_existing_yields_with_fx_metrics(self):
+        r=fixture();r['rows'][1].update(real_yield=1.25,fx_vol_1y=0.12,fx_risk='MEDIUM')
+        text=summary.render_summary_text(summary.build_executive_summary(r))
+        krw=text.split('KRW Investor View',1)[1].split('Decision',1)[0]
+        for expected in ('3.500','1.250','0.120','MEDIUM'):self.assertIn(expected,krw)
+
     def test_public_result_never_restores_private_numbers_or_regimes(self):
         c=load_config();day=date(2026,10,5);b=demo_bundle(c,day)
         private=evaluate(c,b,day);public=evaluate(c,b,day,public_output=True)

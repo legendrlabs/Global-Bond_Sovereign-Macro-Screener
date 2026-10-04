@@ -13,10 +13,10 @@
 
 ## 검증
 
-- `python -m unittest discover -s tests -v`: 기존 75 + 신규 12 = 87개 통과.
+- `python -m unittest discover -s tests -v`: 기존 75 + 신규 13 = 88개 통과.
 - 신규 테스트: partial/full/zero/demo 판정, rank 누락·제외·정렬, 실제 오류 표시, ranked 국가의 보조 축 HOLD, public redaction, renderer 일관성, HTML escaping, 실제 parsed count와 stale 분리, app 갱신 거절.
 - `python -m sovereign_macro demo --output results/demo --public-output`: SYNTHETIC DEMO, 0/27, 실사용 순위 없음, 모든 Decision SYNTHETIC DEMO.
-- `python -m sovereign_macro run --output results/local`: 실제 수집 성공. 첫 실행 run `20261004T163914-e7d18d5b`의 결과는 DATA_HOLD / SAFE_TO_USE FALSE / PARTIAL BASELINE, 실제 파싱 16개, Baseline 6/27, Adjusted 0/27. 순위 NOR, CAN, SWE, NLD, DEU, GBR. 결측·월별 빈도·정의 불일치·429 등 실제 오류 표시. 렌더링 최종 수정 후 재실행 결과는 후속 실행 기록에서 확인.
+- `python -m sovereign_macro run --output results/local`: 실제 수집 성공。상태 표시와 ranked-country HOLD 수정 후 재실행 `20261004T164307-07c4ac98`: DATA_HOLD / SAFE_TO_USE FALSE / PARTIAL BASELINE, 실제 파싱 16개, Baseline 6/27, Adjusted 0/27. 순위 NOR, CAN, SWE, NLD, DEU, GBR. CZE ReadTimeout과 FRA HTTP_FAILURE:429를 포함한 실제 오류 표시. 후속 KRW 표의 5Y·실질금리 병기는 같은 저장 summary 모델을 최신 formatter로 재렌더링해 검증.
 - v0.1.0-preview.1에 대응하는 이전 pipeline과 현재 pipeline을 public/private, demo/live 평가, 완전/결측 bundle의 8가지 조합으로 비교: coverage 메타데이터 제외 전체 result 동일.
 - 독립 리뷰에서 ranked 국가의 FX/CPI/10Y 오류 누락을 발견해 회귀 테스트를 먼저 실패시킨 후 수정. 재검토에서 잔여 blocker 없음.
 

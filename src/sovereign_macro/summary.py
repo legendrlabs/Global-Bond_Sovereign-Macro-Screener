@@ -63,7 +63,7 @@ def sections(s):
     holds += [['GLOBAL',e] for e in s['system_holds']]
     if s['adjusted_status']!='AVAILABLE': holds.append(['Adjusted ranking','NOT AVAILABLE; MARKET_QUALITY_UNAVAILABLE'])
     macro_keys=['iso3','currency','yield_5y','real_yield','net_debt_current','net_debt_future','balance_trajectory','fiscal_trend','real_yield_regime']
-    krw_keys=['iso3','fx_vol_1y','fx_drawdown','fx_risk','carry','discount_rate']
+    krw_keys=['iso3','yield_5y','real_yield','fx_vol_1y','fx_drawdown','fx_risk','carry','discount_rate']
     return [
         ('Executive Summary',['Field','Value'],[['Model',s['model_version']],['As-of',s['as_of']],
             ['GLOBAL STATUS',s['global_status']],['SAFE_TO_USE',str(s['safe_to_use']).upper()],['USAGE MODE',s['usage_mode']]]),
