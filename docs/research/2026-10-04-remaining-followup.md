@@ -23,4 +23,4 @@
 - [DNK 중앙은행 경매 결과](https://www.nationalbanken.dk/en/government-debt/trading-and-data/auction-results-government-bonds)는 종목별 경매 결과이며, 물가연동채의 실질수익률도 포함한다. DKK 명목 일별 5년물로 자동 대체하지 않는다.
 - IRL 공식 기관을 대상으로 한 이번 추가 검색에서는 직접 수집 가능한 5Y 계열을 새로 확인하지 못했다. 자료 부재의 증명은 아니다.
 
-현재 남은 10개국을 연결 완료로 바꾸는 근거는 이 조사에서 추가되지 않았다.
+이 기록 작성 이후 CZE 공식 월간 PDF 경로가 추가되어 현재 미연결은 9개국이다. [체코 연결 및 나머지 후속 점검](2026-10-04-czech-publication.md)을 참고한다.

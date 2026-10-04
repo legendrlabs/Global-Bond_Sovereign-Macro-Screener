@@ -6,6 +6,9 @@ import re
 import time
 import zipfile
 import calendar
+from html.parser import HTMLParser
+from urllib.parse import urljoin
+from pypdf import PdfReader
 import openpyxl
 import xml.etree.ElementTree as ET
 from .models import DataError, Observation, finite
@@ -267,6 +270,62 @@ def select_latest(rows,as_of):
     period=max(parsed)
     return period,parsed[period]
 
+CNB_BULLETIN_INDEX='https://www.cnb.cz/en/statistics/money_and_banking_stat/monetary-statistics-monthly-bulletin/index.html'
+
+def discover_czech_bulletin(body,as_of):
+    class Links(HTMLParser):
+        def __init__(self):
+            super().__init__(); self.links=[]
+        def handle_starttag(self,tag,attrs):
+            if tag=='a': self.links.append(dict(attrs).get('href',''))
+    parser=Links(); parser.feed(body.decode('utf-8'))
+    candidates=set()
+    for link in parser.links:
+        url=urljoin(CNB_BULLETIN_INDEX,link)
+        match=re.fullmatch(r'https://www\.cnb\.cz/export/sites/cnb/en/statistics/\.galleries/money_and_banking_stat/mon_bank_stat/(\d{4})/menstat_(\d{4})-(\d{2})_EN\.pdf',url)
+        if not match: continue
+        folder,y,m=match.groups()
+        if folder!=y or not 1<=int(m)<=12: continue
+        edition=f'{y}-{m}'
+        if edition<=as_of.strftime('%Y-%m'): candidates.add((edition,url))
+    if not candidates: raise DataError('CZE_PUBLISHED_EDITION_MISSING')
+    edition,url=max(candidates)
+    return url,edition
+
+def parse_czech_pages(pages,edition):
+    # The PDF table is drawn with positioned glyphs. Its narrative explicitly
+    # labels the current month and 5Y yield; never infer a value from glyph order.
+    pages=[re.sub(r'\s+',' ',p.replace('\u2212','-')).strip() for p in pages]
+    table=[p for p in pages if '1.3 TABLE 2B – CAPITAL MARKET INTEREST RATES' in p]
+    commentary=[p for p in pages if '1.4 COMMENTARY ON TABLES 1 – 2' in p]
+    if len(table)!=1 or len(commentary)!=1: raise DataError('CZE_SECTION_SCHEMA')
+    section=table[0].split('1.3 TABLE 2B – CAPITAL MARKET INTEREST RATES',1)[1]
+    if not re.search(r'\b5 years\b',section) or not all(s in section for s in ('(in %, monthly average)','Bond yields','Source: Czech National Bank.')):
+        raise DataError('CZE_TABLE_METADATA')
+    for page in (table[0],commentary[0]):
+        editions=re.findall(r'Monetary Statistics – (\d{1,2})/(\d{4})',page)
+        if len(editions)!=1 or f'{editions[0][1]}-{int(editions[0][0]):02}'!=edition:
+            raise DataError('CZE_EDITION_MISMATCH')
+    text=commentary[0]
+    matches=re.findall(r'Commentary on key interest rates \(Table 1\) and financial market interest rates \(Table 2\): ([A-Za-z]+) (\d{4})\.',text)
+    if len(matches)!=1: raise DataError('CZE_REFERENCE_MONTH_SCHEMA')
+    month,y=matches[0]
+    months={calendar.month_name[m]:m for m in range(1,13)}
+    if month not in months: raise DataError('CZE_REFERENCE_MONTH_SCHEMA')
+    period=f'{y}-{months[month]:02}'
+    lag=(int(edition[:4])-int(y))*12+int(edition[5:])-months[month]
+    if not 0<=lag<=3: raise DataError('CZE_REFERENCE_MONTH_LAG')
+    text=text.split('1.4.2 FINANCIAL MARKET INTEREST RATES',1)
+    if len(text)!=2: raise DataError('CZE_COMMENTARY_SCHEMA')
+    # Split at sentence-ending periods, not decimal points. Missing 5Y data
+    # must never consume a later 10Y sentence or its percentage.
+    sentences=[s.strip() for s in re.split(r'\.(?:\s+|$)',text[1]) if re.search(r'\byield on the 5Y bond\b',s)]
+    if len(sentences)!=1: raise DataError('CZE_FIVE_YEAR_AMBIGUOUS')
+    number=r'-?\d+(?:\.\d+)?'
+    value=re.fullmatch(r'(?:The )?yield on the 5Y bond (?:increased|decreased|rose|fell)(?: by '+number+r' percentage points?)? to ('+number+r')%',sentences[0])
+    if not value: raise DataError('CZE_YIELD_SCHEMA')
+    return [(period,float(value.group(1)))]
+
 def collect_yield(client,country,as_of,tenor=5):
     route=country['yield']; adapter=route['adapter']; series=route['series']
     if tenor not in (5,10): raise DataError('TENOR_NOT_IMPLEMENTED')
@@ -328,6 +387,13 @@ def collect_yield(client,country,as_of,tenor=5):
             rows,annotations=parse_iceland(p.body)
             notes.update(annotations)
             return rows
+    elif adapter=='czech':
+        if series!='TABLE_2B:5Y:monthly_average': raise DataError('CZE_SERIES_CONTRACT')
+        index=client.fetch(CNB_BULLETIN_INDEX)
+        url,edition=discover_czech_bulletin(index.body,as_of)
+        parser=lambda p:parse_czech_pages([page.extract_text() or '' for page in PdfReader(BytesIO(p.body)).pages],edition)
+        frequency='monthly'
+        notes['edition']=edition
     elif adapter=='israel':
         # Three calendar months, so monthly series are not filtered out by a daily window.
         month_index=as_of.year*12+as_of.month-1-3
@@ -343,4 +409,4 @@ def collect_yield(client,country,as_of,tenor=5):
                        provider=adapter,dataset=adapter,series=series,source_date=p.source_date,
                        retrieved_at=p.retrieved_at,url=p.url,raw_sha256=p.sha256,
                        tenor_years=tenor,yield_type=route['yield_type'],redistribution=route['redistribution'],
-                       frequency=frequency,notes=notes.get(period,''))
+                       frequency=frequency,notes=('publication_edition='+notes['edition']) if adapter=='czech' else notes.get(period,''))

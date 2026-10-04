@@ -67,12 +67,11 @@ countries:
   currency_from: '2000-01-01'
   fx_continuity: true
   yield:
-    adapter: unavailable
-    series: ''
-    yield_type: unverified
+    adapter: czech
+    series: TABLE_2B:5Y:monthly_average
+    yield_type: monthly_residual_maturity_basket
     baseline_compatible: false
     redistribution: pending
-    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: BGR
   name: 불가리아
   currency: EUR

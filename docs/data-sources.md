@@ -24,7 +24,9 @@ This initial release deliberately distinguishes researched candidates from calla
 | SVK | NBS Yields_SK / ZCY5Y | Estimated zero-coupon; daily observations, weekly publication | Pending definition; existing 7-day stale gate |
 | ISR | BOI ZC_TSB_ZND_05Y_MA | Nominal zero-coupon monthly average, percent (PT / multiplier 0) | Monthly frequency fails daily gate |
 
-NZL, CZE, BGR, IRL, DNK, LTU, HRV, SVN, AUT, PRT remain unimplemented slots. Some already have promising researched files, but research coverage is not implementation coverage. The source research document contains those candidates.
+| CZE | CNB monthly bulletin TABLE_2B:5Y:monthly_average | Published narrative of monthly residual-maturity basket; reference month distinct from edition | Monthly frequency fails daily gate |
+
+NZL, BGR, IRL, DNK, LTU, HRV, SVN, AUT, PRT remain unimplemented slots. Some already have promising researched files, but research coverage is not implementation coverage. The source research document contains those candidates.
 
 ## Provenance and fallback
 
@@ -55,3 +57,10 @@ SVK keeps the actual date of the estimate, never the workbook retrieval date. IS
 keeps YYYY-MM and frequency=monthly and excludes incomplete future months; no
 month-end daily observation is invented. The daily gate rejects monthly periods.
 See [live evidence and remaining gaps](research/2026-10-04-connected-sources.md).
+
+CZE discovers a published PDF link on the official monthly bulletin index, validates
+the edition and monthly percent metadata, and reads only the explicitly labelled
+5Y yield from that edition’s commentary. The reference month must be no later than
+the edition and at most three months behind. Changed or ambiguous narrative wording
+fails closed; no historical PDF fallback or invented daily date is used.
+See [Czech publication evidence](research/2026-10-04-czech-publication.md).
