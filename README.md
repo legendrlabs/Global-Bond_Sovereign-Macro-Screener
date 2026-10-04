@@ -44,6 +44,18 @@ python -m sovereign_macro run --output results/public --public-output
 
 재배포 조건이 `pending`인 공급자의 수치와 파생 분류는 공개 모드에서 숨깁니다. 현재 기본 설정은 모두 검토 대기 상태라 공개 보고서는 수치보다 연결·품질 진단을 보여줍니다. 로컬 수집 가능 여부와 공개 재배포 허용 여부는 별도입니다. `data/`의 원본 캐시나 로컬 연구 보고서를 공개 저장소에 올리지 마세요.
 
+## 확보된 국가부터 사용하기
+
+27개국이 모두 연결될 때까지 기다리지 않고, 로컬 `run` 결과에서 `usable_baseline=True`인 국가끼리 부분 순위를 사용할 수 있습니다. `baseline_rank`가 빈 국가는 순위 대상이 아닙니다. 미연결·요청 실패·오래된 관측일·월별 자료·단위 또는 정의 미승인은 그대로 제외하며 계산식은 바꾸지 않습니다. 전체 `safe_to_use=False`와 부분 국가의 `usable_baseline`은 서로 다른 검사입니다.
+
+```bash
+python -m sovereign_macro run --output results/local
+```
+
+부분 결과를 볼 때는 `--require-complete`를 붙이지 않습니다. 진단 보고서는 전체 DATA_HOLD에서도 생성됩니다. Adjusted는 Market Quality 확보 전까지 비워 둡니다. 커뮤니티에 공유할 때는 기존 `--public-output` 모드를 사용합니다.
+
+2026-10-04 실제 실행은 등록 경로 18개국 중 14개국의 5Y 원자료를 파싱했고, 6개국의 Baseline 부분 순위를 계산했습니다. 프랑스는 HTTP 429로 이번 순위에서 제외했습니다. 실행마다 성공 국가가 달라질 수 있으므로 고정 6개국 목록을 강제하지 않습니다. [첫 부분 실행 기록](docs/research/2026-10-04-available-first.md)을 참고하세요.
+
 ## 현재 구현 범위
 
 - 27개국 고정 목록과 통화·금리 정의별 검증 구조
