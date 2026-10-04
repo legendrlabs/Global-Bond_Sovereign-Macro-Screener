@@ -67,7 +67,9 @@ py -3 -m venv .venv
 
 터미널 입력이 없는 환경에서는 `app`이 설치·수집을 건너뜁니다. 기존 `run`/`demo`와 주간 GitHub Actions는 명시적으로 요청된 비대화형 작업이므로 확인 질문을 넣지 않았습니다. 자료 갱신 승인 뒤 수집이 일부 실패하면 새 진단 보고서에 DATA_HOLD를 기록하며, 이전 자료를 최신 값으로 대체하지 않습니다.
 
-배포 관리자는 main에 병합된 버전에 대해 `pyproject.toml`과 `__version__`을 함께 올린 뒤 `vX.Y.Z` 태그를 게시합니다. `Stable program release`가 main 포함 여부·버전 일치·설치 wheel 테스트를 검증한 후 설치 파일을 GitHub Release에 올립니다. 릴리스 워크플로 구성만 추가했으며 이번 작업에서 main 병합이나 새 릴리스 게시는 수행하지 않았습니다.
+배포 관리자는 main에 병합된 버전에 대해 `pyproject.toml`과 `__version__`을 함께 올린 뒤 `vX.Y.Z` 태그를 게시합니다. `Stable program release`가 main 포함 여부·버전 일치·설치 wheel 테스트를 검증한 후 설치 파일을 GitHub Release에 올립니다.
+
+첫 시험판 `v0.1.0-preview.1`은 `release-preview/v0.1.0-preview.1` 브랜치의 검증된 커밋에서 별도로 게시합니다. `Preview program release`가 wheel 설치·테스트·공개 demo를 통과한 뒤 wheel, 설치 안내가 포함된 소스 ZIP, SHA-256 목록을 올립니다. GitHub에서 반드시 프리릴리스로 표시하며 main 병합을 요구하지 않습니다. 시험판 내부 패키지 버전은 `0.1.0`이며 자동 업데이트는 시험판을 설치하지 않습니다. 후속 시험판은 직접 설치하고, 정식 버전으로 자동 전환할 때는 더 높은 패키지 버전을 사용합니다.
 
 ## 확보된 국가부터 사용하기
 
