@@ -154,6 +154,12 @@ class ReleaseWorkflowTests(unittest.TestCase):
             env={**os.environ,'GITHUB_REF_NAME':'v0.1.0'}
             valid=subprocess.run(['bash','-e','-c',step['run']],cwd=root,env=env,capture_output=True,text=True)
             self.assertEqual(valid.returncode,0,valid.stderr)
+            main_env={**env,'GITHUB_REF_NAME':'main','GITHUB_REF_TYPE':'branch'}
+            main_run=subprocess.run(['bash','-e','-c',step['run']],cwd=root,env=main_env,capture_output=True,text=True)
+            self.assertEqual(main_run.returncode,0,main_run.stderr)
+            main_env['GITHUB_REF_NAME']='release/stable-0.1.1'
+            nonmain=subprocess.run(['bash','-e','-c',step['run']],cwd=root,env=main_env,capture_output=True)
+            self.assertNotEqual(nonmain.returncode,0)
             env['GITHUB_REF_NAME']='v0.2.0'
             wrong=subprocess.run(['bash','-e','-c',step['run']],cwd=root,env=env,capture_output=True)
             self.assertNotEqual(wrong.returncode,0)
