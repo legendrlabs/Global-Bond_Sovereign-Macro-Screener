@@ -25,6 +25,35 @@ class QualityScopeTests(unittest.TestCase):
             self.assertTrue(row['baseline_definition_note'])
             self.assertIn('BASELINE_DEFINITION_DIFFERENCE', row['warnings'])
 
+    def test_iceland_and_australia_research_proxies_rank_with_original_definitions(self):
+        bundle = demo_bundle(self.config, self.day)
+        for iso, provider, definition in [('ISL', 'iceland', 'par_constant_maturity'),
+                                           ('AUS', 'rba', 'interpolated_constant_maturity')]:
+            bundle['yields'][iso + ':5'] = replace(bundle['yields'][iso + ':5'], provider=provider, yield_type=definition)
+        result = evaluate(self.config, bundle, self.day)
+        for iso, definition in [('ISL', 'par_constant_maturity'), ('AUS', 'interpolated_constant_maturity')]:
+            row = next(r for r in result['rows'] if r['iso3'] == iso)
+            self.assertTrue(row['usable_baseline'], iso)
+            self.assertIsNotNone(row['baseline_rank'])
+            self.assertEqual(row['yield_type'], definition)
+            self.assertTrue(row['baseline_definition_note'])
+            self.assertTrue(row['baseline_definition_source'])
+            self.assertIn('BASELINE_DEFINITION_DIFFERENCE', row['warnings'])
+            self.assertFalse(row['usable_adjusted'])
+        for iso in ('SVK', 'ESP'):
+            row = next(r for r in result['rows'] if r['iso3'] == iso)
+            self.assertFalse(row['usable_baseline'])
+            self.assertIsNone(row['baseline_rank'])
+
+    def test_new_research_proxy_approvals_keep_stale_unit_and_definition_gates(self):
+        for iso in ('ISL', 'AUS'):
+            for changes in ({'period': '2026-09-27'}, {'yield_type': 'estimated_zero_coupon'}, {'unit': 'bp'}):
+                bundle = demo_bundle(self.config, self.day)
+                bundle['yields'][iso + ':5'] = replace(bundle['yields'][iso + ':5'], **changes)
+                row = next(r for r in evaluate(self.config, bundle, self.day)['rows'] if r['iso3'] == iso)
+                self.assertFalse(row['usable_baseline'])
+                self.assertIsNone(row['baseline_rank'])
+
     def test_baseline_remains_available_when_fx_and_market_quality_are_missing(self):
         bundle = demo_bundle(self.config, self.day)
         bundle['fx'] = {}
