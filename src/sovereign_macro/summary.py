@@ -139,6 +139,18 @@ def sections(s):
               r['credit'].get('last_action_date'),
               '; '.join([r['credit']['status'],r['credit'].get('reason','')]).strip('; '),
               r['credit'].get('url')] for r in s['market_inputs']]))
+        candidates={}
+        for row in s['market_inputs']:
+            for axis in ('liquidity','accessibility'):
+                for source in row[axis].get('candidate_sources',[]):
+                    key=(axis,source['url'])
+                    if key not in candidates: candidates[key]=dict(source,axis=axis,countries=[])
+                    candidates[key]['countries'].append(row['iso3'])
+        if candidates:
+            content.append(('Market Quality Research Links — no observations collected',
+                ['Scope','Countries to review','Provider','Definition','Outstanding limitation','Source'],
+                [[r['axis'],', '.join(r['countries']),r['provider'],r['scope'],r['limitation'],r['url']]
+                 for r in candidates.values()]))
     if s.get('source_notices'):
         content.append(('Source / Reuse Notices',['Attribution and conditions'],[[n] for n in s['source_notices']]))
     content.append(('Decision',['Data use','Status'],list(map(list,s['decision'].items()))))

@@ -7,6 +7,7 @@ import re
 import xml.etree.ElementTree as ET
 
 from .models import DataError, finite
+from .market_research import research_links
 
 AREA_TO_ISO3=dict(zip(
     'IS NO AU NZ KR CZ BG CA IE DK LT SE HR NL SI DE SK AT PT IL ES GB FR IT BE US JP'.split(),
@@ -102,6 +103,8 @@ def country_market_inputs(iso,bundle,demo=False,public_output=False):
         credit=credit,
         accessibility=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Dated bond-market accessibility input not connected'),
         composite_status='MODEL_NOT_IMPLEMENTED')
+    for axis in ('liquidity','accessibility'):
+        result[axis]['candidate_sources']=research_links(iso,axis)
     if public_output:
         for component in ('size','liquidity','credit','accessibility'):
             if result[component].get('value') is None: result[component].pop('value',None)
