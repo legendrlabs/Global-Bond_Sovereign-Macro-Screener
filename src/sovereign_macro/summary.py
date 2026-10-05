@@ -45,6 +45,7 @@ def build_executive_summary(result):
                     yield5_observations_parsed=None if demo else coverage.get('yield5_observations_parsed')),
                 baseline_ranking=metrics,top_country_metrics=metrics,holds=holds,
                 quality_scopes=quality_scopes(rows,demo),
+                market_inputs=[dict(iso3=r['iso3'],**r['market_inputs']) for r in rows if r.get('market_inputs')],
                 system_holds=[e for e in system if not any(e.startswith(r['iso3']+':') for r in rows)],
                 adjusted_status='AVAILABLE' if adjusted else 'NOT AVAILABLE',decision=decision,
                 source_notices=result.get('source_notices',[]),
@@ -121,6 +122,16 @@ def sections(s):
             ['Retrieval age (calendar days)',f.get('age_days')],
             ['Latest release checked successfully',f.get('latest_release_verified')],
             ['Refresh failure',f.get('refresh_failure','')]]))
+    if s.get('market_inputs'):
+        content.append(('Market Quality Input Gaps',['Scope','Reason'],[
+            [axis,s['market_inputs'][0][axis]['reason']] for axis in ('liquidity','credit','accessibility')]))
+        content.append(('Market Quality Inputs',
+            ['Country','Size (USD bn)','Period / scope','Size status / reason','Liquidity','Credit','Accessibility','Composite'],
+            [[r['iso3'],r['size'].get('value'),
+              '; '.join([r['size'].get('period',''),r['size'].get('definition','')]).strip('; '),
+              '; '.join([r['size']['status'],r['size'].get('reason','')]).strip('; '),
+              r['liquidity']['status'],r['credit']['status'],r['accessibility']['status'],r['composite_status']]
+             for r in s['market_inputs']]))
     if s.get('source_notices'):
         content.append(('Source / Reuse Notices',['Attribution and conditions'],[[n] for n in s['source_notices']]))
     content.append(('Decision',['Data use','Status'],list(map(list,s['decision'].items()))))

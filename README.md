@@ -127,7 +127,7 @@ python -m sovereign_macro run --output results/local
 1. 미연결 9개국의 공식 5Y 자료와 단위·주기·만기 검증
 2. benchmark / par / interpolated / fixed residual 정의의 비교 가능성 확정
 3. 공급자별 커뮤니티 재배포 조건 확인
-4. Market Quality의 실제 자료·정규화 기준 연결
+4. Market Quality 입력 표의 BIS 분기 규모 수집 경로를 검증하고, 신용·유동성·접근성 자료 및 정규화 기준 연결. 규모는 중앙정부·명목가·전체 통화의 발행잔액(십억 달러)이며 유동성 점수나 5년물 거래 가능성이 아닙니다. 미연결 항목과 수집 실패는 별도로 표시하며 Adjusted는 계속 비워 둡니다.
 5. 정식 라이선스를 확보한 실제 April 2026 회귀 자료 추가
 
 국가를 추가하거나 경로를 바꿀 때 숫자 예외를 넣지 말고 `config/`의 메타데이터 계약과 원자료 파서를 보강하세요. 설치 배포본의 `src/sovereign_macro/defaults/`도 함께 갱신해야 합니다.

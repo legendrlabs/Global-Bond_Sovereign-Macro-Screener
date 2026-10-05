@@ -3,6 +3,7 @@ from datetime import date
 from .fiscal import collect_fiscal
 from .sources import parse_ecb
 from .yield_selection import collect_preferred_yield
+from .market_inputs import collect_market_inputs
 
 def collect(config,client,as_of):
     countries=config['countries']['countries']
@@ -25,5 +26,7 @@ def collect(config,client,as_of):
             try: bundle['yields'][key]=collect_preferred_yield(client,country,config,as_of,tenor)
             except Exception as exc:
                 bundle['errors'].append(key+':'+type(exc).__name__+':'+str(exc)[:180])
+    # Optional structural-input failure does not invalidate an otherwise usable Baseline.
+    bundle['market_inputs']=collect_market_inputs(client,config['sources'].get('market_inputs',{}),as_of)
     bundle['http_records']=client.records
     return bundle

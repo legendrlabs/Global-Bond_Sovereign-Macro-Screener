@@ -6,6 +6,7 @@ from .fx import fx_metrics, _anniversary
 from .regimes import regimes
 from .publication import yield_reuse_allowed
 from .yield_selection import validate_yield, yield_contract, observation_warnings
+from .market_inputs import country_market_inputs
 
 NUMERIC_FIELDS=('yield_5y','yield_10y','net_debt_current','net_debt_future','gross_debt_current',
                 'balance_mean','balance_trajectory','inflation_mean','real_yield','fiscal','baseline','adjusted',
@@ -24,6 +25,9 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                  yield_type=c['yield']['yield_type'],edition=fiscal['edition'] if fiscal else '',
                  redistribution_status='pending')
         row.update({k:None for k in NUMERIC_FIELDS})
+        row['market_inputs']=country_market_inputs(iso,bundle,demo,public_output)
+        if row['market_inputs']['size'].get('raw_sha256'):
+            row['provenance'].append(dict(row['market_inputs']['size']))
         if fiscal:
             row['warnings'].extend(fiscal.get('warnings',[]))
             row['fiscal_snapshot_used']=fiscal.get('snapshot',{}).get('used',False)
@@ -131,6 +135,8 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                       and source_config['fx']['redistribution']=='allowed'
                       and yield_reuse_allowed(country,observations))
             if not eligible:
+                size=row['market_inputs']['size']
+                if size.pop('value',None) is not None: size['status']='ROW_REDACTED'
                 for key in NUMERIC_FIELDS: row[key]=None
                 for key in ('fiscal_trend','real_yield_regime','fx_risk','carry','discount_rate'): row[key]='UNAVAILABLE'
                 row['usable_baseline']=False;row['usable_adjusted']=False
