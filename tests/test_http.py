@@ -56,19 +56,20 @@ class HttpTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             browser=Browser([response(200,b'{"ok":true}')])
             fallback=Session([])
-            client=HttpClient(tmp,fallback,browser_session=browser)
+            client=HttpClient(tmp,fallback,imf_transport=browser.request)
             payload=client.fetch('https://www.imf.org/external/datamapper/api/v2/indicators')
             self.assertEqual(browser.calls[0][1]['impersonate'],'chrome')
             self.assertEqual(browser.calls[0][1]['timeout'],(10,30))
-            self.assertEqual(payload.transport,'curl_cffi:chrome')
-            self.assertEqual(client.records[-1]['transport'],'curl_cffi:chrome')
+            self.assertEqual(payload.transport,'curl_cffi')
+            self.assertEqual(client.records[-1]['transport'],'curl_cffi')
     def test_imf_browser_failure_falls_back_to_requests_and_records_transport(self):
         with tempfile.TemporaryDirectory() as tmp:
             browser=Browser([RuntimeError('browser transport failed')])
             fallback=Session([response(200,b'{"ok":true}')])
-            client=HttpClient(tmp,fallback,browser_session=browser)
+            client=HttpClient(tmp,fallback,imf_transport=browser.request)
             payload=client.fetch('https://www.imf.org/external/datamapper/api/v2/indicators')
             self.assertEqual(fallback.calls[0][1]['timeout'],(10,30))
             self.assertEqual(payload.transport,'requests')
             self.assertEqual(client.records[-1]['transport'],'requests')
-            self.assertEqual(client.records[-2]['transport'],'curl_cffi:chrome')
+            self.assertEqual(client.records[-2]['transport'],'curl_cffi')
+

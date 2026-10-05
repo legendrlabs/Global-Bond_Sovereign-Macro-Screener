@@ -96,7 +96,8 @@ def collect_fiscal_live(client,config,countries,as_of):
             if not actual.get(field) or actual[field]!=metadata[key].get(field):
                 raise DataError('FISCAL_SERIES_METADATA_MISMATCH:'+key)
         provenance[metric]={'url':p.url,'raw_sha256':p.sha256,'retrieved_at':p.retrieved_at,
-                            'source_date':p.source_date,'series':key,'metadata':metadata[key],'redistribution':config['redistribution']}
+                            'source_date':p.source_date,'series':key,'metadata':metadata[key],
+                            'transport':p.transport,'redistribution':config['redistribution']}
     data=parse_fiscal(metadata,payloads,as_of.year)
     data['provenance']=provenance
     data['errors']=[]
@@ -111,7 +112,8 @@ def collect_fiscal_live(client,config,countries,as_of):
             data['pdf_fills']=fills
             data['pdf_provenance']={'url':p.url,'raw_sha256':p.sha256,'retrieved_at':p.retrieved_at,
                                    'edition':data['edition'],'table':pdf_config['table'],'page':pdf_config['page'],
-                                   'precision':0.1,'redistribution':config['redistribution']}
+                                   'precision':0.1,'transport':p.transport,
+                                   'redistribution':config['redistribution']}
         except (DataError,ValueError,IndexError) as exc:
             data['errors'].append('PDF_FALLBACK_FAILED:'+str(exc))
     return data

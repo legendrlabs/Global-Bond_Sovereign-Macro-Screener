@@ -6,7 +6,17 @@ import hashlib
 import json
 import time
 import requests
+from urllib.parse import urlparse
 from .models import DataError
+
+try:
+    from curl_cffi import requests as cffi_requests
+except ImportError:
+    cffi_requests = None
+
+IMF_HOSTS = {'imf.org', 'www.imf.org'}
+DEFAULT_TIMEOUT = (5, 15)
+IMF_TIMEOUT = (10, 30)
 
 @dataclass(frozen=True)
 class Payload:
@@ -15,16 +25,37 @@ class Payload:
     retrieved_at: str
     sha256: str
     source_date: str = ''
+    transport: str = 'requests'
     def json(self):
         return json.loads(self.body)
 
 class HttpClient:
-    def __init__(self, cache='data/cache', session=None, budget=80, attempts=2):
+    def __init__(self, cache='data/cache', session=None, budget=80, attempts=2, imf_transport=None):
         self.cache=Path(cache)
         self.session=session or requests.Session()
+        self.imf_transport=imf_transport
+        if self.imf_transport is None and session is None and cffi_requests is not None:
+            self.imf_transport=cffi_requests.request
         self.budget=budget
         self.attempts=attempts
         self.records=[]
+
+    @staticmethod
+    def _is_imf(url):
+        return (urlparse(url).hostname or '').lower() in IMF_HOSTS
+
+    def _request(self, method, url, body, headers):
+        if self._is_imf(url) and self.imf_transport is not None:
+            try:
+                response=self.imf_transport(method=method,url=url,data=body,headers=headers,
+                                             timeout=IMF_TIMEOUT,impersonate='chrome')
+                if response.status_code < 400 or response.status_code == 304:
+                    return response, 'curl_cffi'
+                self.records.append({'url':url,'status':response.status_code,'transport':'curl_cffi'})
+            except Exception as exc:
+                self.records.append({'url':url,'status':None,'transport':'curl_cffi','error':type(exc).__name__})
+        timeout=IMF_TIMEOUT if self._is_imf(url) else DEFAULT_TIMEOUT
+        return self.session.request(method,url,data=body,headers=headers,timeout=timeout), 'requests'
 
     def fetch(self, url, method='GET', body=None, headers=None):
         extra_headers=dict(headers or {})
@@ -43,7 +74,7 @@ class HttpClient:
             if self.budget<=0: raise DataError('REQUEST_BUDGET_EXHAUSTED')
             self.budget-=1
             try:
-                response=self.session.request(method,url,data=body,headers=headers,timeout=(5,15))
+                response,transport=self._request(method,url,body,headers)
                 if response.status_code==304:
                     raw=self.cache/(old.get('sha256','')+'.bin')
                     content=raw.read_bytes()
@@ -58,10 +89,11 @@ class HttpClient:
                 (self.cache/(sha+'.bin')).write_bytes(content)
                 meta={'url':response.url or url,'sha256':sha,'retrieved_at':now,
                       'etag':response.headers.get('ETag',old.get('etag','')),
-                      'last_modified':response.headers.get('Last-Modified',old.get('last_modified',''))}
+                      'last_modified':response.headers.get('Last-Modified',old.get('last_modified','')),
+                      'transport':transport}
                 meta_file.write_text(json.dumps(meta),encoding='utf8')
                 self.records.append({**meta,'status':response.status_code})
-                return Payload(content,meta['url'],now,sha,meta['last_modified'])
+                return Payload(content,meta['url'],now,sha,meta['last_modified'],transport)
             except requests.RequestException as exc:
                 status=getattr(getattr(exc,'response',None),'status_code',None)
                 retryable=status is None or status==429 or status>=500

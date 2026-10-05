@@ -73,7 +73,7 @@ py -3 -m venv .venv
 
 배포 관리자는 main에 병합된 버전에 대해 `pyproject.toml`과 `__version__`을 함께 올린 뒤 `vX.Y.Z` 태그를 게시합니다. `Stable program release`가 main 포함 여부·버전 일치·설치 wheel 테스트를 검증한 후 설치 파일을 GitHub Release에 올립니다.
 
-첫 시험판 `v0.1.0-preview.1`은 `release-preview/v0.1.0-preview.1` 브랜치의 검증된 커밋에서 별도로 게시합니다. `Preview program release`가 wheel 설치·테스트·공개 demo를 통과한 뒤 wheel, 설치 안내가 포함된 소스 ZIP, SHA-256 목록을 올립니다. GitHub에서 반드시 프리릴리스로 표시하며 main 병합을 요구하지 않습니다. 시험판 내부 패키지 버전은 `0.1.0`이며 자동 업데이트는 시험판을 설치하지 않습니다. 후속 시험판은 직접 설치하고, 정식 버전으로 자동 전환할 때는 더 높은 패키지 버전을 사용합니다.
+첫 시험판 `v0.1.0-preview.1`은 `release-preview/v0.1.0-preview.1` 브랜치의 검증된 커밋에서 별도로 게시합니다. `Preview program release`가 wheel 설치·테스트·공개 demo를 통과한 뒤 wheel, 설치 안내가 포함된 소스 ZIP, SHA-256 목록을 올립니다. GitHub에서 반드시 프리릴리스로 표시하며 main 병합을 요구하지 않습니다. 시험판 내부 패키지 버전은 `0.1.0`이며 자동 업데이트는 시험판을 설치하지 않습니다. 후속 시험판은 직접 설치하고, 정식 버전으로 자동 전환할 때는 더 높은 패키지 버전을 사용합니다. `v0.1.0-preview.3`부터 IMF DataMapper에는 `curl-cffi` 브라우저 호환 전송을 우선 적용하고 기존 `requests` fallback을 유지합니다.
 
 ## 확보된 국가부터 사용하기
 
@@ -135,6 +135,8 @@ python -m sovereign_macro run --output results/local
 ### IMF 발표판 저장본 재사용
 
 IMF 재정·물가 자료는 최신 API 조회를 먼저 시도합니다. 연결 실패(`HTTP_FAILURE`) 시에는 검증된 발표판 원본을 다시 파싱해 사용합니다. HTML·요약·CSV·실행 manifest에 발표판, 저장본 사용 여부, 최초 수집 시각, 수집 경과일, 최신 발표판 확인 실패 사유를 표시합니다. `FISCAL_SNAPSHOT_USED`는 경고이며 그 자체로 전체 점수를 보류시키지 않습니다. 새 실행 시각을 원자료 수집 시각으로 바꾸지 않습니다.
+
+IMF DataMapper는 Python 기본 HTTP 지문을 차단할 수 있어 `curl-cffi`의 브라우저 호환 전송을 IMF 도메인에만 우선 사용합니다. 해당 전송이 없거나 실패하면 기존 `requests`로 보완하며, 실제 전송수단과 요청 결과는 캐시·원자료 provenance에 기록합니다. IMF 요청 timeout은 `(10, 30)`으로 적용하고 다른 공급자 요청의 기본 timeout은 바꾸지 않습니다.
 
 저장본은 같은 `--cache` 디렉터리의 `fiscal-snapshots/`에 보관합니다. 지표 목록, 네 가지 IMF 시계열, 필요한 같은 발표판 PDF를 원본 SHA-256과 함께 저장하고, 사용 시 다시 검증합니다. 기존 HTTP 캐시도 원본 해시·발표판·단위·시리즈별 메타데이터·동일 수집 회차·PDF 대조를 통과하면 저장본으로 승격할 수 있습니다. IMF 이외의 HTTP 캐시에는 이 재사용 규칙을 적용하지 않습니다.
 

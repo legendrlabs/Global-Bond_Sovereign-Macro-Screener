@@ -65,7 +65,9 @@ def payload_from_record(record,root):
     if not re.fullmatch('[0-9a-f]{64}',sha): raise DataError('FISCAL_SNAPSHOT_HASH')
     raw=(root/(sha+'.bin')).read_bytes()
     if hashlib.sha256(raw).hexdigest()!=sha: raise DataError('FISCAL_SNAPSHOT_HASH')
-    return Payload(raw,record['url'],record['retrieved_at'],sha,record.get('source_date',record.get('last_modified','')))
+    return Payload(raw,record['url'],record['retrieved_at'],sha,
+                   record.get('source_date',record.get('last_modified','')),
+                   record.get('transport','requests'))
 
 
 def save(root,config,countries,data,payloads):
@@ -75,7 +77,8 @@ def save(root,config,countries,data,payloads):
         if p.url!=url or hashlib.sha256(p.body).hexdigest()!=p.sha256:
             raise DataError('FISCAL_SNAPSHOT_HASH')
         (raw/(p.sha256+'.bin')).write_bytes(p.body)
-        entries.append(dict(url=url,sha256=p.sha256,retrieved_at=p.retrieved_at,source_date=p.source_date))
+        entries.append(dict(url=url,sha256=p.sha256,retrieved_at=p.retrieved_at,
+                            source_date=p.source_date,transport=p.transport))
     doc=dict(schema=1,scope=scope(config,countries),edition=data['edition'],
              validated_at=datetime.now(timezone.utc).isoformat(),responses=entries)
     wrapper=dict(document=doc,sha256=hashlib.sha256(canonical(doc)).hexdigest())
@@ -149,7 +152,8 @@ def observed_metadata(root,seen,base):
             raise DataError('FISCAL_SNAPSHOT_HASH')
         raw=root/'raw';raw.mkdir(parents=True,exist_ok=True)
         (raw/(p.sha256+'.bin')).write_bytes(p.body)
-        record=dict(url=url,sha256=p.sha256,retrieved_at=p.retrieved_at,source_date=p.source_date)
+        record=dict(url=url,sha256=p.sha256,retrieved_at=p.retrieved_at,
+                    source_date=p.source_date,transport=p.transport)
         temp=root/('observed.tmp-'+uuid.uuid4().hex)
         try:
             temp.write_bytes(canonical(record))
