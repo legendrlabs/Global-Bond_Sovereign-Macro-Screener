@@ -15,8 +15,10 @@ except ImportError:
     cffi_requests = None
 
 IMF_HOSTS = {'imf.org', 'www.imf.org'}
+LIQUIDITY_HOSTS = {'markets.newyorkfed.org', 'www.jsda.or.jp'}
 DEFAULT_TIMEOUT = (5, 15)
 IMF_TIMEOUT = (10, 30)
+LIQUIDITY_TIMEOUT = 20
 
 @dataclass(frozen=True)
 class Payload:
@@ -30,12 +32,13 @@ class Payload:
         return json.loads(self.body)
 
 class HttpClient:
-    def __init__(self, cache='data/cache', session=None, budget=80, attempts=2, imf_transport=None):
+    def __init__(self, cache='data/cache', session=None, budget=80, attempts=2, imf_transport=None, browser_transport=None):
         self.cache=Path(cache)
         self.session=session or requests.Session()
-        self.imf_transport=imf_transport
-        if self.imf_transport is None and session is None and cffi_requests is not None:
-            self.imf_transport=cffi_requests.request
+        self.browser_transport=browser_transport
+        if self.browser_transport is None and session is None and cffi_requests is not None:
+            self.browser_transport=cffi_requests.request
+        self.imf_transport=imf_transport if imf_transport is not None else self.browser_transport
         self.budget=budget
         self.attempts=attempts
         self.records=[]
@@ -45,16 +48,18 @@ class HttpClient:
         return (urlparse(url).hostname or '').lower() in IMF_HOSTS
 
     def _request(self, method, url, body, headers):
-        if self._is_imf(url) and self.imf_transport is not None:
+        host=(urlparse(url).hostname or '').lower()
+        timeout=IMF_TIMEOUT if self._is_imf(url) else LIQUIDITY_TIMEOUT if host in LIQUIDITY_HOSTS else DEFAULT_TIMEOUT
+        transport=self.imf_transport if self._is_imf(url) else self.browser_transport if host in LIQUIDITY_HOSTS else None
+        if transport is not None:
             try:
-                response=self.imf_transport(method=method,url=url,data=body,headers=headers,
-                                             timeout=IMF_TIMEOUT,impersonate='chrome')
+                response=transport(method=method,url=url,data=body,headers=headers,
+                                             timeout=timeout,impersonate='chrome')
                 if response.status_code < 400 or response.status_code == 304:
                     return response, 'curl_cffi'
                 self.records.append({'url':url,'status':response.status_code,'transport':'curl_cffi'})
             except Exception as exc:
                 self.records.append({'url':url,'status':None,'transport':'curl_cffi','error':type(exc).__name__})
-        timeout=IMF_TIMEOUT if self._is_imf(url) else DEFAULT_TIMEOUT
         return self.session.request(method,url,data=body,headers=headers,timeout=timeout), 'requests'
 
     def fetch(self, url, method='GET', body=None, headers=None):

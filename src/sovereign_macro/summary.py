@@ -139,6 +139,14 @@ def sections(s):
               r['credit'].get('last_action_date'),
               '; '.join([r['credit']['status'],r['credit'].get('reason','')]).strip('; '),
               r['credit'].get('url')] for r in s['market_inputs']]))
+        content.append(('Source-specific Liquidity Diagnostics — not a cross-country score',
+            ['Country','Provider','Value','Unit','Period / observation date','Status / limitation','Source'],
+            [[r['iso3'],r['liquidity'].get('provider'),r['liquidity'].get('value'),
+              r['liquidity'].get('unit'),
+              '; '.join([r['liquidity'].get('period',''),r['liquidity'].get('observation_date','')]).strip('; '),
+              '; '.join([r['liquidity']['status'],r['liquidity'].get('definition',''),
+                         r['liquidity'].get('reason','')]).strip('; '),r['liquidity'].get('url')]
+             for r in s['market_inputs']]))
         candidates={}
         for row in s['market_inputs']:
             for axis in ('liquidity','accessibility'):
@@ -147,7 +155,7 @@ def sections(s):
                     if key not in candidates: candidates[key]=dict(source,axis=axis,countries=[])
                     candidates[key]['countries'].append(row['iso3'])
         if candidates:
-            content.append(('Market Quality Research Links — no observations collected',
+            content.append(('Market Quality Research Links — candidates only',
                 ['Scope','Countries to review','Provider','Definition','Outstanding limitation','Source'],
                 [[r['axis'],', '.join(r['countries']),r['provider'],r['scope'],r['limitation'],r['url']]
                  for r in candidates.values()]))

@@ -27,8 +27,9 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                  redistribution_status='pending')
         row.update({k:None for k in NUMERIC_FIELDS})
         row['market_inputs']=country_market_inputs(iso,bundle,demo,public_output)
-        if row['market_inputs']['size'].get('raw_sha256'):
-            row['provenance'].append(dict(row['market_inputs']['size']))
+        for component in ('size','liquidity'):
+            if row['market_inputs'][component].get('raw_sha256'):
+                row['provenance'].append(dict(row['market_inputs'][component]))
         if fiscal:
             row['warnings'].extend(fiscal.get('warnings',[]))
             row['fiscal_snapshot_used']=fiscal.get('snapshot',{}).get('used',False)
@@ -142,8 +143,9 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                       and source_config['fx']['redistribution']=='allowed'
                       and yield_reuse_allowed(country,observations))
             if not eligible:
-                size=row['market_inputs']['size']
-                if size.pop('value',None) is not None: size['status']='ROW_REDACTED'
+                for component in ('size','liquidity'):
+                    item=row['market_inputs'][component]
+                    if item.pop('value',None) is not None: item['status']='ROW_REDACTED'
                 for key in NUMERIC_FIELDS: row[key]=None
                 for key in ('fiscal_trend','real_yield_regime','fx_risk','carry','discount_rate'): row[key]='UNAVAILABLE'
                 row['usable_baseline']=False;row['usable_adjusted']=False
