@@ -46,7 +46,13 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                     if currency_start>as_of: raise DataError('CURRENCY_ASSIGNMENT_UNAVAILABLE')
                     row[f'yield_{tenor}y']=obs.value
                     row[f'yield_{tenor}y_age_days']=(as_of-date.fromisoformat(obs.period)).days
-                    if tenor==5: baseline_compatible=yield_contract(c,obs,config).get('baseline_compatible',False)
+                    if tenor==5:
+                        contract=yield_contract(c,obs,config)
+                        baseline_compatible=contract.get('baseline_compatible',False)
+                        row['baseline_definition_note']=contract.get('baseline_definition_note','')
+                        row['baseline_definition_source']=contract.get('baseline_definition_source','')
+                        if baseline_compatible and row['baseline_definition_note']:
+                            row['warnings'].append('BASELINE_DEFINITION_DIFFERENCE')
                 except DataError as exc: row['errors'].append(f'YIELD_{tenor}Y:'+str(exc))
             elif tenor==5 or iso in config['scoring']['watch_markets']:
                 row['errors'].append(f'YIELD_{tenor}Y_UNAVAILABLE')
@@ -83,7 +89,7 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                 row['baseline']=baseline(row['net_debt_current'],row['net_debt_future'],balances,row['yield_5y'])['baseline']
                 if baseline_compatible and 'FISCAL_YEAR_ROLLOVER' not in row['errors']:
                     row['usable_baseline']=True
-                else: row['errors'].append('BASELINE_DEFINITION_UNAPPROVED')
+                elif not baseline_compatible: row['errors'].append('BASELINE_DEFINITION_UNAPPROVED')
             except DataError as exc: row['errors'].append(str(exc))
         try:
             fx=fx_metrics(bundle.get('fx',{}),c['currency'],as_of,continuity=c['fx_continuity'])

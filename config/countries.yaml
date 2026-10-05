@@ -63,7 +63,9 @@ countries:
     adapter: kofia
     series: '3007'
     yield_type: final_quotation_basket
-    baseline_compatible: false
+    baseline_compatible: true
+    baseline_definition_note: 연구용 5년물 비교; 최종호가 바스켓 잔존기간 4년6개월~5년, 단일 5년 benchmark와 다름
+    baseline_definition_source: https://www.kofiabond.or.kr/
     redistribution: pending
 - iso3: CZE
   wgb_slug: czech-republic
@@ -363,7 +365,9 @@ countries:
     adapter: treasury
     series: BC_5YEAR
     yield_type: par_constant_maturity
-    baseline_compatible: false
+    baseline_compatible: true
+    baseline_definition_note: 연구용 5년물 비교; par constant maturity 곡선의 5년 지점, 특정 채권의 거래수익률과 다름
+    baseline_definition_source: https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics/interest-rates-frequently-asked-questions
     redistribution: pending
 - iso3: JPN
   wgb_slug: japan
@@ -376,5 +380,7 @@ countries:
     adapter: japan
     series: 5年
     yield_type: constant_maturity
-    baseline_compatible: false
+    baseline_compatible: true
+    baseline_definition_note: 연구용 5년물 비교; 시장가격 기반 constant maturity 반기복리 수익률, 단일 benchmark와 다름
+    baseline_definition_source: https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/qa.htm
     redistribution: pending

@@ -1,10 +1,10 @@
-baseline_comparability: explicit metadata; benchmark by default
+baseline_comparability: explicit metadata; disclosed nominal 5Y research proxies
 fx_scale: 0.15
 market_quality_status: UNAVAILABLE
 real_center: 1.0
 real_scale: 1.5
 stale_days: 7
-version: 0.1.0-provisional
+version: 0.1.1-provisional
 watch_markets:
 - USA
 weights:
