@@ -15,8 +15,10 @@ except ImportError:
     cffi_requests = None
 
 IMF_HOSTS = {'imf.org', 'www.imf.org'}
+LIQUIDITY_HOSTS = {'markets.newyorkfed.org', 'www.jsda.or.jp'}
 DEFAULT_TIMEOUT = (5, 15)
 IMF_TIMEOUT = (10, 30)
+LIQUIDITY_TIMEOUT = 20
 
 @dataclass(frozen=True)
 class Payload:
@@ -45,16 +47,17 @@ class HttpClient:
         return (urlparse(url).hostname or '').lower() in IMF_HOSTS
 
     def _request(self, method, url, body, headers):
-        if self._is_imf(url) and self.imf_transport is not None:
+        host=(urlparse(url).hostname or '').lower()
+        timeout=IMF_TIMEOUT if self._is_imf(url) else LIQUIDITY_TIMEOUT if host in LIQUIDITY_HOSTS else DEFAULT_TIMEOUT
+        if (self._is_imf(url) or host in LIQUIDITY_HOSTS) and self.imf_transport is not None:
             try:
                 response=self.imf_transport(method=method,url=url,data=body,headers=headers,
-                                             timeout=IMF_TIMEOUT,impersonate='chrome')
+                                             timeout=timeout,impersonate='chrome')
                 if response.status_code < 400 or response.status_code == 304:
                     return response, 'curl_cffi'
                 self.records.append({'url':url,'status':response.status_code,'transport':'curl_cffi'})
             except Exception as exc:
                 self.records.append({'url':url,'status':None,'transport':'curl_cffi','error':type(exc).__name__})
-        timeout=IMF_TIMEOUT if self._is_imf(url) else DEFAULT_TIMEOUT
         return self.session.request(method,url,data=body,headers=headers,timeout=timeout), 'requests'
 
     def fetch(self, url, method='GET', body=None, headers=None):

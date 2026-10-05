@@ -23,6 +23,19 @@ def response(code,content=b'{}',headers=None):
     r=requests.Response();r.status_code=code;r._content=content;r.headers.update(headers or {});return r
 
 class HttpTests(unittest.TestCase):
+    def test_liquidity_hosts_use_compatible_transport_without_matching_lookalike_hosts(self):
+        for host in ('markets.newyorkfed.org','www.jsda.or.jp'):
+            with self.subTest(host=host),tempfile.TemporaryDirectory() as tmp:
+                browser=Browser([response(200,b'data')]);fallback=Session([response(200,b'wrong')])
+                payload=HttpClient(tmp,fallback,imf_transport=browser.request).fetch('https://'+host+'/data')
+                self.assertEqual(payload.body,b'data')
+                self.assertEqual(payload.transport,'curl_cffi')
+                self.assertEqual(browser.calls[0][1]['timeout'],20)
+        with tempfile.TemporaryDirectory() as tmp:
+            browser=Browser([]);fallback=Session([response(200,b'plain')])
+            payload=HttpClient(tmp,fallback,imf_transport=browser.request).fetch('https://www.jsda.or.jp.example.org/data')
+            self.assertEqual(payload.transport,'requests')
+
     def test_json_post_can_supply_origin_referer_without_changing_existing_form_posts(self):
         with tempfile.TemporaryDirectory() as tmp:
             s=Session([response(200)])
@@ -72,4 +85,3 @@ class HttpTests(unittest.TestCase):
             self.assertEqual(payload.transport,'requests')
             self.assertEqual(client.records[-1]['transport'],'requests')
             self.assertEqual(client.records[-2]['transport'],'curl_cffi')
-

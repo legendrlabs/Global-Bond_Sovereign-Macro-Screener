@@ -1,6 +1,9 @@
 market_inputs:
   enabled: true
   size_max_age_days: 365
+  liquidity_enabled: true
+  weekly_max_age_days: 30
+  monthly_max_age_days: 120
   redistribution: pending
 yield_fallback:
   enabled: true
