@@ -88,9 +88,18 @@ class YieldSelectionTests(unittest.TestCase):
         self.assertEqual(row['yield_5y_age_days'],3)
         self.assertTrue(row['yield_5y_fallback'])
         self.assertIn('WGB_DATE_DISCREPANCY',row['warnings'])
-        self.assertFalse(row['usable_baseline'])
+        self.assertTrue(row['usable_baseline'])
         self.assertIn('wgb',build_html(result,'test'))
         self.assertIn('WGB_DATE_DISCREPANCY',render_summary_text(build_executive_summary(result)))
+
+    def test_approved_wgb_fallback_can_enter_baseline_when_policy_allows_it(self):
+        self.config['sources']['yield_fallback']['baseline_compatible']=True
+        b=demo_bundle(self.config,self.day)
+        b['yields']['CAN:5']=self.fallback
+        result=evaluate(self.config,b,self.day)
+        row=next(r for r in result['rows'] if r['iso3']=='CAN')
+        self.assertTrue(row['usable_baseline'])
+        self.assertNotIn('BASELINE_DEFINITION_UNAPPROVED',row['errors'])
 
     def test_fallback_cannot_inherit_official_publication_approval_or_leak_values_in_notes(self):
         for axis in ('fiscal','fx'): self.config['sources'][axis]['redistribution']='allowed'
@@ -112,4 +121,3 @@ class YieldSelectionTests(unittest.TestCase):
             bundle=collect(config,Client(),self.day)
         self.assertEqual(bundle['errors'],[])
         self.assertEqual(bundle['yields']['CAN:5'].provider,'wgb')
-

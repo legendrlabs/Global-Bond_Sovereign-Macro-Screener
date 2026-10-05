@@ -30,4 +30,4 @@ Independent review found two important defects (asymmetric year inference and tr
 
 One minor diagnostic limitation remains: very long combined official/fallback failure messages are truncated by the existing report error limit, which can omit the tail of the fallback reason when both sources fail. Successful fallback reasons are preserved in the selected observation.
 
-WGB annualized sovereign yields remain a separate definition with Baseline compatibility unapproved and redistribution pending by default. This change does not clear official par/zero/benchmark equivalence, fill Market Quality, change score formulas or publish a new release.
+WGB annualized sovereign yields remain a separate definition. The user subsequently approved their use as Baseline yield inputs; they retain the WGB label and redistribution remains pending. This does not relabel them as official par/zero-coupon/benchmark observations, fill Market Quality, change score formulas or publish a new release.

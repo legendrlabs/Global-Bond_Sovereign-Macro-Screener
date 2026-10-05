@@ -15,6 +15,7 @@
 - Keep 27 country IDs and existing score formulas, weights and definition approvals.
 - Never substitute 10Y for 5Y or silently change source dates.
 - WGB annualized sovereign yields have a distinct definition; do not label them official benchmark/par yields or inherit official redistribution clearance.
+- User decision after implementation: validated WGB annualized yields may enter Baseline calculations; retain the WGB definition and keep redistribution pending.
 - Match country, tenor, percent unit, finite values and series; reject future/stale dates, conflicting duplicates and discontinued series.
 - Allow matching WGB values with differing dates using the older confirmed date; expose the discrepancy as a warning.
 - Keep provider raw responses in local caches only; do not commit them.

@@ -85,7 +85,7 @@ py -3 -m venv .venv
 
 HTML·요약·국가 상세 CSV에서 선택된 출처, 관측일, 경과일, WGB 보완 여부와 공식 경로 실패 사유를 확인할 수 있습니다. 국가 코드와 통화는 패키지 설정에 포함되어 외부 `countries_ref.csv`나 브라우저 화면 검증 파일이 필요하지 않습니다. WGB 내부 데이터 응답의 표·시계열을 직접 교차검증하고 응답 원본과 SHA-256은 로컬 캐시에 보관합니다.
 
-WGB는 `annualized_government_yield`라는 별도 정의로 기록합니다. **금리 수집 성공은 기존 Baseline 정의 승인이나 공개 재배포 승인이 아닙니다.** 기본 WGB 설정의 `baseline_compatible=false`, `redistribution=pending`을 유지하므로 금리·실질금리 등 연구 입력은 표시되지만 승인된 부분 Baseline 순위에 자동 편입하지 않습니다. 공식 자료의 기존 정의 승인도 그대로입니다. 점수 공식과 Adjusted 가중치는 바꾸지 않았습니다.
+WGB는 `annualized_government_yield`라는 별도 정의로 기록합니다. 프로젝트 정책상 검증된 WGB 금리는 Baseline 금리 입력으로 사용합니다. 다만 WGB를 다른 공급자의 benchmark/par/zero-coupon 정의로 이름을 바꾸거나 공식 재배포 승인을 상속하지는 않습니다. 기본 WGB 설정은 `baseline_compatible=true`, `redistribution=pending`입니다. 공개 모드에서는 WGB 수치와 값이 포함된 교차검증 메모를 계속 숨깁니다. 점수 공식과 Adjusted 가중치는 바꾸지 않았습니다.
 
 `config/sources.yaml`의 `yield_fallback.enabled=false`로 공식 경로만 사용할 수 있습니다. 기본 HTTP 요청 예산은 재시도까지 포함해 240회로 제한합니다. 공개 모드에서는 WGB의 수치·파생 결과와 금리가 들어 있는 교차검증 메모를 숨기며 공식 자료의 출처별 재배포 승인을 WGB에 적용하지 않습니다.
 

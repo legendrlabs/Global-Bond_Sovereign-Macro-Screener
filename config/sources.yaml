@@ -1,7 +1,7 @@
 yield_fallback:
   enabled: true
   yield_type: annualized_government_yield
-  baseline_compatible: false
+  baseline_compatible: true
   redistribution: pending
   request_budget: 240
 fiscal:
