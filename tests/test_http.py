@@ -16,6 +16,15 @@ def response(code,content=b'{}',headers=None):
     r=requests.Response();r.status_code=code;r._content=content;r.headers.update(headers or {});return r
 
 class HttpTests(unittest.TestCase):
+    def test_json_post_can_supply_origin_referer_without_changing_existing_form_posts(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            s=Session([response(200)])
+            client=HttpClient(tmp,s)
+            client.fetch('https://example.org/data',method='POST',body='{}',
+                         headers={'Origin':'https://example.org','Content-Type':'application/json'})
+            self.assertEqual(s.calls[0][1]['headers']['Origin'],'https://example.org')
+            self.assertEqual(s.calls[0][1]['headers']['Content-Type'],'application/json')
+            self.assertEqual(s.calls[0][1]['data'],'{}')
     def test_retry_and_conditional_hash_revalidation(self):
         with tempfile.TemporaryDirectory() as tmp,patch('sovereign_macro.http.time.sleep'):
             s=Session([response(429),response(200,b'payload',{'ETag':'version'}),response(304)])

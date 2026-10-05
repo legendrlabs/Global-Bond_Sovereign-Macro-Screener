@@ -3,6 +3,7 @@ import html
 import math
 
 METRICS=('iso3','name','baseline_rank','baseline','currency','yield_5y','real_yield',
+         'yield_5y_provider','yield_5y_date','yield_5y_age_days','yield_5y_fallback',
          'net_debt_current','net_debt_future','balance_trajectory','fx_vol_1y','fx_drawdown',
          'fiscal_trend','real_yield_regime','fx_risk','carry','discount_rate')
 
@@ -43,7 +44,12 @@ def build_executive_summary(result):
                 baseline_ranking=metrics,top_country_metrics=metrics,holds=holds,
                 system_holds=[e for e in system if not any(e.startswith(r['iso3']+':') for r in rows)],
                 adjusted_status='AVAILABLE' if adjusted else 'NOT AVAILABLE',decision=decision,
-                source_notices=result.get('source_notices',[]))
+                source_notices=result.get('source_notices',[]),
+                fiscal_source=result.get('fiscal_source',{}),
+                yield_sources=[dict(iso3=r['iso3'],name=r.get('name',r['iso3']),
+                    provider=r.get('yield_5y_provider'),observation_date=r.get('yield_5y_date'),
+                    age_days=r.get('yield_5y_age_days'),fallback=r.get('yield_5y_fallback',False),
+                    selection_reason=r.get('yield_5y_selection_reason',''),warnings=r.get('warnings',[])) for r in rows])
 
 
 def value(v):
@@ -74,6 +80,19 @@ def sections(s):
         ('Top Country Metrics',macro_keys,[[r.get(k) for k in macro_keys] for r in metric]),
         ('KRW Investor View',krw_keys,[[r.get(k) for k in krw_keys] for r in metric]),
     ]
+    if s.get('yield_sources'):
+        content.append(('Yield Sources / Observation Dates',
+            ['Country','5Y provider','Observation date','Age (calendar days)','WGB fallback','Selection / warnings'],
+            [[r['iso3'],r['provider'],r['observation_date'],r['age_days'],r['fallback'],
+              '; '.join([r['selection_reason']]+r['warnings']).strip('; ')] for r in s['yield_sources']]))
+    if s.get('fiscal_source'):
+        f=s['fiscal_source']
+        content.append(('IMF Fiscal / Inflation Edition',['Field','Value'],[
+            ['Edition',f.get('edition')],['Saved snapshot used',f.get('used',False)],
+            ['Original retrieval (UTC)',f.get('original_retrieved_at')],
+            ['Retrieval age (calendar days)',f.get('age_days')],
+            ['Latest release checked successfully',f.get('latest_release_verified')],
+            ['Refresh failure',f.get('refresh_failure','')]]))
     if s.get('source_notices'):
         content.append(('Source / Reuse Notices',['Attribution and conditions'],[[n] for n in s['source_notices']]))
     content.append(('Decision',['Data use','Status'],list(map(list,s['decision'].items()))))

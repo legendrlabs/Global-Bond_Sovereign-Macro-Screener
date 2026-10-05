@@ -28,7 +28,8 @@ def main(argv=None):
 
 def run_pipeline(args,synthetic):
     config=load_config(args.config)
-    bundle=demo_bundle(config,args.as_of) if synthetic else collect(config,HttpClient(args.cache),args.as_of)
+    budget=config['sources'].get('yield_fallback',{}).get('request_budget',80)
+    bundle=demo_bundle(config,args.as_of) if synthetic else collect(config,HttpClient(args.cache,budget=budget),args.as_of)
     result=evaluate(config,bundle,args.as_of,public_output=args.public_output,demo=synthetic)
     destination=publish(result,args.output)
     q=result['quality']

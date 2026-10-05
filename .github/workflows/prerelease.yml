@@ -1,7 +1,7 @@
 name: Preview program release
 on:
   push:
-    branches: ['release-preview/v0.1.0-preview.1']
+    branches: ['release-preview/v0.1.0-preview.2']
 permissions:
   contents: read
 jobs:
@@ -18,7 +18,7 @@ jobs:
           PYTHONPATH=src python - <<'PY'
           import os, tomllib
           from sovereign_macro import __version__
-          assert os.environ['GITHUB_REF_NAME']=='release-preview/v0.1.0-preview.1'
+          assert os.environ['GITHUB_REF_NAME']=='release-preview/v0.1.0-preview.2'
           assert tomllib.load(open('pyproject.toml','rb'))['project']['version']==__version__=='0.1.0'
           PY
       - run: python -m pip wheel --no-deps . --wheel-dir dist
@@ -27,7 +27,7 @@ jobs:
       - run: python -m sovereign_macro demo --output results/demo --public-output
       - name: Package source and checksums
         run: |
-          git archive --format=zip --prefix=sovereign-macro/ HEAD -o dist/sovereign-macro-v0.1.0-preview.1.zip
+          git archive --format=zip --prefix=sovereign-macro/ HEAD -o dist/sovereign-macro-v0.1.0-preview.2.zip
           cd dist
           sha256sum *.whl *.zip > SHA256SUMS.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -53,8 +53,8 @@ jobs:
           GH_REPO: ${{ github.repository }}
           RELEASE_COMMIT: ${{ github.sha }}
         run: |
-          if gh api "repos/$GH_REPO/git/ref/tags/v0.1.0-preview.1" >/dev/null 2>&1; then
+          if gh api "repos/$GH_REPO/git/ref/tags/v0.1.0-preview.2" >/dev/null 2>&1; then
             echo 'Preview tag already exists; refusing to reuse its target.'
             exit 1
           fi
-          gh release create v0.1.0-preview.1 dist/* --target "$RELEASE_COMMIT" --prerelease --title "v0.1.0-preview.1 — 첫 공개 시험판" --notes 'Python 3.11+ 시험판입니다. 소스 ZIP을 풀고 README의 설치 안내를 따라 실행하세요. 프로그램·자료 갱신은 실행 시 각각 확인받습니다. 자동 프로그램 업데이트는 정식 릴리스만 확인하며 이 시험판은 직접 설치합니다. 27개국 중 18개국의 5년물 수집 경로가 등록되어 있습니다. 미연결·정의 불일치·자료 지연은 DATA_HOLD로 표시합니다. 제공기관 숫자의 재배포 허가가 확인되지 않아 공개 보고서에서는 해당 숫자를 숨깁니다. 원자료와 개인 보고서는 배포물에 포함하지 않습니다.'
+          gh release create v0.1.0-preview.2 dist/* --target "$RELEASE_COMMIT" --prerelease --title "v0.1.0-preview.2 — WGB·IMF 보완 시험판" --notes 'Python 3.11+ 시험판입니다. 소스 ZIP을 풀고 README의 설치 안내를 따라 실행하세요. 프로그램·자료 갱신은 실행 시 각각 확인받습니다. 자동 프로그램 업데이트는 정식 릴리스만 확인하며 이 시험판은 직접 설치합니다. 27개국 5년물은 공식 경로 우선, 검증된 WGB 보완 경로를 사용합니다. 검증된 WGB 금리는 Baseline 입력에 사용하고 WGB 출처와 관측일을 표시합니다. IMF 연결 실패 시 검증된 같은 발표판 저장본을 재사용합니다. 미연결·정의 불일치·자료 지연은 DATA_HOLD로 표시합니다. 제공기관 재배포 허가가 확인되지 않은 수치는 공개 보고서에서 숨깁니다. 원자료와 개인 보고서는 배포물에 포함하지 않습니다.'
