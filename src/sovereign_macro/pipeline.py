@@ -24,6 +24,10 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                  yield_type=c['yield']['yield_type'],edition=fiscal['edition'] if fiscal else '',
                  redistribution_status='pending')
         row.update({k:None for k in NUMERIC_FIELDS})
+        if fiscal:
+            row['warnings'].extend(fiscal.get('warnings',[]))
+            row['fiscal_snapshot_used']=fiscal.get('snapshot',{}).get('used',False)
+            row['fiscal_original_retrieved_at']=fiscal.get('snapshot',{}).get('original_retrieved_at','')
         y5=bundle.get('yields',{}).get(iso+':5')
         y10=bundle.get('yields',{}).get(iso+':10')
         if y5: row['yield_type']=y5.yield_type
@@ -108,7 +112,8 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
     quality={'status':'READY' if ready else 'DATA_HOLD',
              'safe_to_use':ready,'core_inputs_complete':core_complete,
              'safe_to_use_adjusted':False,'baseline_usable':baseline_count,'adjusted_usable':0,
-             'country_count':len(rows),'demo':demo,'public_output':public_output,'system_errors':system_errors}
+             'country_count':len(rows),'demo':demo,'public_output':public_output,'system_errors':system_errors,
+             'warnings':list(fiscal.get('warnings',[])) if fiscal else []}
     source_notices=[]
     for row in rows:
         if public_output:
@@ -140,6 +145,7 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
         if not quality['safe_to_use']: quality['status']='DATA_HOLD'
     rank_rows(rows,'baseline');rank_rows(rows,'adjusted')
     return {'as_of':as_of.isoformat(),'model_version':config['scoring']['version'],'rows':rows,'quality':quality,
+            'fiscal_source':dict(fiscal.get('snapshot',{}),edition=fiscal['edition']) if fiscal else {},
             'source_notices':list(dict.fromkeys(source_notices)),
             'coverage':{'yield5_observations_parsed':sum(bundle.get('yields',{}).get(c['iso3']+':5') is not None
                                                        for c in config['countries']['countries'])},

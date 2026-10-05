@@ -81,7 +81,7 @@ def validate_pdf_edition(text,edition):
     if not re.search(pattern,text,re.IGNORECASE): raise DataError('PDF_EDITION_MISMATCH')
 
 
-def collect_fiscal(client,config,countries,as_of):
+def collect_fiscal_live(client,config,countries,as_of):
     base=config['api']
     metadata=client.fetch(base+'indicators').json()['indicators']
     payloads={}
@@ -89,6 +89,12 @@ def collect_fiscal(client,config,countries,as_of):
     for metric,key in METRICS.items():
         p=client.fetch(base+key)
         payloads[key]=p.json()
+        # Each API response identifies its own edition; never attach newer
+        # indicator metadata to values from an older edition or revision.
+        actual=payloads[key].get('indicators',{}).get(key,{})
+        for field in ('source','unit','projection-year','last-modified'):
+            if not actual.get(field) or actual[field]!=metadata[key].get(field):
+                raise DataError('FISCAL_SERIES_METADATA_MISMATCH:'+key)
         provenance[metric]={'url':p.url,'raw_sha256':p.sha256,'retrieved_at':p.retrieved_at,
                             'source_date':p.source_date,'series':key,'metadata':metadata[key],'redistribution':config['redistribution']}
     data=parse_fiscal(metadata,payloads,as_of.year)
@@ -109,3 +115,8 @@ def collect_fiscal(client,config,countries,as_of):
         except (DataError,ValueError,IndexError) as exc:
             data['errors'].append('PDF_FALLBACK_FAILED:'+str(exc))
     return data
+
+
+def collect_fiscal(client,config,countries,as_of):
+    from .fiscal_snapshot import collect_with_snapshot
+    return collect_with_snapshot(client,config,countries,as_of,collect_fiscal_live)

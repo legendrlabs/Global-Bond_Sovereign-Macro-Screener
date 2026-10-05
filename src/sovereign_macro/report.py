@@ -73,7 +73,8 @@ def publish(result,output):
         hashes={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in stage.iterdir()}
         manifest={'run_id':run_id,'as_of':result['as_of'],'generated_at':now,'model_version':result['model_version'],
                   'demo':quality['demo'],'public_output':quality['public_output'],'files':hashes,
-                  'http_records':result.get('http_records',[]),'source_provenance':{r['iso3']:r['provenance'] for r in scored}}
+                  'http_records':result.get('http_records',[]),'fiscal_source':result.get('fiscal_source',{}),
+                  'source_provenance':{r['iso3']:r['provenance'] for r in scored}}
         dump(stage/'run_manifest.json',manifest)
         destination=runs/run_id
         os.replace(stage,destination)

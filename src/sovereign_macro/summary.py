@@ -45,6 +45,7 @@ def build_executive_summary(result):
                 system_holds=[e for e in system if not any(e.startswith(r['iso3']+':') for r in rows)],
                 adjusted_status='AVAILABLE' if adjusted else 'NOT AVAILABLE',decision=decision,
                 source_notices=result.get('source_notices',[]),
+                fiscal_source=result.get('fiscal_source',{}),
                 yield_sources=[dict(iso3=r['iso3'],name=r.get('name',r['iso3']),
                     provider=r.get('yield_5y_provider'),observation_date=r.get('yield_5y_date'),
                     age_days=r.get('yield_5y_age_days'),fallback=r.get('yield_5y_fallback',False),
@@ -84,6 +85,14 @@ def sections(s):
             ['Country','5Y provider','Observation date','Age (calendar days)','WGB fallback','Selection / warnings'],
             [[r['iso3'],r['provider'],r['observation_date'],r['age_days'],r['fallback'],
               '; '.join([r['selection_reason']]+r['warnings']).strip('; ')] for r in s['yield_sources']]))
+    if s.get('fiscal_source'):
+        f=s['fiscal_source']
+        content.append(('IMF Fiscal / Inflation Edition',['Field','Value'],[
+            ['Edition',f.get('edition')],['Saved snapshot used',f.get('used',False)],
+            ['Original retrieval (UTC)',f.get('original_retrieved_at')],
+            ['Retrieval age (calendar days)',f.get('age_days')],
+            ['Latest release checked successfully',f.get('latest_release_verified')],
+            ['Refresh failure',f.get('refresh_failure','')]]))
     if s.get('source_notices'):
         content.append(('Source / Reuse Notices',['Attribution and conditions'],[[n] for n in s['source_notices']]))
     content.append(('Decision',['Data use','Status'],list(map(list,s['decision'].items()))))
