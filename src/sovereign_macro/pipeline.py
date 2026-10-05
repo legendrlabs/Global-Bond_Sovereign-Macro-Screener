@@ -4,6 +4,7 @@ from .models import DataError, Observation, finite
 from .scoring import baseline, adjusted, rank_rows
 from .fx import fx_metrics, _anniversary
 from .regimes import regimes
+from .publication import yield_reuse_allowed
 
 NUMERIC_FIELDS=('yield_5y','yield_10y','net_debt_current','net_debt_future','gross_debt_current',
                 'balance_mean','balance_trajectory','inflation_mean','real_yield','fiscal','baseline','adjusted',
@@ -104,25 +105,35 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
              'safe_to_use':ready,'core_inputs_complete':core_complete,
              'safe_to_use_adjusted':False,'baseline_usable':baseline_count,'adjusted_usable':0,
              'country_count':len(rows),'demo':demo,'public_output':public_output,'system_errors':system_errors}
+    source_notices=[]
     for row in rows:
         if public_output:
             # The publication gate is conservative at the entire row, including regimes.
+            country=next(c for c in config['countries']['countries'] if c['iso3']==row['iso3'])
+            observations=[bundle['yields'][key] for key in (row['iso3']+':5',row['iso3']+':10')
+                          if bundle.get('yields',{}).get(key) is not None]
             eligible=(source_config['fiscal']['redistribution']=='allowed'
                       and source_config['fx']['redistribution']=='allowed'
-                      and next(c['yield']['redistribution'] for c in config['countries']['countries'] if c['iso3']==row['iso3'])=='allowed')
+                      and yield_reuse_allowed(country,observations))
             if not eligible:
                 for key in NUMERIC_FIELDS: row[key]=None
                 for key in ('fiscal_trend','real_yield_regime','fx_risk','carry','discount_rate'): row[key]='UNAVAILABLE'
                 row['usable_baseline']=False;row['usable_adjusted']=False
                 row['errors'].append('REDISTRIBUTION_PENDING_REDACTED')
                 for provenance in row['provenance']: provenance.pop('value',None)
-            else: row['redistribution_status']='allowed'
+            else:
+                row['redistribution_status']='allowed'
+                review=country['yield'].get('redistribution_review')
+                if review:
+                    dates=list(dict.fromkeys(obs.source_date for obs in observations if obs.source_date))
+                    source_notices.append(review['notice']+(' Provider source date: '+', '.join(dates) if dates else ''))
     if public_output:
         quality['baseline_usable']=sum(r['usable_baseline'] for r in rows)
         quality['safe_to_use']=quality['safe_to_use'] and quality['baseline_usable']==27
         if not quality['safe_to_use']: quality['status']='DATA_HOLD'
     rank_rows(rows,'baseline');rank_rows(rows,'adjusted')
     return {'as_of':as_of.isoformat(),'model_version':config['scoring']['version'],'rows':rows,'quality':quality,
+            'source_notices':list(dict.fromkeys(source_notices)),
             'coverage':{'yield5_observations_parsed':sum(bundle.get('yields',{}).get(c['iso3']+':5') is not None
                                                        for c in config['countries']['countries'])},
             'http_records':bundle.get('http_records',[])}

@@ -159,8 +159,18 @@ countries:
     series: ''
     yield_type: unverified
     baseline_compatible: false
-    redistribution: pending
+    redistribution: allowed
     reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+    redistribution_review:
+      evidence_url: https://narodne-novine.nn.hr/eli/sluzbeni/2017/67/1577
+      catalog_url: https://data.gov.hr/ckan/api/3/action/package_show?id=711cb511-fbfc-49c3-a6c3-7ae40cca5bdf
+      required_provenance: [source_date]
+      reviewed_on: '2026-10-05'
+      scope:
+      - url: https://www.hnb.hr/documents/20182/1f79bc1c-dfb5-17fd-1571-cdd52a4a9619
+      notice: 'Hrvatska narodna banka — G8b: https://www.hnb.hr/documents/20182/1f79bc1c-dfb5-17fd-1571-cdd52a4a9619 . Croatian
+        Open Licence: https://narodne-novine.nn.hr/eli/sluzbeni/2017/67/1577 ; provider modification date accompanies source provenance
+        (not an observation date). Calculations and classifications are derived by Sovereign Macro Screener; no official endorsement.'
 - iso3: NLD
   name: 네덜란드
   currency: EUR
@@ -234,8 +244,17 @@ countries:
     series: ''
     yield_type: unverified
     baseline_compatible: false
-    redistribution: pending
+    redistribution: allowed
     reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+    redistribution_review:
+      evidence_url: https://bpstat.bportugal.pt/avisos-legais
+      reviewed_on: '2026-10-05'
+      scope:
+      - url: https://bpstat.bportugal.pt/data/v1/domains/26/datasets/690b7b36fd36c0dbe249c48cbbc39524/
+        query:
+          series_ids: '12099457'
+      notice: Banco de Portugal / BPstat — https://bpstat.bportugal.pt/avisos-legais . Direct BPstat data only; source values
+        reproduced accurately; calculations and classifications are derived by Sovereign Macro Screener.
 - iso3: ISR
   name: 이스라엘
   currency: ILS

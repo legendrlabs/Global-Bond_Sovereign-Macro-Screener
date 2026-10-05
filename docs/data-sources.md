@@ -45,7 +45,7 @@ The April 2026 statistical appendix Table A8 is on physical PDF page 23 (printed
 5. Keep `baseline_compatible: false` until the definition comparison is accepted. Only mark redistribution `allowed` after a documented rights review; public access alone is insufficient.
 6. Update both editable and packaged YAML defaults, the coverage table and tests.
 
-All provider redistribution flags are `pending` in this release. No raw provider downloads are bundled or committed. Public mode conservatively suppresses an entire row's provider-derived numbers and classifications when any required provider is pending. Observation metadata remains inspectable without values. RBA units must explicitly be percent per annum; the Japan header must declare %. BoC response metadata must still identify a 5-year series, and the Riksbank series catalogue is checked once each run for maturity and closure. For metadata-poor sources, unit interpretation remains the researched source contract; Belgium is explicitly unverified and its raw observation is excluded from derived metrics until unit evidence is accepted. Market Quality is an explicit unpopulated extension point; no manually invented quality score is supplied.
+Fiscal and FX redistribution flags remain `pending`. Yield reuse remains `pending` except the two scoped clearances below. No raw provider downloads are bundled or committed. Public mode conservatively suppresses an entire row's provider-derived numbers and classifications when any required provider is pending. Observation metadata remains inspectable without values. RBA units must explicitly be percent per annum; the Japan header must declare %. BoC response metadata must still identify a 5-year series, and the Riksbank series catalogue is checked once each run for maturity and closure. For metadata-poor sources, unit interpretation remains the researched source contract; Belgium is explicitly unverified and its raw observation is excluded from derived metrics until unit evidence is accepted. Market Quality is an explicit unpopulated extension point; no manually invented quality score is supplied.
 
 ## 2026-10-04 extension
 
@@ -64,3 +64,23 @@ the edition and monthly percent metadata, and reads only the explicitly labelled
 the edition and at most three months behind. Changed or ambiguous narrative wording
 fails closed; no historical PDF fallback or invented daily date is used.
 See [Czech publication evidence](research/2026-10-04-czech-publication.md).
+
+
+## 2026-10-05 scoped publication clearance
+
+PRT direct BPstat series `12099457` and the exact Croatian-language HRV G8b
+catalogue resource have documented reuse clearance. This approves only reuse
+within the registered URL/series scope; neither route is implemented or Baseline
+approved. The English G8b resource, other BPstat series and third-party products
+cannot inherit this clearance.
+
+For scoped routes, public output checks every present yield observation against
+its URL, configured series, ISO3 and observation redistribution state. Missing
+scope, evidence or attribution keeps the row redacted. HRV also requires the
+provider modification date in provenance, printed dynamically with its attribution
+and licence notice; a past review date is never represented as the current source
+date. CLI, Markdown and HTML share these notices. Fiscal and FX clearance is still
+required before any row's provider-derived numbers may be published.
+
+Scoring, maturity definitions, stale/unit checks and Adjusted availability are
+unchanged. See [approval scope and verification](research/2026-10-05-publication-gate-update.md).

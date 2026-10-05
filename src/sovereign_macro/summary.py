@@ -42,7 +42,8 @@ def build_executive_summary(result):
                     yield5_observations_parsed=None if demo else coverage.get('yield5_observations_parsed')),
                 baseline_ranking=metrics,top_country_metrics=metrics,holds=holds,
                 system_holds=[e for e in system if not any(e.startswith(r['iso3']+':') for r in rows)],
-                adjusted_status='AVAILABLE' if adjusted else 'NOT AVAILABLE',decision=decision)
+                adjusted_status='AVAILABLE' if adjusted else 'NOT AVAILABLE',decision=decision,
+                source_notices=result.get('source_notices',[]))
 
 
 def value(v):
@@ -64,7 +65,7 @@ def sections(s):
     if s['adjusted_status']!='AVAILABLE': holds.append(['Adjusted ranking','NOT AVAILABLE; MARKET_QUALITY_UNAVAILABLE'])
     macro_keys=['iso3','currency','yield_5y','real_yield','net_debt_current','net_debt_future','balance_trajectory','fiscal_trend','real_yield_regime']
     krw_keys=['iso3','yield_5y','real_yield','fx_vol_1y','fx_drawdown','fx_risk','carry','discount_rate']
-    return [
+    content=[
         ('Executive Summary',['Field','Value'],[['Model',s['model_version']],['As-of',s['as_of']],
             ['GLOBAL STATUS',s['global_status']],['SAFE_TO_USE',str(s['safe_to_use']).upper()],['USAGE MODE',s['usage_mode']]]),
         ('Data Coverage',['Field','Value'],coverage),
@@ -72,8 +73,11 @@ def sections(s):
         ('Data / Quality Holds',['Country / Scope','Reason'],holds),
         ('Top Country Metrics',macro_keys,[[r.get(k) for k in macro_keys] for r in metric]),
         ('KRW Investor View',krw_keys,[[r.get(k) for k in krw_keys] for r in metric]),
-        ('Decision',['Data use','Status'],list(map(list,s['decision'].items())))
     ]
+    if s.get('source_notices'):
+        content.append(('Source / Reuse Notices',['Attribution and conditions'],[[n] for n in s['source_notices']]))
+    content.append(('Decision',['Data use','Status'],list(map(list,s['decision'].items()))))
+    return content
 
 
 def notice(s):
