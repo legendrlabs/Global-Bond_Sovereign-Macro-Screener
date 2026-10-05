@@ -1,3 +1,7 @@
+market_inputs:
+  enabled: true
+  size_max_age_days: 365
+  redistribution: pending
 yield_fallback:
   enabled: true
   yield_type: annualized_government_yield

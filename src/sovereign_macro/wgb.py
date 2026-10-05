@@ -138,6 +138,38 @@ def row_date(text, history_date):
     except ValueError as exc: raise DataError('WGB_ROW_DATE_SCHEMA') from exc
 
 
+def reported_credit(html, as_of, payload, page_url):
+    """Preserve the reported S&P row; unspecified currency/term is not a score."""
+    try:
+        if not isinstance(html,str): raise DataError('WGB_RATING_SCHEMA')
+        tables=[]
+        for table in BeautifulSoup(html,'html.parser').find_all('table'):
+            heads=[norm(th.get_text(' ')) for th in table.find_all('th')]
+            if heads==['rating agency','rating','outlook','last update','action']: tables.append(table)
+        if len(tables)!=1: raise DataError('WGB_RATING_SCHEMA')
+        rows=[]
+        for tr in tables[0].find_all('tr'):
+            cells=tr.find_all('td',recursive=False)
+            if cells and norm(cells[0].get_text(' '))=="standard & poor's":
+                if len(cells)!=5: raise DataError('WGB_RATING_SCHEMA')
+                rows.append([' '.join(td.get_text(' ').split()) for td in cells])
+        if len(rows)!=1: raise DataError('WGB_RATING_MISSING_OR_DUPLICATE')
+        agency,rating,outlook,day,action=rows[0]
+        grades={'AAA','AA+','AA','AA-','A+','A','A-','BBB+','BBB','BBB-',
+                'BB+','BB','BB-','B+','B','B-','CCC+','CCC','CCC-','CC','C','SD','D'}
+        if rating not in grades: raise DataError('WGB_RATING_VALUE_SCHEMA')
+        if not re.fullmatch(r'\d{1,2} [A-Za-z]{3} \d{4}',day): raise DataError('WGB_RATING_DATE_SCHEMA')
+        observed=row_date(norm(day),as_of)
+        if observed>as_of: raise DataError('WGB_RATING_FUTURE_DATE')
+        return dict(value=None,agency=agency,rating=rating,outlook=outlook,action=action,
+            last_action_date=observed.isoformat(),provider='wgb',url=page_url,api_url=payload.url,
+            raw_sha256=payload.sha256,retrieved_at=payload.retrieved_at,redistribution='pending',
+            status='REPORTED_TYPE_UNVERIFIED',usable_for_scoring=False,
+            reason='Rating currency and term unspecified; last update is a reported action date, not verification of current rating')
+    except DataError as exc:
+        return dict(value=None,status='UNAVAILABLE',provider='wgb',usable_for_scoring=False,reason=str(exc))
+
+
 def collect_wgb(client, country, as_of, tenor=5, stale_days=7):
     if tenor not in (5, 10): raise DataError('TENOR_NOT_IMPLEMENTED')
     slug = country.get('wgb_slug', '')
@@ -158,7 +190,8 @@ def collect_wgb(client, country, as_of, tenor=5, stale_days=7):
         return payload
 
     gv = context(fetch(page_url), slug)
-    main = fetch(COUNTRY_API, page_url, gv).json()
+    main_payload = fetch(COUNTRY_API, page_url, gv)
+    main = main_payload.json()
     if not isinstance(main, dict) or main.get('success') is not True: raise DataError('WGB_MAIN_SCHEMA')
     screen_value, screen_date, href = curve_row(main.get('mainTable'), tenor)
     if urljoin(page_url, href) != hist_url: raise DataError('WGB_HISTORY_LINK')
@@ -177,7 +210,8 @@ def collect_wgb(client, country, as_of, tenor=5, stale_days=7):
     if prices is None: warnings.append('WGB_PRICE_CROSSCHECK_UNAVAILABLE')
     observed = min(observed, hist_date)
     notes = {'warnings':warnings, 'curve_row_date':screen_date, 'history_date':hist_date.isoformat(),
-             'curve_yield':screen_value, 'price_yield':prices, 'raw_evidence':evidence}
+             'curve_yield':screen_value, 'price_yield':prices, 'raw_evidence':evidence,
+             'reported_credit':reported_credit(main.get('ratingTable'),as_of,main_payload,page_url)}
     obs = Observation(country['iso3'], f'yield_{tenor}y', value, observed.isoformat(), country['currency'],
                       provider='wgb', dataset='worldgovernmentbonds', series=f'{slug}:{tenor}Y',
                       source_date=source_timestamp, retrieved_at=payload.retrieved_at, url=hist_url,

@@ -1,11 +1,13 @@
 """Evaluate one immutable source bundle; incomplete axes are never reweighted."""
 from datetime import date, timedelta
+from copy import deepcopy
 from .models import DataError, Observation, finite
 from .scoring import baseline, adjusted, rank_rows
 from .fx import fx_metrics, _anniversary
 from .regimes import regimes
 from .publication import yield_reuse_allowed
 from .yield_selection import validate_yield, yield_contract, observation_warnings
+from .market_inputs import country_market_inputs
 
 NUMERIC_FIELDS=('yield_5y','yield_10y','net_debt_current','net_debt_future','gross_debt_current',
                 'balance_mean','balance_trajectory','inflation_mean','real_yield','fiscal','baseline','adjusted',
@@ -24,6 +26,9 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                  yield_type=c['yield']['yield_type'],edition=fiscal['edition'] if fiscal else '',
                  redistribution_status='pending')
         row.update({k:None for k in NUMERIC_FIELDS})
+        row['market_inputs']=country_market_inputs(iso,bundle,demo,public_output)
+        if row['market_inputs']['size'].get('raw_sha256'):
+            row['provenance'].append(dict(row['market_inputs']['size']))
         if fiscal:
             row['warnings'].extend(fiscal.get('warnings',[]))
             row['fiscal_snapshot_used']=fiscal.get('snapshot',{}).get('used',False)
@@ -46,7 +51,13 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                     if currency_start>as_of: raise DataError('CURRENCY_ASSIGNMENT_UNAVAILABLE')
                     row[f'yield_{tenor}y']=obs.value
                     row[f'yield_{tenor}y_age_days']=(as_of-date.fromisoformat(obs.period)).days
-                    if tenor==5: baseline_compatible=yield_contract(c,obs,config).get('baseline_compatible',False)
+                    if tenor==5:
+                        contract=yield_contract(c,obs,config)
+                        baseline_compatible=contract.get('baseline_compatible',False)
+                        row['baseline_definition_note']=contract.get('baseline_definition_note','')
+                        row['baseline_definition_source']=contract.get('baseline_definition_source','')
+                        if baseline_compatible and row['baseline_definition_note']:
+                            row['warnings'].append('BASELINE_DEFINITION_DIFFERENCE')
                 except DataError as exc: row['errors'].append(f'YIELD_{tenor}Y:'+str(exc))
             elif tenor==5 or iso in config['scoring']['watch_markets']:
                 row['errors'].append(f'YIELD_{tenor}Y_UNAVAILABLE')
@@ -83,7 +94,7 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                 row['baseline']=baseline(row['net_debt_current'],row['net_debt_future'],balances,row['yield_5y'])['baseline']
                 if baseline_compatible and 'FISCAL_YEAR_ROLLOVER' not in row['errors']:
                     row['usable_baseline']=True
-                else: row['errors'].append('BASELINE_DEFINITION_UNAPPROVED')
+                elif not baseline_compatible: row['errors'].append('BASELINE_DEFINITION_UNAPPROVED')
             except DataError as exc: row['errors'].append(str(exc))
         try:
             fx=fx_metrics(bundle.get('fx',{}),c['currency'],as_of,continuity=c['fx_continuity'])
@@ -116,6 +127,12 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
              'warnings':list(fiscal.get('warnings',[])) if fiscal else []}
     source_notices=[]
     for row in rows:
+        # Never mutate the input bundle's shared fiscal / FX provenance.
+        row['provenance']=deepcopy(row['provenance'])
+        if demo:
+            for provenance in row['provenance']:
+                provenance.pop('value',None)
+                provenance.pop('notes',None)
         if public_output:
             # The publication gate is conservative at the entire row, including regimes.
             country=next(c for c in config['countries']['countries'] if c['iso3']==row['iso3'])
@@ -125,6 +142,8 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                       and source_config['fx']['redistribution']=='allowed'
                       and yield_reuse_allowed(country,observations))
             if not eligible:
+                size=row['market_inputs']['size']
+                if size.pop('value',None) is not None: size['status']='ROW_REDACTED'
                 for key in NUMERIC_FIELDS: row[key]=None
                 for key in ('fiscal_trend','real_yield_regime','fx_risk','carry','discount_rate'): row[key]='UNAVAILABLE'
                 row['usable_baseline']=False;row['usable_adjusted']=False

@@ -1,11 +1,13 @@
 """Presentation of evaluated, already redacted results; never scores or fills data."""
 import html
 import math
+from .models import finite
 
 METRICS=('iso3','name','baseline_rank','baseline','currency','yield_5y','real_yield',
          'yield_5y_provider','yield_5y_date','yield_5y_age_days','yield_5y_fallback',
          'net_debt_current','net_debt_future','balance_trajectory','fx_vol_1y','fx_drawdown',
-         'fiscal_trend','real_yield_regime','fx_risk','carry','discount_rate')
+         'fiscal_trend','real_yield_regime','fx_risk','carry','discount_rate',
+         'yield_type','baseline_definition_note')
 
 
 def build_executive_summary(result):
@@ -42,6 +44,8 @@ def build_executive_summary(result):
                     yield5_routes_registered=coverage.get('yield5_routes_registered'),
                     yield5_observations_parsed=None if demo else coverage.get('yield5_observations_parsed')),
                 baseline_ranking=metrics,top_country_metrics=metrics,holds=holds,
+                quality_scopes=quality_scopes(rows,demo),
+                market_inputs=[dict(iso3=r['iso3'],**r['market_inputs']) for r in rows if r.get('market_inputs')],
                 system_holds=[e for e in system if not any(e.startswith(r['iso3']+':') for r in rows)],
                 adjusted_status='AVAILABLE' if adjusted else 'NOT AVAILABLE',decision=decision,
                 source_notices=result.get('source_notices',[]),
@@ -49,7 +53,28 @@ def build_executive_summary(result):
                 yield_sources=[dict(iso3=r['iso3'],name=r.get('name',r['iso3']),
                     provider=r.get('yield_5y_provider'),observation_date=r.get('yield_5y_date'),
                     age_days=r.get('yield_5y_age_days'),fallback=r.get('yield_5y_fallback',False),
+                    definition=r.get('yield_type',''),definition_note=r.get('baseline_definition_note',''),
                     selection_reason=r.get('yield_5y_selection_reason',''),warnings=r.get('warnings',[])) for r in rows])
+
+
+def quality_scopes(rows,demo=False):
+    """Summarize displayed inputs independently of the global readiness gate."""
+    checks=[
+        ('BASELINE',lambda r:r.get('usable_baseline') is True and r.get('baseline_rank') is not None),
+        ('REAL_YIELD',lambda r:finite(r.get('real_yield'))),
+        ('FX_1Y',lambda r:finite(r.get('fx_vol_1y'))),
+        ('MARKET_QUALITY',lambda r:finite(r.get('market_quality_norm'))),
+        ('ADJUSTED',lambda r:r.get('usable_adjusted') is True and r.get('adjusted_rank') is not None),
+    ]
+    result=[]
+    for scope,check in checks:
+        available=[r['iso3'] for r in rows if check(r) and not demo]
+        missing=[] if demo else [r['iso3'] for r in rows if r['iso3'] not in available]
+        status=('SYNTHETIC DEMO' if demo else 'AVAILABLE' if not missing else
+                'PARTIAL' if available else 'UNAVAILABLE')
+        result.append(dict(scope=scope,status=status,available=len(available),total=len(rows),
+                           unavailable_countries=missing))
+    return result
 
 
 def value(v):
@@ -73,8 +98,11 @@ def sections(s):
     krw_keys=['iso3','yield_5y','real_yield','fx_vol_1y','fx_drawdown','fx_risk','carry','discount_rate']
     content=[
         ('Executive Summary',['Field','Value'],[['Model',s['model_version']],['As-of',s['as_of']],
-            ['GLOBAL STATUS',s['global_status']],['SAFE_TO_USE',str(s['safe_to_use']).upper()],['USAGE MODE',s['usage_mode']]]),
+            ['USAGE MODE',s['usage_mode']],['GLOBAL STATUS',s['global_status']],['SAFE_TO_USE',str(s['safe_to_use']).upper()]]),
         ('Data Coverage',['Field','Value'],coverage),
+        ('Quality by Scope',['Scope','Status','Available','Unavailable countries'],
+            [[r['scope'],r['status'],str(r['available'])+' / '+str(r['total']),
+              ', '.join(r['unavailable_countries']) or '—'] for r in s['quality_scopes']]),
         ('Baseline Partial Ranking',['Rank','Country','Baseline'],ranking),
         ('Data / Quality Holds',['Country / Scope','Reason'],holds),
         ('Top Country Metrics',macro_keys,[[r.get(k) for k in macro_keys] for r in metric]),
@@ -82,8 +110,9 @@ def sections(s):
     ]
     if s.get('yield_sources'):
         content.append(('Yield Sources / Observation Dates',
-            ['Country','5Y provider','Observation date','Age (calendar days)','WGB fallback','Selection / warnings'],
+            ['Country','5Y provider','Observation date','Age (calendar days)','WGB fallback','Definition','Selection / warnings'],
             [[r['iso3'],r['provider'],r['observation_date'],r['age_days'],r['fallback'],
+              '; '.join([r['definition'],r['definition_note']]).strip('; '),
               '; '.join([r['selection_reason']]+r['warnings']).strip('; ')] for r in s['yield_sources']]))
     if s.get('fiscal_source'):
         f=s['fiscal_source']
@@ -93,6 +122,35 @@ def sections(s):
             ['Retrieval age (calendar days)',f.get('age_days')],
             ['Latest release checked successfully',f.get('latest_release_verified')],
             ['Refresh failure',f.get('refresh_failure','')]]))
+    if s.get('market_inputs'):
+        content.append(('Market Quality Input Gaps',['Scope','Reason'],[
+            [axis,'; '.join(dict.fromkeys(r[axis].get('reason','') for r in s['market_inputs']))]
+            for axis in ('liquidity','credit','accessibility')]))
+        content.append(('Market Quality Inputs',
+            ['Country','Size (USD bn)','Period / scope','Size status / reason','Liquidity','Credit','Accessibility','Composite'],
+            [[r['iso3'],r['size'].get('value'),
+              '; '.join([r['size'].get('period',''),r['size'].get('definition','')]).strip('; '),
+              '; '.join([r['size']['status'],r['size'].get('reason','')]).strip('; '),
+              r['liquidity']['status'],r['credit']['status'],r['accessibility']['status'],r['composite_status']]
+             for r in s['market_inputs']]))
+        content.append(('Reported Credit Ratings',
+            ['Country','Agency','Reported rating','Outlook','Last reported action date','Status / reason','Source'],
+            [[r['iso3'],r['credit'].get('agency'),r['credit'].get('rating'),r['credit'].get('outlook'),
+              r['credit'].get('last_action_date'),
+              '; '.join([r['credit']['status'],r['credit'].get('reason','')]).strip('; '),
+              r['credit'].get('url')] for r in s['market_inputs']]))
+        candidates={}
+        for row in s['market_inputs']:
+            for axis in ('liquidity','accessibility'):
+                for source in row[axis].get('candidate_sources',[]):
+                    key=(axis,source['url'])
+                    if key not in candidates: candidates[key]=dict(source,axis=axis,countries=[])
+                    candidates[key]['countries'].append(row['iso3'])
+        if candidates:
+            content.append(('Market Quality Research Links — no observations collected',
+                ['Scope','Countries to review','Provider','Definition','Outstanding limitation','Source'],
+                [[r['axis'],', '.join(r['countries']),r['provider'],r['scope'],r['limitation'],r['url']]
+                 for r in candidates.values()]))
     if s.get('source_notices'):
         content.append(('Source / Reuse Notices',['Attribution and conditions'],[[n] for n in s['source_notices']]))
     content.append(('Decision',['Data use','Status'],list(map(list,s['decision'].items()))))

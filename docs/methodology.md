@@ -1,4 +1,4 @@
-# Version 0.1.0-provisional methodology
+# Version 0.1.1-provisional methodology
 
 The fixed universe is the 27 ISO3 countries in `config/countries.yaml`. Results are a research comparison, not orders or allocation advice.
 
@@ -19,6 +19,12 @@ Use the Seoul reference year's net debt and the edition's global terminal year. 
 
 An incompatible yield definition can have a provisional formula value for inspection, but `usable_baseline=false` and no rank. Rank eligibility additionally requires a finite current daily observation no older than 7 calendar days, matching country, currency and tenor. Ties use competition ranks 1, 1, 3. Partial-country ranks can exist while global DATA_HOLD remains active.
 
+The Korea final quotation basket (remaining maturity 4.5–5 years), US 5Y par constant maturity and Japan 5Y constant maturity are accepted as nominal sovereign 5Y research proxies. This permits exploratory ranking, not a claim that all observations represent the same instrument or executable yield. Preserve each original definition and quote convention; do not silently rename them benchmark or convert yields. Display the definition note and `BASELINE_DEFINITION_DIFFERENCE` warning. Freshness, currency, tenor, unit and fiscal-horizon gates still apply. Other unapproved definitions remain excluded. A changed eligible universe can change ranks even when yields are unchanged.
+
+The report puts usage mode before global status and separately counts displayed Baseline, real-yield, FX, Market Quality and Adjusted availability. These counts describe available inputs, not authorization for a complete combined model. Public-mode counts use already redacted rows; synthetic demo counts remain ineligible. Fiscal-year rollover is reported under its own cause rather than mislabeled as a yield-definition problem.
+
+Exploratory nominal-5Y comparisons are not a harmonized annual-effective-return ranking. Quote compounding conventions, curve construction and basket maturity can differ. WGB's `Annualized Yield` label alone does not establish a common annual-effective convention. No blanket compounding conversion or assumed basket midpoint is applied.
+
 ## Adjusted and FX
 
 Expected inflation is the arithmetic mean of five consecutive WEO forecasts after the reference year. Require all five and the same edition as the fiscal inputs. Real yield is nominal Y minus expected inflation, an approximation with an explicitly different forecast period.
@@ -31,7 +37,13 @@ Adjusted = 100 * FiscalNorm^0.40 * RealYieldNorm^0.30
                * FXNorm^0.20 * MarketQualityNorm^0.10
 ```
 
-These normalization parameters are provisional, versioned, and not empirically calibrated. All four axes must be present. A missing Market Quality axis leaves Adjusted unavailable; weights remain 0.40 / 0.30 / 0.20 / 0.10. No empirical Market Quality normalization or accepted input pipeline exists yet.
+These normalization parameters are provisional, versioned, and not empirically calibrated. All four axes must be present. A missing Market Quality axis leaves Adjusted unavailable; weights remain 0.40 / 0.30 / 0.20 / 0.10. No empirical Market Quality composite normalization or complete four-component input pipeline exists yet.
+
+Market Quality has a structural-input inventory, separate from the composite: BIS quarterly central-government nominal debt-security positions, all currencies and all maturities, in USD billions. A 365-day quarter-end age bound applies only to this size diagnostic; daily yield freshness is unchanged. The latest completed quarter is used without merging sectors or valuations. Optional collection failures and missing series are shown per scope and do not block Baseline. Liquidity and accessibility remain unconnected. A size input alone never produces Market Quality or Adjusted; no missing axis is replaced with zero. Source metadata remains inspectable, and pending public-redistribution status suppresses size values.
+
+BIS unit/value/date/confidentiality/duplicate failures are isolated by matched country and shown as `INVALID_DATA`; unaffected countries remain available. Malformed or truncated XML still invalidates the entire response. Missing confidentiality flags are not assumed public. Demo provenance values and serialized source notes are removed, without modifying the supplied input bundle; demo scopes do not label all countries missing merely because synthetic inputs are ineligible for live use.
+
+When a validated 5Y WGB fallback is selected, its existing country API response also supplies a diagnostic S&P rating row. This adds no HTTP requests and does not replace an official yield to obtain a rating. Reported grade, outlook and last action date are preserved with the country context, API response hash and retrieval time. Currency and term are unspecified: `REPORTED_TYPE_UNVERIFIED` is never eligible for scoring. The last action date is not a freshness guarantee or expiry date; an old affirmation is not automatically rejected under the daily yield rule. Future/incomplete dates, duplicate S&P rows, unknown grades or schema changes suppress only the rating diagnostic. Pending public redistribution hides grade, outlook and action; demos suppress actual ratings. Official-selected countries can still have no rating input. No credit normalization or Market Quality composite is enabled.
 
 ECB gives currency units per EUR; `KRW_per_currency = KRW_per_EUR / currency_per_EUR`. KRW has identity zero risk. Use sample standard deviation of valid log returns times sqrt(252), in decimal units. A 1Y window requires 200 matched observations; 3Y requires 600. Never forward-fill. Missing currency observations spanning more than five returned provider dates invalidate the window. A conservative weekday bound also rejects gaps longer than five weekdays across the entire response; an exact provider holiday calendar is not yet implemented. Latest currency data older than seven calendar days invalidate FX metrics. Maximum drawdown uses the KRW-per-currency path. Bulgaria's 2026 currency switch is unavailable pending a verified continuity policy; 3Y windows cannot cross an unverified currency start.
 
