@@ -1,0 +1,386 @@
+countries:
+- iso3: ISL
+  wgb_slug: iceland
+  name: 아이슬란드
+  currency: ISK
+  pdf_label: Iceland
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: iceland
+    series: FLV:nominal:par:5Y
+    yield_type: par_constant_maturity
+    baseline_compatible: false
+    redistribution: pending
+- iso3: NOR
+  wgb_slug: norway
+  name: 노르웨이
+  currency: NOK
+  pdf_label: Norway
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: norway
+    series: GOVT_GENERIC_RATES:5Y:GBON
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: AUS
+  wgb_slug: australia
+  name: 호주
+  currency: AUD
+  pdf_label: Australia
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: rba
+    series: FCMYGBAG5D
+    yield_type: interpolated_constant_maturity
+    baseline_compatible: false
+    redistribution: pending
+- iso3: NZL
+  wgb_slug: new-zealand
+  name: 뉴질랜드
+  currency: NZD
+  pdf_label: New Zealand
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: KOR
+  wgb_slug: south-korea
+  name: 한국
+  currency: KRW
+  pdf_label: Korea
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: kofia
+    series: '3007'
+    yield_type: final_quotation_basket
+    baseline_compatible: true
+    baseline_definition_note: 연구용 5년물 비교; 최종호가 바스켓 잔존기간 4년6개월~5년, 단일 5년 benchmark와 다름
+    baseline_definition_source: https://www.kofiabond.or.kr/
+    redistribution: pending
+- iso3: CZE
+  wgb_slug: czech-republic
+  name: 체코
+  currency: CZK
+  pdf_label: Czech Republic
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: czech
+    series: TABLE_2B:5Y:monthly_average
+    yield_type: monthly_residual_maturity_basket
+    baseline_compatible: false
+    redistribution: pending
+- iso3: BGR
+  wgb_slug: bulgaria
+  name: 불가리아
+  currency: EUR
+  pdf_label: Bulgaria
+  currency_from: '2026-01-01'
+  fx_continuity: false
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: CAN
+  wgb_slug: canada
+  name: 캐나다
+  currency: CAD
+  pdf_label: Canada
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: canada
+    series: BD.CDN.5YR.DQ.YLD
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: IRL
+  wgb_slug: ireland
+  name: 아일랜드
+  currency: EUR
+  pdf_label: Ireland
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: DNK
+  wgb_slug: denmark
+  name: 덴마크
+  currency: DKK
+  pdf_label: Denmark
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: LTU
+  wgb_slug: lithuania
+  name: 리투아니아
+  currency: EUR
+  pdf_label: Lithuania
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: SWE
+  wgb_slug: sweden
+  name: 스웨덴
+  currency: SEK
+  pdf_label: Sweden
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: SEGVB5YC
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: HRV
+  wgb_slug: croatia
+  name: 크로아티아
+  currency: EUR
+  pdf_label: Croatia
+  currency_from: '2023-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: allowed
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+    redistribution_review:
+      evidence_url: https://narodne-novine.nn.hr/eli/sluzbeni/2017/67/1577
+      catalog_url: https://data.gov.hr/ckan/api/3/action/package_show?id=711cb511-fbfc-49c3-a6c3-7ae40cca5bdf
+      required_provenance: [source_date]
+      reviewed_on: '2026-10-05'
+      scope:
+      - url: https://www.hnb.hr/documents/20182/1f79bc1c-dfb5-17fd-1571-cdd52a4a9619
+      notice: 'Hrvatska narodna banka — G8b: https://www.hnb.hr/documents/20182/1f79bc1c-dfb5-17fd-1571-cdd52a4a9619 . Croatian
+        Open Licence: https://narodne-novine.nn.hr/eli/sluzbeni/2017/67/1577 ; provider modification date accompanies source provenance
+        (not an observation date). Calculations and classifications are derived by Sovereign Macro Screener; no official endorsement.'
+- iso3: NLD
+  wgb_slug: netherlands
+  name: 네덜란드
+  currency: EUR
+  pdf_label: The Netherlands
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: NLGVB5Y
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: SVN
+  wgb_slug: slovenia
+  name: 슬로베니아
+  currency: EUR
+  pdf_label: Slovenia
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: DEU
+  wgb_slug: germany
+  name: 독일
+  currency: EUR
+  pdf_label: Germany
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: DEGVB5Y
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: SVK
+  wgb_slug: slovakia
+  name: 슬로바키아
+  currency: EUR
+  pdf_label: Slovak Republic
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: slovakia
+    series: ZCY5Y
+    yield_type: estimated_zero_coupon
+    baseline_compatible: false
+    redistribution: pending
+- iso3: AUT
+  wgb_slug: austria
+  name: 오스트리아
+  currency: EUR
+  pdf_label: Austria
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: pending
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+- iso3: PRT
+  wgb_slug: portugal
+  name: 포르투갈
+  currency: EUR
+  pdf_label: Portugal
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: unavailable
+    series: ''
+    yield_type: unverified
+    baseline_compatible: false
+    redistribution: allowed
+    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+    redistribution_review:
+      evidence_url: https://bpstat.bportugal.pt/avisos-legais
+      reviewed_on: '2026-10-05'
+      scope:
+      - url: https://bpstat.bportugal.pt/data/v1/domains/26/datasets/690b7b36fd36c0dbe249c48cbbc39524/
+        query:
+          series_ids: '12099457'
+      notice: Banco de Portugal / BPstat — https://bpstat.bportugal.pt/avisos-legais . Direct BPstat data only; source values
+        reproduced accurately; calculations and classifications are derived by Sovereign Macro Screener.
+- iso3: ISR
+  wgb_slug: israel
+  name: 이스라엘
+  currency: ILS
+  pdf_label: Israel
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: israel
+    series: ZC_TSB_ZND_05Y_MA
+    yield_type: monthly_zero_coupon
+    baseline_compatible: false
+    redistribution: pending
+- iso3: ESP
+  wgb_slug: spain
+  name: 스페인
+  currency: EUR
+  pdf_label: Spain
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: spain
+    series: D_G0B1F0ZO
+    yield_type: secondary_market_bucket
+    baseline_compatible: false
+    redistribution: pending
+- iso3: GBR
+  wgb_slug: united-kingdom
+  name: 영국
+  currency: GBP
+  pdf_label: United Kingdom
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: GBGVB5Y
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: FRA
+  wgb_slug: france
+  name: 프랑스
+  currency: EUR
+  pdf_label: France
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: riksbank
+    series: FRGVB5Y
+    yield_type: benchmark
+    baseline_compatible: true
+    redistribution: pending
+- iso3: ITA
+  wgb_slug: italy
+  name: 이탈리아
+  currency: EUR
+  pdf_label: Italy
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: italy
+    series: MFN_BMK.D.020.922.0.EUR.205
+    yield_type: benchmark
+    baseline_compatible: false
+    redistribution: pending
+- iso3: BEL
+  wgb_slug: belgium
+  name: 벨기에
+  currency: EUR
+  pdf_label: Belgium
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: belgium
+    series: D.5Y.F
+    yield_type: fixed_residual_reference
+    baseline_compatible: false
+    redistribution: pending
+- iso3: USA
+  wgb_slug: united-states
+  name: 미국
+  currency: USD
+  pdf_label: United States
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: treasury
+    series: BC_5YEAR
+    yield_type: par_constant_maturity
+    baseline_compatible: true
+    baseline_definition_note: 연구용 5년물 비교; par constant maturity 곡선의 5년 지점, 특정 채권의 거래수익률과 다름
+    baseline_definition_source: https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics/interest-rates-frequently-asked-questions
+    redistribution: pending
+- iso3: JPN
+  wgb_slug: japan
+  name: 일본
+  currency: JPY
+  pdf_label: Japan
+  currency_from: '2000-01-01'
+  fx_continuity: true
+  yield:
+    adapter: japan
+    series: 5年
+    yield_type: constant_maturity
+    baseline_compatible: true
+    baseline_definition_note: 연구용 5년물 비교; 시장가격 기반 constant maturity 반기복리 수익률, 단일 benchmark와 다름
+    baseline_definition_source: https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/qa.htm
+    redistribution: pending

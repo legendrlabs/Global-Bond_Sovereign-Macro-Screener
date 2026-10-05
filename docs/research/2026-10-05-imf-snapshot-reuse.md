@@ -1,0 +1,9 @@
+# IMF edition reuse verification — 2026-10-05
+
+User authorized reusing a validated IMF publication edition when network retrieval fails, with edition and original retrieval time disclosed. Root-cause probes found local `requests` timed out on the indicator endpoint and both a country series and API help page; the web retrieval path could read the same indicator endpoint. This identifies a local-to-IMF connection-path failure without proving a global IMF outage or a specific blocking mechanism.
+
+Existing private HTTP cache contained an intact April 2026 indicator catalogue, all four required series and the matching Fiscal Monitor PDF. Original retrievals were 2026-10-05 00:41:23–00:41:25 UTC. Promotion verified raw hashes, source metadata, series-specific metadata and the PDF edition/overlap. Same-edition PDF filled 15 net-debt cells. All 27 countries have 2026 and 2031 values for net debt, overall balance, gross debt and inflation.
+
+The actual production HttpClient still encountered two ReadTimeouts on the indicator URL. The collector reused the verified April 2026 snapshot with no fiscal collection errors, retained original retrieval timestamps and reported the network failure as a snapshot-use warning. Previously collected same-day sovereign yield and FX evidence is replayed separately for integrated evaluation; that is not a new yield/FX live collection.
+
+Snapshot failure tests cover absent, disabled, expired, future-dated, corrupt and scope-mismatched evidence, a new edition observed during partial refresh, invalid live units, mixed legacy series editions, successful live precedence and disclosure/public redaction. Stored data remains private and ignored by Git. This change does not alter scoring formulas, the separate WGB yield label, or redistribution gates. WGB Baseline use was approved separately by the user and is tracked in the WGB integration change.

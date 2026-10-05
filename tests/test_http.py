@@ -1,0 +1,100 @@
+import unittest
+import tempfile
+from unittest.mock import patch
+import requests
+from sovereign_macro.http import HttpClient
+from sovereign_macro.models import DataError
+
+class Session:
+    def __init__(self,items): self.items=iter(items);self.calls=[]
+    def request(self,*args,**kwargs):
+        self.calls.append((args,kwargs));item=next(self.items)
+        if isinstance(item,Exception): raise item
+        return item
+
+class Browser:
+    def __init__(self,items): self.items=iter(items);self.calls=[]
+    def request(self,*args,**kwargs):
+        self.calls.append((args,kwargs));item=next(self.items)
+        if isinstance(item,Exception): raise item
+        return item
+
+def response(code,content=b'{}',headers=None):
+    r=requests.Response();r.status_code=code;r._content=content;r.headers.update(headers or {});return r
+
+class HttpTests(unittest.TestCase):
+    def test_legacy_imf_adapter_is_not_used_for_liquidity(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            imf=Browser([response(200,b'wrong IMF payload')]);session=Session([response(200,b'liquidity')])
+            payload=HttpClient(tmp,session,imf_transport=imf.request).fetch('https://www.jsda.or.jp/data')
+            self.assertEqual(payload.body,b'liquidity');self.assertEqual(payload.transport,'requests')
+
+    def test_general_browser_adapter_and_imf_override_route_independently(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            general=Browser([response(200,b'liquidity')]);imf=Browser([response(200,b'fiscal')])
+            client=HttpClient(tmp,Session([]),imf_transport=imf.request,browser_transport=general.request)
+            self.assertEqual(client.fetch('https://www.jsda.or.jp/data').body,b'liquidity')
+            self.assertEqual(client.fetch('https://www.imf.org/data').body,b'fiscal')
+
+    def test_liquidity_hosts_use_compatible_transport_without_matching_lookalike_hosts(self):
+        for host in ('markets.newyorkfed.org','www.jsda.or.jp'):
+            with self.subTest(host=host),tempfile.TemporaryDirectory() as tmp:
+                browser=Browser([response(200,b'data')]);fallback=Session([response(200,b'wrong')])
+                payload=HttpClient(tmp,fallback,browser_transport=browser.request).fetch('https://'+host+'/data')
+                self.assertEqual(payload.body,b'data')
+                self.assertEqual(payload.transport,'curl_cffi')
+                self.assertEqual(browser.calls[0][1]['timeout'],20)
+        with tempfile.TemporaryDirectory() as tmp:
+            browser=Browser([]);fallback=Session([response(200,b'plain')])
+            payload=HttpClient(tmp,fallback,browser_transport=browser.request).fetch('https://www.jsda.or.jp.example.org/data')
+            self.assertEqual(payload.transport,'requests')
+
+    def test_json_post_can_supply_origin_referer_without_changing_existing_form_posts(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            s=Session([response(200)])
+            client=HttpClient(tmp,s)
+            client.fetch('https://example.org/data',method='POST',body='{}',
+                         headers={'Origin':'https://example.org','Content-Type':'application/json'})
+            self.assertEqual(s.calls[0][1]['headers']['Origin'],'https://example.org')
+            self.assertEqual(s.calls[0][1]['headers']['Content-Type'],'application/json')
+            self.assertEqual(s.calls[0][1]['data'],'{}')
+    def test_retry_and_conditional_hash_revalidation(self):
+        with tempfile.TemporaryDirectory() as tmp,patch('sovereign_macro.http.time.sleep'):
+            s=Session([response(429),response(200,b'payload',{'ETag':'version'}),response(304)])
+            client=HttpClient(tmp,s)
+            first=client.fetch('https://example.org/data')
+            second=client.fetch('https://example.org/data')
+            self.assertEqual(first.sha256,second.sha256)
+            self.assertEqual(s.calls[-1][1]['headers']['If-None-Match'],'version')
+            self.assertEqual(s.calls[0][1]['timeout'],(5,15))
+    def test_timeout_does_not_reuse_cached_success(self):
+        with tempfile.TemporaryDirectory() as tmp,patch('sovereign_macro.http.time.sleep'):
+            client=HttpClient(tmp,Session([response(200),requests.Timeout(),requests.Timeout()]))
+            client.fetch('https://example.org/data')
+            with self.assertRaises(DataError): client.fetch('https://example.org/data')
+    def test_404_no_retry_and_budget(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            s=Session([response(404)]);client=HttpClient(tmp,s,budget=1)
+            with self.assertRaises(DataError): client.fetch('https://example.org/data')
+            self.assertEqual(len(s.calls),1)
+            with self.assertRaisesRegex(DataError,'BUDGET'): client.fetch('https://example.org/data')
+    def test_imf_uses_chrome_transport_and_longer_timeout(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            browser=Browser([response(200,b'{"ok":true}')])
+            fallback=Session([])
+            client=HttpClient(tmp,fallback,imf_transport=browser.request)
+            payload=client.fetch('https://www.imf.org/external/datamapper/api/v2/indicators')
+            self.assertEqual(browser.calls[0][1]['impersonate'],'chrome')
+            self.assertEqual(browser.calls[0][1]['timeout'],(10,30))
+            self.assertEqual(payload.transport,'curl_cffi')
+            self.assertEqual(client.records[-1]['transport'],'curl_cffi')
+    def test_imf_browser_failure_falls_back_to_requests_and_records_transport(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            browser=Browser([RuntimeError('browser transport failed')])
+            fallback=Session([response(200,b'{"ok":true}')])
+            client=HttpClient(tmp,fallback,imf_transport=browser.request)
+            payload=client.fetch('https://www.imf.org/external/datamapper/api/v2/indicators')
+            self.assertEqual(fallback.calls[0][1]['timeout'],(10,30))
+            self.assertEqual(payload.transport,'requests')
+            self.assertEqual(client.records[-1]['transport'],'requests')
+            self.assertEqual(client.records[-2]['transport'],'curl_cffi')

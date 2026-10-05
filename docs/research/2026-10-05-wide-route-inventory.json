@@ -1,0 +1,928 @@
+{
+  "date_kst": "2026-10-05",
+  "search_calls": 30,
+  "requested_result_slots": 150,
+  "returned_url_entries": 150,
+  "unique_urls": 127,
+  "note": "Search candidates only. No claim of successful downloads, current values, redistribution clearance or adapter connection.",
+  "queries": [
+    {
+      "country": "DNK",
+      "query": "Nasdaq Copenhagen Danish government benchmark bonds five year bond yield daily closing prices downloadable market statistics government debt Danmarks Nationalbank 2026",
+      "numResults": 5
+    },
+    {
+      "country": "IRL",
+      "query": "NTMA Ireland five year government bond benchmark daily yields Irish Stock Exchange Euronext Dublin historical prices downloadable official market data",
+      "numResults": 5
+    },
+    {
+      "country": "LTU",
+      "query": "Nasdaq Baltic Lithuanian government bonds yield to maturity historical trading daily statistics downloadable five year government bonds Bank of Lithuania",
+      "numResults": 5
+    },
+    {
+      "country": "BGR",
+      "query": "Bulgarian National Bank secondary market government securities yields residual maturity five years monthly 2026 dealers yield curve statistics",
+      "numResults": 5
+    },
+    {
+      "country": "SVN",
+      "query": "Ljubljana Stock Exchange Slovenian government bonds daily yield maturity price statistics downloadable SI bonds RS 2026",
+      "numResults": 5
+    },
+    {
+      "country": "AUT",
+      "query": "Wiener Boerse Austrian government benchmark bonds yield historical reference prices official statistics download five year OeKB",
+      "numResults": 5
+    },
+    {
+      "country": "NZL",
+      "query": "New Zealand Debt Management government bonds market yields benchmark five year daily data NZX historical closing prices NZFMA open data",
+      "numResults": 5
+    },
+    {
+      "country": "HRV",
+      "query": "HANFA Croatian government bond yields five years Zagreb stock exchange government bonds yield to maturity percentage G8b statistics",
+      "numResults": 5
+    },
+    {
+      "country": "PRT",
+      "query": "IGCP Portugal government bonds five year secondary market yield MEDIP MTS statistical bulletin maturity Reuters fixed rate yield method",
+      "numResults": 5
+    },
+    {
+      "country": "IRL",
+      "query": "Ireland Central Statistics Office PxStat CSO interest rates government securities five years FIM02 FIM03 2026 data API",
+      "numResults": 5
+    },
+    {
+      "country": "DNK",
+      "query": "Nasdaq Copenhagen average bond yield report government bonds maturity 3 5 7 years historical download methodology STAT",
+      "numResults": 5
+    },
+    {
+      "country": "SVN",
+      "query": "Slovenia Ministry of Finance government yield curve daily MTS Slovenia bond market yields five year benchmark Bloomberg data statistical time series",
+      "numResults": 5
+    },
+    {
+      "country": "AUT",
+      "query": "Wiener Boerse bond yield Austrian government AT0000A2NW83 historical data Kurs Rendite market data license download",
+      "numResults": 5
+    },
+    {
+      "country": "BGR",
+      "query": "Bulgarian National Bank government securities secondary market yield curve 5 years 2026 outright transactions remaining maturity percentage quarterly data",
+      "numResults": 5
+    },
+    {
+      "country": "MTS",
+      "query": "MTS data public fixing daily snapshots website terms conditions historical data redistribution licence Slovenia benchmark yield",
+      "numResults": 5
+    },
+    {
+      "country": "LTU",
+      "query": "Nasdaq Baltic bond list Lithuanian government securities secondary market trading statistics yield maturity download historical daily prices",
+      "numResults": 5
+    },
+    {
+      "country": "HRV",
+      "query": "Hrvatska narodna banka G8b Prinosi do dospijeća obveznice postocima godišnjoj razini jedinica mjere pet godina",
+      "numResults": 5
+    },
+    {
+      "country": "DNK",
+      "query": "Nasdaq Copenhagen average yield bond groups remaining maturity 2 5 7 10 Stat maturity groups official list",
+      "numResults": 5
+    },
+    {
+      "country": "IRL",
+      "query": "CSO Ireland PxStat Government Securities Yields historical series 2 5 10 years FIM table CSV",
+      "numResults": 5
+    },
+    {
+      "country": "NZL",
+      "query": "Statistics New Zealand Infoshare government stock yields 5 year interest rates series data public API",
+      "numResults": 5
+    },
+    {
+      "country": "AUT",
+      "query": "OeKB government bond strips theoretical issue prices spot yield curve zero coupon five years data publication download methodology",
+      "numResults": 5
+    },
+    {
+      "country": "PRT",
+      "query": "Banco de Portugal BPstat Treasury bonds residual maturity 5 years average yield methodology series 12099457 interpolation Reuters MEDIP",
+      "numResults": 5
+    },
+    {
+      "country": "BGR",
+      "query": "BNB Government securities market quarterly data secondary market outright transactions issue yield columns appendix A 2026 06 five year",
+      "numResults": 5
+    },
+    {
+      "country": "IRL",
+      "query": "NTMA Euronext Dublin Daily Bond Index Report 2026 government bonds gross redemption yield benchmark 5 years",
+      "numResults": 5
+    },
+    {
+      "country": "BGR",
+      "query": "Bulgarian Stock Exchange government bonds BG2030126119 price yield to maturity market data historical trading 2026",
+      "numResults": 5
+    },
+    {
+      "country": "NZL",
+      "query": "NZFMA NZFBF end of day closing government bond benchmark rates licence redistribution delayed data public RBNZ",
+      "numResults": 5
+    },
+    {
+      "country": "HRV",
+      "query": "Hrvatska narodna banka G8b statistika metadata jedinica mjere prinos obveznice SDMX postotak",
+      "numResults": 5
+    },
+    {
+      "country": "SVN",
+      "query": "Republic Slovenia Ministry Finance five year benchmark bond MTS fixing RS government yield curve bond market official reference price",
+      "numResults": 5
+    },
+    {
+      "country": "IRL_PRT",
+      "query": "MTS public daily fixing reference mid yield Irish Portuguese government bonds public statistics Ireland Portugal yield curve",
+      "numResults": 5
+    },
+    {
+      "country": "AUT_DNK",
+      "query": "official exchange government bond yield data Denmark Austria free downloadable daily reference yield historical data redistribution terms",
+      "numResults": 5
+    }
+  ],
+  "candidates": [
+    {
+      "url": "https://www.nasdaq.com/european-market-activity/fixed-income/average-bond-yield",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://www.nationalbanken.dk/en/government-debt/trading-and-data/auction-results-government-bonds",
+      "countries": [
+        "DNK",
+        "AUT_DNK"
+      ]
+    },
+    {
+      "url": "https://www.nationalbanken.dk/en/government-debt/trading-and-data",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://www.nasdaq.com/european-market-activity/government-bonds",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://www.nationalbanken.dk/en/government-debt/trading-and-data/list-of-danish-government-bonds",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://www.ntma.ie/business-areas/funding-and-debt-management/government-securities/government-bonds",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.ntma.ie/uploads/general/Daily_Bond_Index_Rpt_2019-10-03.pdf",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.investing.com/rates-bonds/ireland-5-year-bond-yield-historical-data",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://data.gov.ie/dataset/fim05-stock-exchange-indices-historical-series",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.ntma.ie/business-areas/funding-and-debt-management/government-securities",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.lb.lt/uploads/publications/docs/67019_1fc43a73e2b4b84c08dbac4e080f96fe.pdf",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://nasdaqbaltic.com/statistics/en/auctions_vln/govdebt",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://finmin.lrv.lt/en/competence-areas/state-debt-management/government-securities/government-securities-auctions/results-of-the-government-securities-auctions/",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://nasdaqbaltic.com/statistics/lt/auctions_vln/govdebt",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://finmin.lrv.lt/en/competence-areas/state-debt-management/government-securities/eurobonds/",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://www.bnb.bg/bnbweb/groups/public/documents/bnb_publication/gssm_2026_06_en.pdf",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://www.bnb.bg/bnbweb/groups/public/documents/bnb_publication/gssm_2026_03_en.pdf",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://www.bnb.bg/bnbweb/groups/public/documents/bnb_publication/gssm_2026_06_bg.pdf",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://www.bnb.bg/bnbweb/groups/public/documents/bnb_publication/gssm_2025_12_en.pdf",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://www.bnb.bg/FiscalAgent/FAGSAuctions/FAAuctionResults/FA_AR_20260928_A1_EN",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://rebalix.com/en/government-bonds/slovenia",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://seonet.ljse.si/default_en.aspx?doc_id=92617&language=en",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://www.mtsdata.com/content/data/public/rsl/anagraph/index.php",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://www.investing.com/rates-bonds/slovenia-government-bonds",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://seonet.ljse.si/?doc_id=93141",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://www.oekb.at/en/capital-market-services/our-range-of-data-knowledge-creates-an-advantage/data-on-austrian-government-bonds/statistics-and-publications-on-government-bonds.html",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.oekb.at/en/capital-market-services/our-range-of-data-knowledge-creates-an-advantage/data-on-austrian-government-bonds/benchmark-government-bonds-of-the-republic-of-austria.html",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.oenb.at/en/Statistics/Standardized-Tables/interest-rates-and-exchange-rates/austrian-government-bond-yields.html",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.oekb.at/kapitalmarkt-services/unser-datenangebot/daten-zu-bundesanleihen-der-republik-oesterreich/benchmarks.html",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.oekb.at/en/capital-market-services/our-range-of-data-knowledge-creates-an-advantage/data-on-austrian-government-bonds.html",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://debtmanagement.treasury.govt.nz/investor-resources/data",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://www.nzfma.org/nzdata/",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://www.nzfma.org/nzdata/search",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://developer.ice.com/fixed-income-data-services/catalog/new-zealand-financial-markets-association-nzfma",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://debtmanagement.treasury.govt.nz/government-securities-market",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://cbonds.com/indexes/162121/",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://zse.hr/",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://www.investing.com/rates-bonds/croatia-5-year-bond-yield",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://www.hanfa.hr/news/financial-education-what-is-a-bond/",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://www.investing.com/rates-bonds/croatia-government-bonds",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://www.igcp.pt/sites/default/files/2026-07/BM_jul26.pdf",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://www.igcp.pt/sites/default/files/2026-04/BM_abr26.pdf",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://www.igcp.pt/sites/default/files/2026-03/BM_mar26.pdf",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://www.igcp.pt/sites/default/files/2025-05/BM_mai25.pdf",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://www.igcp.pt/sites/default/files/2025-06/BM_jun25.pdf",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://data.gov.ie/en_GB/dataset/?_res_format_limit=0&api=true&organization=central-bank-of-ireland&res_format=PX&sort=date_released+desc",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://data.cso.ie/",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.ReadDataset/FIM09/JSON-stat/1.0/en",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.cso.ie/en/databases/databasetools/pxstatrpackagecsodata/",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.centralbank.ie/statistics/data-and-analysis/securities-statistics",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.nasdaq.com/docs/guidelines-for-yield-calculation-january-2016.pdf",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://www.nasdaq.com/european-market-activity/fixed-income/index-factors",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://www.dst.dk/en/Statistik/dokumentation/documentationofstatistics/interest-and-share-price-indices/statistical-presentation",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://www.mtsdata.com/content/data/public/rsl/fixing/",
+      "countries": [
+        "SVN",
+        "MTS"
+      ]
+    },
+    {
+      "url": "https://www.bsi.si/en/long-term-interest-rates-for-convergence-assessment-purposes-ltir",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://www.investing.com/rates-bonds/slovenia-5-year-bond-yield",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://fred.stlouisfed.org/series/IRLTLT01SIM156N",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://www.wienerborse.at/en/market-data/bonds/quote/?cHash=20e4bb996c9e621d96408c168a47b38d&ID_NOTATION=322041840&ISIN=AT0000A2NW83",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.wienerborse.at/marktdaten/anleihen/preisdaten/?ID_NOTATION=322041840&ISIN=AT0000A2NW83&cHash=20e4bb996c9e621d96408c168a47b38d",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.oebfa.at/dam/jcr:3cc6c8a8-e6bd-40e8-ac6a-0c029df8c9e2/Bundesanleihen_historisch.pdf",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.oenb.at/isawebstat/stabfrage/createReport?lang=DE&report=2.11.1",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.oenb.at/en/daten-und-forschung/datenangebot/zinssaetze-wechselkurse/renditen-oesterreichischer-bundesanleihen.html",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.bnb.bg/bnbweb/groups/public/documents/bnb_publication/gssm_2025_09_en.pdf",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://www.mtsmarkets.com/en/data-analytics/market-data-documentation",
+      "countries": [
+        "MTS"
+      ]
+    },
+    {
+      "url": "https://www.mtsmarkets.com/en/mts-fixings",
+      "countries": [
+        "MTS",
+        "IRL_PRT"
+      ]
+    },
+    {
+      "url": "https://www.mtsmarkets.com/en/data-analytics/data-products/time-series-data",
+      "countries": [
+        "MTS"
+      ]
+    },
+    {
+      "url": "https://www.mtsmarkets.com/en/data-analytics/data-products",
+      "countries": [
+        "MTS"
+      ]
+    },
+    {
+      "url": "https://nasdaqbaltic.com/statistics/en/bonds",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://nasdaqbaltic.com/statistics/lt/bonds",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://www.nasdaqbaltic.com/statistics/en/instrument/LT0000630105/historical?date=2026-07-31",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://nasdaqbaltic.com/statistics/lt/statistics/stats_json",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://nasdaqbaltic.com/statistics/en/instrument/LT0000612012/trading",
+      "countries": [
+        "LTU"
+      ]
+    },
+    {
+      "url": "https://www.hnb.hr/en/statistics/statistical-data/general-government/general-government-debt",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://www.hnb.hr/documents/20182/4792973/h-polugodisnja-informacija-1polugodiste2023.pdf/a2313ee1-fa77-5789-82e4-1fd3d8d20658",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://p-data.gov.hr/ckan/dataset/vrijednosni-papiri",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://www.hnb.hr/documents/d/guest/hp20032025_prezentacija_noa_hinger-lucija_rasic",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://www.hnb.hr/documents/20182/4344323/h-polugodisnja-informacija-2polugodiste2022.pdf/b2e3a094-1a66-4c79-0822-e411e1fe3efb",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://nationalbanken.statistikbank.dk/statbank5a/SelectVarVal/Define.asp?Maintable=DNVPDKR2&PLanguage=1",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://www.nasdaq.com/european-market-activity/corporate-bonds",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://m.statbank.dk/TableInfo/DNVPDKR2",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://m.statbank.dk/TableInfo/DNVPDKS",
+      "countries": [
+        "DNK"
+      ]
+    },
+    {
+      "url": "https://ws.cso.ie/public/api.restful/PxStat.Data.Cube_API.ReadDataset/FIM05/JSON-stat/2.0/en",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://data.gov.ie/dataset/708eea1b-7450-4e33-9f7a-22d487de6af7/resource/a07d289f-05b1-42af-8e9b-e4a6bcbb67b2",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.ceicdata.com/en/ireland/treasury-bill-and-government-securities-rates-annual",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://au.investing.com/rates-bonds/ireland-2-year-bond-yield-historical-data",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.rbnz.govt.nz/statistics/series/exchange-and-interest-rates/wholesale-interest-rates",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://www.stats.govt.nz/tools/stats-infoshare/",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://infoshare.stats.govt.nz/infoshare/(X(1)S(2ykgaqisq02oecumvhprjarh))/exportdirect.aspx?AspxAutoDetectCookieSupport=1",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://www.stats.govt.nz/large-datasets/help-using-infoshare",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://data.govt.nz/catalogue-guide/showcase/infoshare",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://www.oekb.at/en/capital-market-services/government-bond-and-atb-auctions/stripping-of-government-bonds-of-the-republic-of-austria.html",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.oekb.at/en/dam/jcr:2525d7e2-7b90-44bf-9226-0028a9ff78c0/OeKB-Auction-Procedure.pdf",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://www.oekb.at/en/dam/jcr:2525d7e2-7b90-44bf-9226-0028a9ff78c0/Auction%20Procedure.pdf",
+      "countries": [
+        "AUT"
+      ]
+    },
+    {
+      "url": "https://bpstat.bportugal.pt/serie/12099462",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://bpstat.bportugal.pt/dominios/26/",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://bpstat.bportugal.pt/dados/dominios/22/series",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://bpstat.bportugal.pt/serie/12099459",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://bpstat.bportugal.pt/api/media/files/documentos/dm_est_emi_tit.pdf",
+      "countries": [
+        "PRT"
+      ]
+    },
+    {
+      "url": "https://www.bb.org.bd/pub/quaterly/gsec/january-march%202026.pdf",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://www.bnb.bg/bnbweb/groups/public/documents/bnb_publication/gssm_2025_03_en.pdf",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://dataful.in/datasets/17855/",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://www.ntma.ie/uploads/general/NTMA-Investor-Presentation-May-2026.pdf",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.ntma.ie/news/ntma-publishes-2026-mid-year-business-update",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://www.ntma.ie/annualreport-2025/documents/Funding-and-Debt-Management.pdf",
+      "countries": [
+        "IRL"
+      ]
+    },
+    {
+      "url": "https://cbonds.com/bonds/2073837/",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://www.bta.bg/en/news/economy/1214101-finance-ministry-issues-eur-150-mln-in-five-year-bonds-on-domestic-market",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://balgarianovinite.com/en/finance-ministry-issues-eur-150-mln-five-year/",
+      "countries": [
+        "BGR"
+      ]
+    },
+    {
+      "url": "https://www.rbnz.govt.nz/statistics/stats-alerts-and-updates/2025/sa-04",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://www.fma.govt.nz/assets/Compliance/Market-Service-Licence-New-Zealand-Financial-Benchmark-Facility-Limited.pdf",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://www.nzfbf.co.nz/benchmarks/closing-rates/",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://www.fma.govt.nz/business/licensed-providers/new-zealand-financial-benchmark-facility-limited-nzfbf/",
+      "countries": [
+        "NZL"
+      ]
+    },
+    {
+      "url": "https://data.gov.hr/ckan/dataset/standardni-prezentacijski-format",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://sdmx.org/about-sdmx/welcome/",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://www.hnb.hr/documents/20182/121567/h-uputa-za-statisticko-bonitetno-izvjescivanje-npt.pdf",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://www.hnb.hr/documents/20182/121564/h-uputa-vrijednosni-papiri-NN71-2013.pdf/1a9d07a4-c7e8-4571-99c8-d9fb1fcd3aef",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://hnb.hr/statistika/statisticki-podaci",
+      "countries": [
+        "HRV"
+      ]
+    },
+    {
+      "url": "https://uk.investing.com/rates-bonds/slovenia-5-year-bond-yield",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://fred.stlouisfed.org/series/IRLTLT01SIA156N",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://www.gov.si/novice/2024-01-03-republika-slovenija-izdala-novo-10-letno-obveznico/",
+      "countries": [
+        "SVN"
+      ]
+    },
+    {
+      "url": "https://live.euronext.com/en/products/indices/fixed-income",
+      "countries": [
+        "IRL_PRT"
+      ]
+    },
+    {
+      "url": "https://live.euronext.com/en/products/indices/euronext-mts",
+      "countries": [
+        "IRL_PRT"
+      ]
+    },
+    {
+      "url": "https://live.euronext.com/sites/default/files/documentation/index-fact-sheets/Euronext_MTS_EGB_Ireland_GR_Index_Factsheet.pdf",
+      "countries": [
+        "IRL_PRT"
+      ]
+    },
+    {
+      "url": "https://www.mtsdata.com/content/data/public/irl/anagraph/index.php",
+      "countries": [
+        "IRL_PRT"
+      ]
+    },
+    {
+      "url": "https://statbank.dk/statbank5a/selectvarval/saveselections.asp?MainTable=DNRENTD&PLanguage=1&TableStyle=&Buttons=&PXSId=99541&IQY=&TC=&ST=ST&rvar0=&rvar1=&rvar2=&rvar3=&rvar4=&rvar5=&rvar6=&rvar7=&rvar8=&rvar9=&rvar10=&rvar11=&rvar12=&rvar13=&rvar14=",
+      "countries": [
+        "AUT_DNK"
+      ]
+    },
+    {
+      "url": "https://m.statbank.dk/TableInfo/DNRENTD?lang=da",
+      "countries": [
+        "AUT_DNK"
+      ]
+    },
+    {
+      "url": "https://bonds-api.com/countries/AT",
+      "countries": [
+        "AUT_DNK"
+      ]
+    },
+    {
+      "url": "https://nationalbanken.statistikbank.dk/statbank5a/selectvarval/define.asp?MainTable=DNRENTD&PLanguage=0&PXSId=99541&ST=ST&buttons=5&subword=nbf",
+      "countries": [
+        "AUT_DNK"
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,77 @@
+name: Stable program release
+on:
+  push:
+    tags: ['v*']
+    branches: ['main']
+    paths: ['pyproject.toml', 'src/sovereign_macro/__init__.py', '.github/workflows/release.yml']
+permissions:
+  contents: read
+jobs:
+  build:
+    if: github.ref_type == 'branch' || !contains(github.ref_name, '-')
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Require a main commit and matching stable version
+        id: version
+        run: |
+          git merge-base --is-ancestor HEAD origin/main
+          PYTHONPATH=src python - <<'PY'
+          import os, re, tomllib
+          from sovereign_macro import __version__
+          version=tomllib.load(open('pyproject.toml','rb'))['project']['version']
+          assert re.fullmatch(r'(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)',version)
+          assert __version__==version
+          if os.environ.get('GITHUB_REF_TYPE')=='branch':
+              assert os.environ['GITHUB_REF_NAME']=='main'
+          else:
+              assert os.environ['GITHUB_REF_NAME']=='v'+version
+          if os.environ.get('GITHUB_OUTPUT'):
+              with open(os.environ['GITHUB_OUTPUT'],'a') as out:
+                  print('version='+version,file=out)
+          PY
+      - run: python -m pip wheel --no-deps . --wheel-dir dist
+      - run: python -m pip install dist/*.whl
+      - run: python -m unittest discover -s tests -v
+      - run: python -m sovereign_macro demo --output results/demo --public-output
+      - name: Package source and checksums
+        run: |
+          git archive --format=zip --prefix=sovereign-macro/ HEAD -o dist/sovereign-macro-v${{ steps.version.outputs.version }}.zip
+          cd dist
+          sha256sum *.whl *.zip > SHA256SUMS.txt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: stable-wheel
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 7
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: stable-wheel
+          path: dist
+      - name: Publish verified program asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: v${{ needs.build.outputs.version }}
+          RELEASE_COMMIT: ${{ github.sha }}
+        run: |
+          if gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" >/dev/null 2>&1; then
+            test "$(gh api "repos/$GH_REPO/git/ref/tags/$RELEASE_TAG" --jq .object.sha)" = "$RELEASE_COMMIT"
+          fi
+          gh release create "$RELEASE_TAG" dist/* --target "$RELEASE_COMMIT" --title "$RELEASE_TAG — 국채 거시 스크리너 사용판" --notes 'Python 3.11+ 연구용 사용판입니다. preview.5에서 검수한 공식 우선/WGB 보완, IMF 발표판 재사용, 부분 Baseline 및 출처별 미국·일본 유동성 진단을 포함합니다. API 키 없이 실행합니다. Market Quality 종합 점수와 Adjusted 순위는 보류하며, 전체 DATA_HOLD와 국가별 관측일·정의 차이를 함께 표시합니다. 공개 출력은 재배포 허가 미확인 수치를 숨깁니다. wheel 설치 테스트와 공개 데모를 통과한 패키지만 게시합니다. 이전 시험판(내부 0.1.0)에서 app으로 정식 업데이트를 확인할 수 있습니다. 개인 보고서와 원자료 캐시는 포함하지 않습니다.'
