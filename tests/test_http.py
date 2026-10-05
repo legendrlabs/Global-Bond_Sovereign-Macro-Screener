@@ -12,6 +12,13 @@ class Session:
         if isinstance(item,Exception): raise item
         return item
 
+class Browser:
+    def __init__(self,items): self.items=iter(items);self.calls=[]
+    def request(self,*args,**kwargs):
+        self.calls.append((args,kwargs));item=next(self.items)
+        if isinstance(item,Exception): raise item
+        return item
+
 def response(code,content=b'{}',headers=None):
     r=requests.Response();r.status_code=code;r._content=content;r.headers.update(headers or {});return r
 
@@ -45,3 +52,23 @@ class HttpTests(unittest.TestCase):
             with self.assertRaises(DataError): client.fetch('https://example.org/data')
             self.assertEqual(len(s.calls),1)
             with self.assertRaisesRegex(DataError,'BUDGET'): client.fetch('https://example.org/data')
+    def test_imf_uses_chrome_transport_and_longer_timeout(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            browser=Browser([response(200,b'{"ok":true}')])
+            fallback=Session([])
+            client=HttpClient(tmp,fallback,browser_session=browser)
+            payload=client.fetch('https://www.imf.org/external/datamapper/api/v2/indicators')
+            self.assertEqual(browser.calls[0][1]['impersonate'],'chrome')
+            self.assertEqual(browser.calls[0][1]['timeout'],(10,30))
+            self.assertEqual(payload.transport,'curl_cffi:chrome')
+            self.assertEqual(client.records[-1]['transport'],'curl_cffi:chrome')
+    def test_imf_browser_failure_falls_back_to_requests_and_records_transport(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            browser=Browser([RuntimeError('browser transport failed')])
+            fallback=Session([response(200,b'{"ok":true}')])
+            client=HttpClient(tmp,fallback,browser_session=browser)
+            payload=client.fetch('https://www.imf.org/external/datamapper/api/v2/indicators')
+            self.assertEqual(fallback.calls[0][1]['timeout'],(10,30))
+            self.assertEqual(payload.transport,'requests')
+            self.assertEqual(client.records[-1]['transport'],'requests')
+            self.assertEqual(client.records[-2]['transport'],'curl_cffi:chrome')
