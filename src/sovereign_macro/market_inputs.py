@@ -71,19 +71,21 @@ def parse_bis_size(body,as_of,max_age_days=365):
 
 def collect_market_inputs(client,settings,as_of):
     if not settings.get('enabled',False): return dict(size={},errors=['SOURCE_NOT_CONNECTED'])
-    areas='+'.join(AREA_TO_ISO3)
-    key=f'Q.N.{areas}.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T'
-    url=BIS_API+key+f'?startPeriod={as_of.year-1}-Q1&endPeriod={as_of.year}-Q{(as_of.month-1)//3+1}'
-    try:
-        payload=client.fetch(url)
-        if payload.url!=url: raise DataError('BIS_UNEXPECTED_REDIRECT')
-        size=parse_bis_size(payload.body,as_of,settings.get('size_max_age_days',365))
-        for row in size.values():
-            row.update(url=payload.url,raw_sha256=payload.sha256,retrieved_at=payload.retrieved_at,
-                       redistribution=settings.get('redistribution','pending'))
-        result=dict(size=size,errors=[])
-    except Exception as exc:
-        result=dict(size={},errors=['SIZE:'+type(exc).__name__+':'+str(exc)[:180]])
+    result=dict(size={},errors=['SIZE_SOURCE_DISABLED'])
+    if settings.get('size_enabled',True):
+        areas='+'.join(AREA_TO_ISO3)
+        key=f'Q.N.{areas}.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T'
+        url=BIS_API+key+f'?startPeriod={as_of.year-1}-Q1&endPeriod={as_of.year}-Q{(as_of.month-1)//3+1}'
+        try:
+            payload=client.fetch(url)
+            if payload.url!=url: raise DataError('BIS_UNEXPECTED_REDIRECT')
+            size=parse_bis_size(payload.body,as_of,settings.get('size_max_age_days',365))
+            for row in size.values():
+                row.update(url=payload.url,raw_sha256=payload.sha256,retrieved_at=payload.retrieved_at,
+                           redistribution=settings.get('redistribution','pending'))
+            result=dict(size=size,errors=[])
+        except Exception as exc:
+            result=dict(size={},errors=['SIZE:'+type(exc).__name__+':'+str(exc)[:180]])
     if settings.get('liquidity_enabled',False):
         result['liquidity']=collect_liquidity(client,settings,as_of)
     return result
@@ -96,7 +98,8 @@ def country_market_inputs(iso,bundle,demo=False,public_output=False):
         reason='; '.join(inputs.get('errors',[])) or 'BIS_SERIES_NOT_REPORTED_IN_SELECTED_SCOPE'
         size=dict(value=None,unit='USD_billion',period='',provider='bis',status='UNAVAILABLE',reason=reason)
     if demo:
-        size.update(value=None,status='SYNTHETIC_DEMO')
+        size=dict(value=None,unit='USD_billion',period='',status='SYNTHETIC_DEMO',
+                  reason='No real size observation in synthetic demo')
     elif public_output and size.get('value') is not None and size.get('redistribution','pending')!='allowed':
         size.update(value=None,status='REDISTRIBUTION_PENDING')
     credit=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Same-agency long-term local-currency rating and dated source not verified')

@@ -2,6 +2,8 @@ from datetime import date
 from io import BytesIO
 import json
 import unittest
+from zipfile import ZipFile
+import re
 
 from openpyxl import Workbook
 from sovereign_macro import market_inputs
@@ -26,6 +28,42 @@ def survey(points):
 
 
 class LiquidityTests(unittest.TestCase):
+    def test_jsda_skips_explicit_annual_total_but_rejects_malformed_month(self):
+        parse=self.parser('parse_jsda_liquidity')
+        row=parse(workbook([('2026/08',150),('2026年度',900)]),date(2026,10,6))
+        self.assertEqual(row['value'],150)
+        with self.assertRaises(DataError): parse(workbook([('2026/08',150),('2026/XX',900)]),date(2026,10,6))
+
+    def test_jsda_rejects_excessive_dimensions_before_scanning_blank_rows(self):
+        output=BytesIO()
+        with ZipFile(BytesIO(workbook())) as src,ZipFile(output,'w') as dest:
+            for name in src.namelist():
+                body=src.read(name)
+                if name=='xl/worksheets/sheet1.xml':
+                    body=re.sub(rb'<dimension ref="[^"]+"',b'<dimension ref="A1:D1048576"',body)
+                dest.writestr(name,body)
+        with self.assertRaisesRegex(DataError,'JSDA_SHEET_BOUNDS'):
+            self.parser('parse_jsda_liquidity')(output.getvalue(),date(2026,10,6))
+
+    def test_size_can_be_disabled_without_disabling_liquidity(self):
+        class Client:
+            calls=[]
+            def fetch(self,url):
+                self.calls.append(url)
+                if url.endswith('koushasai.xlsx'): return Payload(workbook(),url,'2026-10-05T15:30:00Z','hash')
+                raise TimeoutError('unavailable')
+        client=Client()
+        result=market_inputs.collect_market_inputs(client,dict(enabled=True,size_enabled=False,liquidity_enabled=True),date(2026,10,6))
+        self.assertFalse(any('stats.bis.org' in url for url in client.calls))
+        self.assertEqual(result['liquidity']['JPN']['value'],150)
+
+    def test_demo_size_does_not_keep_real_download_metadata(self):
+        bundle={'market_inputs':{'size':{'JPN':dict(value=123,status='AVAILABLE',
+            raw_sha256='real-hash',url='https://stats.bis.org/real-download',retrieved_at='2026-10-05T15:30:00Z')}}}
+        row=market_inputs.country_market_inputs('JPN',bundle,demo=True)
+        self.assertNotIn('real-hash',json.dumps(row));self.assertNotIn('real-download',json.dumps(row))
+        self.assertEqual(bundle['market_inputs']['size']['JPN']['raw_sha256'],'real-hash')
+
     def parser(self,name):
         fn=getattr(market_inputs,name,None)
         self.assertTrue(callable(fn),'Missing liquidity parser: '+name)

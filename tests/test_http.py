@@ -23,17 +23,30 @@ def response(code,content=b'{}',headers=None):
     r=requests.Response();r.status_code=code;r._content=content;r.headers.update(headers or {});return r
 
 class HttpTests(unittest.TestCase):
+    def test_legacy_imf_adapter_is_not_used_for_liquidity(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            imf=Browser([response(200,b'wrong IMF payload')]);session=Session([response(200,b'liquidity')])
+            payload=HttpClient(tmp,session,imf_transport=imf.request).fetch('https://www.jsda.or.jp/data')
+            self.assertEqual(payload.body,b'liquidity');self.assertEqual(payload.transport,'requests')
+
+    def test_general_browser_adapter_and_imf_override_route_independently(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            general=Browser([response(200,b'liquidity')]);imf=Browser([response(200,b'fiscal')])
+            client=HttpClient(tmp,Session([]),imf_transport=imf.request,browser_transport=general.request)
+            self.assertEqual(client.fetch('https://www.jsda.or.jp/data').body,b'liquidity')
+            self.assertEqual(client.fetch('https://www.imf.org/data').body,b'fiscal')
+
     def test_liquidity_hosts_use_compatible_transport_without_matching_lookalike_hosts(self):
         for host in ('markets.newyorkfed.org','www.jsda.or.jp'):
             with self.subTest(host=host),tempfile.TemporaryDirectory() as tmp:
                 browser=Browser([response(200,b'data')]);fallback=Session([response(200,b'wrong')])
-                payload=HttpClient(tmp,fallback,imf_transport=browser.request).fetch('https://'+host+'/data')
+                payload=HttpClient(tmp,fallback,browser_transport=browser.request).fetch('https://'+host+'/data')
                 self.assertEqual(payload.body,b'data')
                 self.assertEqual(payload.transport,'curl_cffi')
                 self.assertEqual(browser.calls[0][1]['timeout'],20)
         with tempfile.TemporaryDirectory() as tmp:
             browser=Browser([]);fallback=Session([response(200,b'plain')])
-            payload=HttpClient(tmp,fallback,imf_transport=browser.request).fetch('https://www.jsda.or.jp.example.org/data')
+            payload=HttpClient(tmp,fallback,browser_transport=browser.request).fetch('https://www.jsda.or.jp.example.org/data')
             self.assertEqual(payload.transport,'requests')
 
     def test_json_post_can_supply_origin_referer_without_changing_existing_form_posts(self):

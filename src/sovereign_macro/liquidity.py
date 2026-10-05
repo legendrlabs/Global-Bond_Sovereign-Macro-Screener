@@ -78,6 +78,8 @@ def parse_jsda_liquidity(body,as_of,max_age_days=120):
     try:
         if '(Ｂ)一般売買高' not in book.sheetnames: raise DataError('JSDA_OUTRIGHT_SHEET_MISSING')
         sheet=book['(Ｂ)一般売買高']
+        if sheet.max_row is None or sheet.max_column is None or sheet.max_row>5000 or sheet.max_column>128:
+            raise DataError('JSDA_SHEET_BOUNDS')
         unit=str(sheet.cell(1,1).value or '')
         if '100 million yen' not in unit: raise DataError('JSDA_UNIT_UNVERIFIED')
         if 'Sell＋Purchase' not in str(sheet.cell(1,4).value or '') or \
@@ -85,9 +87,11 @@ def parse_jsda_liquidity(body,as_of,max_age_days=120):
            'Government Bonds' not in str(sheet.cell(3,4).value or ''):
             raise DataError('JSDA_DEFINITION_UNVERIFIED')
         points={}
-        for row in sheet.iter_rows(min_row=5,values_only=True):
+        for row in sheet.iter_rows(min_row=5,max_col=4,values_only=True):
             if len(row)<4 or row[2]!='Total' or row[1]!='合計': continue
-            match=re.fullmatch(r'(\d{4})/(\d{2})',str(row[0]))
+            label=str(row[0]).strip()
+            if re.fullmatch(r'\d{4}(?:年度|計)',label): continue
+            match=re.fullmatch(r'(\d{4})/(\d{2})',label)
             if not match: raise DataError('JSDA_MONTH_SCHEMA')
             try:
                 year,month=map(int,match.groups());observed=date(year,month,monthrange(year,month)[1])

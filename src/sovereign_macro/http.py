@@ -32,12 +32,13 @@ class Payload:
         return json.loads(self.body)
 
 class HttpClient:
-    def __init__(self, cache='data/cache', session=None, budget=80, attempts=2, imf_transport=None):
+    def __init__(self, cache='data/cache', session=None, budget=80, attempts=2, imf_transport=None, browser_transport=None):
         self.cache=Path(cache)
         self.session=session or requests.Session()
-        self.imf_transport=imf_transport
-        if self.imf_transport is None and session is None and cffi_requests is not None:
-            self.imf_transport=cffi_requests.request
+        self.browser_transport=browser_transport
+        if self.browser_transport is None and session is None and cffi_requests is not None:
+            self.browser_transport=cffi_requests.request
+        self.imf_transport=imf_transport if imf_transport is not None else self.browser_transport
         self.budget=budget
         self.attempts=attempts
         self.records=[]
@@ -49,9 +50,10 @@ class HttpClient:
     def _request(self, method, url, body, headers):
         host=(urlparse(url).hostname or '').lower()
         timeout=IMF_TIMEOUT if self._is_imf(url) else LIQUIDITY_TIMEOUT if host in LIQUIDITY_HOSTS else DEFAULT_TIMEOUT
-        if (self._is_imf(url) or host in LIQUIDITY_HOSTS) and self.imf_transport is not None:
+        transport=self.imf_transport if self._is_imf(url) else self.browser_transport if host in LIQUIDITY_HOSTS else None
+        if transport is not None:
             try:
-                response=self.imf_transport(method=method,url=url,data=body,headers=headers,
+                response=transport(method=method,url=url,data=body,headers=headers,
                                              timeout=timeout,impersonate='chrome')
                 if response.status_code < 400 or response.status_code == 304:
                     return response, 'curl_cffi'
