@@ -40,14 +40,31 @@ class MarketInputTests(unittest.TestCase):
     def test_truncated_conflicting_or_invalid_values_are_rejected(self):
         from sovereign_macro.market_inputs import parse_bis_size
         from sovereign_macro.models import DataError
-        bodies=[document(series())[:-6],document(series()+series()),
+        with self.assertRaises(DataError): parse_bis_size(document(series())[:-6],date(2026,10,5))
+        bodies=[document(series()+series()),
                 document(series().replace('"120"','"nan"')),
                 document(series().replace('"120"','"-1"')),
                 document(series(UNIT_MULT='6')),
                 document(series().replace('CONF_STATUS="F"','CONF_STATUS="C"'))]
         for body in bodies:
-            with self.subTest(body=body[-100:]),self.assertRaises(DataError):
-                parse_bis_size(body,date(2026,10,5))
+            with self.subTest(body=body[-100:]):
+                row=parse_bis_size(body,date(2026,10,5))['KOR']
+                self.assertEqual(row['status'],'INVALID_DATA')
+                self.assertIsNone(row['value'])
+
+    def test_bad_country_does_not_erase_valid_country_and_missing_confidentiality_is_not_assumed_free(self):
+        from sovereign_macro.market_inputs import parse_bis_size
+        bad=series('US').replace(' CONF_STATUS="F"','')
+        rows=parse_bis_size(document(series()+bad),date(2026,10,5))
+        self.assertEqual(rows['KOR']['value'],120)
+        self.assertEqual(rows['USA']['reason'],'BIS_CONFIDENTIALITY_UNVERIFIED')
+        self.assertIsNone(rows['USA']['value'])
+
+    def test_duplicate_country_is_rejected_without_erasing_other_country(self):
+        from sovereign_macro.market_inputs import parse_bis_size
+        rows=parse_bis_size(document(series()+series('US')+series('US')),date(2026,10,5))
+        self.assertEqual(rows['KOR']['status'],'AVAILABLE')
+        self.assertEqual(rows['USA']['reason'],'BIS_DUPLICATE_OBSERVATION')
 
     def test_structural_staleness_is_separate_from_seven_day_yield_rule(self):
         from sovereign_macro.market_inputs import parse_bis_size

@@ -69,7 +69,7 @@ def quality_scopes(rows,demo=False):
     result=[]
     for scope,check in checks:
         available=[r['iso3'] for r in rows if check(r) and not demo]
-        missing=[r['iso3'] for r in rows if r['iso3'] not in available]
+        missing=[] if demo else [r['iso3'] for r in rows if r['iso3'] not in available]
         status=('SYNTHETIC DEMO' if demo else 'AVAILABLE' if not missing else
                 'PARTIAL' if available else 'UNAVAILABLE')
         result.append(dict(scope=scope,status=status,available=len(available),total=len(rows),

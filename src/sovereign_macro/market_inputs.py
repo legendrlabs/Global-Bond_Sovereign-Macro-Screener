@@ -30,27 +30,36 @@ def parse_bis_size(body,as_of,max_age_days=365):
     try: root=ET.fromstring(body)
     except ET.ParseError as exc: raise DataError('BIS_XML_SCHEMA') from exc
     if root.tag.split('}')[-1]!='StructureSpecificData': raise DataError('BIS_XML_SCHEMA')
-    points={}
+    grouped={}
     for series in root.iter():
         if series.tag.split('}')[-1]!='Series': continue
         area=series.get('REF_AREA')
         if area not in AREA_TO_ISO3: continue
         if any(series.get(k)!=v for k,v in SIZE_CONTRACT.items()): continue
-        if series.get('UNIT_MULT')!='9': raise DataError('BIS_UNIT_MULTIPLIER')
-        for obs in series:
-            if obs.tag.split('}')[-1]!='Obs': continue
-            period=obs.get('TIME_PERIOD','');observed=quarter_end(period)
-            if observed>as_of: continue
-            if obs.get('CONF_STATUS')!='F': raise DataError('BIS_CONFIDENTIALITY_UNVERIFIED')
-            try: value=float(obs.get('OBS_VALUE',''))
-            except ValueError as exc: raise DataError('BIS_VALUE_SCHEMA') from exc
-            if not finite(value) or value<0: raise DataError('BIS_VALUE_SCHEMA')
-            key=(AREA_TO_ISO3[area],period)
-            if key in points: raise DataError('BIS_DUPLICATE_OBSERVATION')
-            points[key]=(observed,value)
+        grouped.setdefault(AREA_TO_ISO3[area],[]).append(series)
     result={}
-    for (iso,period),(observed,value) in sorted(points.items()):
-        if iso in result and result[iso]['observation_date']>=observed.isoformat(): continue
+    for iso,series_list in grouped.items():
+        points={}
+        try:
+            for series in series_list:
+                if series.get('UNIT_MULT')!='9': raise DataError('BIS_UNIT_MULTIPLIER')
+                for obs in series:
+                    if obs.tag.split('}')[-1]!='Obs': continue
+                    period=obs.get('TIME_PERIOD','');observed=quarter_end(period)
+                    if observed>as_of: continue
+                    if obs.get('CONF_STATUS')!='F': raise DataError('BIS_CONFIDENTIALITY_UNVERIFIED')
+                    try: value=float(obs.get('OBS_VALUE',''))
+                    except ValueError as exc: raise DataError('BIS_VALUE_SCHEMA') from exc
+                    if not finite(value) or value<0: raise DataError('BIS_VALUE_SCHEMA')
+                    if period in points: raise DataError('BIS_DUPLICATE_OBSERVATION')
+                    points[period]=(observed,value)
+        except (DataError,ValueError) as exc:
+            result[iso]=dict(provider='bis',value=None,unit='USD_billion',period='',
+                             status='INVALID_DATA',reason=str(exc))
+            continue
+        if not points: continue
+        period=max(points,key=lambda p:points[p][0])
+        observed,value=points[period]
         age=(as_of-observed).days
         result[iso]=dict(provider='bis',metric='central_government_debt_securities_outstanding',
             value=value if age<=max_age_days else None,unit='USD_billion',period=period,

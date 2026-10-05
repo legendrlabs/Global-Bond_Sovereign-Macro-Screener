@@ -1,5 +1,6 @@
 """Evaluate one immutable source bundle; incomplete axes are never reweighted."""
 from datetime import date, timedelta
+from copy import deepcopy
 from .models import DataError, Observation, finite
 from .scoring import baseline, adjusted, rank_rows
 from .fx import fx_metrics, _anniversary
@@ -126,6 +127,12 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
              'warnings':list(fiscal.get('warnings',[])) if fiscal else []}
     source_notices=[]
     for row in rows:
+        # Never mutate the input bundle's shared fiscal / FX provenance.
+        row['provenance']=deepcopy(row['provenance'])
+        if demo:
+            for provenance in row['provenance']:
+                provenance.pop('value',None)
+                provenance.pop('notes',None)
         if public_output:
             # The publication gate is conservative at the entire row, including regimes.
             country=next(c for c in config['countries']['countries'] if c['iso3']==row['iso3'])

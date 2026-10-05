@@ -61,3 +61,25 @@ class QualityScopeTests(unittest.TestCase):
         self.assertIn('FISCAL_YEAR_ROLLOVER', row['errors'])
         self.assertNotIn('BASELINE_DEFINITION_UNAPPROVED', row['errors'])
 
+    def test_demo_provenance_strips_values_and_serialized_notes_without_mutating_input(self):
+        bundle=demo_bundle(self.config,self.day)
+        bundle['yields']['KOR:5']=replace(bundle['yields']['KOR:5'],notes='{"crosscheck":987.654}')
+        bundle['provenance']={'fx':{'value':987.654,'notes':'private-source','url':'test'}}
+        result=evaluate(self.config,bundle,self.day,demo=True)
+        for row in result['rows']:
+            for source in row['provenance']:
+                self.assertNotIn('value',source);self.assertNotIn('notes',source)
+        self.assertEqual(bundle['provenance']['fx']['value'],987.654)
+        from sovereign_macro.report import publish
+        import tempfile
+        with tempfile.TemporaryDirectory() as output:
+            path=publish(result,output)
+            for name in ('index.html','run_manifest.json','country_details.csv'):
+                self.assertNotIn('987.654',(path/name).read_text())
+
+    def test_demo_zero_live_eligibility_is_not_displayed_as_country_missingness(self):
+        result=evaluate(self.config,demo_bundle(self.config,self.day),self.day,demo=True)
+        for scope in build_executive_summary(result)['quality_scopes']:
+            self.assertEqual(scope['available'],0)
+            self.assertEqual(scope['unavailable_countries'],[])
+            self.assertEqual(scope['status'],'SYNTHETIC DEMO')
