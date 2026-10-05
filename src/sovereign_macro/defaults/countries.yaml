@@ -1,5 +1,6 @@
 countries:
 - iso3: ISL
+  wgb_slug: iceland
   name: 아이슬란드
   currency: ISK
   pdf_label: Iceland
@@ -12,6 +13,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: NOR
+  wgb_slug: norway
   name: 노르웨이
   currency: NOK
   pdf_label: Norway
@@ -24,6 +26,7 @@ countries:
     baseline_compatible: true
     redistribution: pending
 - iso3: AUS
+  wgb_slug: australia
   name: 호주
   currency: AUD
   pdf_label: Australia
@@ -36,6 +39,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: NZL
+  wgb_slug: new-zealand
   name: 뉴질랜드
   currency: NZD
   pdf_label: New Zealand
@@ -49,6 +53,7 @@ countries:
     redistribution: pending
     reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: KOR
+  wgb_slug: south-korea
   name: 한국
   currency: KRW
   pdf_label: Korea
@@ -61,6 +66,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: CZE
+  wgb_slug: czech-republic
   name: 체코
   currency: CZK
   pdf_label: Czech Republic
@@ -73,6 +79,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: BGR
+  wgb_slug: bulgaria
   name: 불가리아
   currency: EUR
   pdf_label: Bulgaria
@@ -86,6 +93,7 @@ countries:
     redistribution: pending
     reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: CAN
+  wgb_slug: canada
   name: 캐나다
   currency: CAD
   pdf_label: Canada
@@ -98,6 +106,7 @@ countries:
     baseline_compatible: true
     redistribution: pending
 - iso3: IRL
+  wgb_slug: ireland
   name: 아일랜드
   currency: EUR
   pdf_label: Ireland
@@ -111,6 +120,7 @@ countries:
     redistribution: pending
     reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: DNK
+  wgb_slug: denmark
   name: 덴마크
   currency: DKK
   pdf_label: Denmark
@@ -124,6 +134,7 @@ countries:
     redistribution: pending
     reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: LTU
+  wgb_slug: lithuania
   name: 리투아니아
   currency: EUR
   pdf_label: Lithuania
@@ -137,6 +148,7 @@ countries:
     redistribution: pending
     reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: SWE
+  wgb_slug: sweden
   name: 스웨덴
   currency: SEK
   pdf_label: Sweden
@@ -149,6 +161,7 @@ countries:
     baseline_compatible: true
     redistribution: pending
 - iso3: HRV
+  wgb_slug: croatia
   name: 크로아티아
   currency: EUR
   pdf_label: Croatia
@@ -172,6 +185,7 @@ countries:
         Open Licence: https://narodne-novine.nn.hr/eli/sluzbeni/2017/67/1577 ; provider modification date accompanies source provenance
         (not an observation date). Calculations and classifications are derived by Sovereign Macro Screener; no official endorsement.'
 - iso3: NLD
+  wgb_slug: netherlands
   name: 네덜란드
   currency: EUR
   pdf_label: The Netherlands
@@ -184,6 +198,7 @@ countries:
     baseline_compatible: true
     redistribution: pending
 - iso3: SVN
+  wgb_slug: slovenia
   name: 슬로베니아
   currency: EUR
   pdf_label: Slovenia
@@ -197,6 +212,7 @@ countries:
     redistribution: pending
     reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: DEU
+  wgb_slug: germany
   name: 독일
   currency: EUR
   pdf_label: Germany
@@ -209,6 +225,7 @@ countries:
     baseline_compatible: true
     redistribution: pending
 - iso3: SVK
+  wgb_slug: slovakia
   name: 슬로바키아
   currency: EUR
   pdf_label: Slovak Republic
@@ -221,6 +238,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: AUT
+  wgb_slug: austria
   name: 오스트리아
   currency: EUR
   pdf_label: Austria
@@ -234,6 +252,7 @@ countries:
     redistribution: pending
     reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
 - iso3: PRT
+  wgb_slug: portugal
   name: 포르투갈
   currency: EUR
   pdf_label: Portugal
@@ -256,6 +275,7 @@ countries:
       notice: Banco de Portugal / BPstat — https://bpstat.bportugal.pt/avisos-legais . Direct BPstat data only; source values
         reproduced accurately; calculations and classifications are derived by Sovereign Macro Screener.
 - iso3: ISR
+  wgb_slug: israel
   name: 이스라엘
   currency: ILS
   pdf_label: Israel
@@ -268,6 +288,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: ESP
+  wgb_slug: spain
   name: 스페인
   currency: EUR
   pdf_label: Spain
@@ -280,6 +301,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: GBR
+  wgb_slug: united-kingdom
   name: 영국
   currency: GBP
   pdf_label: United Kingdom
@@ -292,6 +314,7 @@ countries:
     baseline_compatible: true
     redistribution: pending
 - iso3: FRA
+  wgb_slug: france
   name: 프랑스
   currency: EUR
   pdf_label: France
@@ -304,6 +327,7 @@ countries:
     baseline_compatible: true
     redistribution: pending
 - iso3: ITA
+  wgb_slug: italy
   name: 이탈리아
   currency: EUR
   pdf_label: Italy
@@ -316,6 +340,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: BEL
+  wgb_slug: belgium
   name: 벨기에
   currency: EUR
   pdf_label: Belgium
@@ -328,6 +353,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: USA
+  wgb_slug: united-states
   name: 미국
   currency: USD
   pdf_label: United States
@@ -340,6 +366,7 @@ countries:
     baseline_compatible: false
     redistribution: pending
 - iso3: JPN
+  wgb_slug: japan
   name: 일본
   currency: JPY
   pdf_label: Japan

@@ -34,6 +34,7 @@ class Observation:
     redistribution: str = "pending"
     frequency: str = "daily"
     notes: str = ""
+    selection_reason: str = ""
 
     def to_dict(self):
         return asdict(self)

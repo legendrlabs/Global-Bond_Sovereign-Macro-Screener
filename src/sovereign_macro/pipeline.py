@@ -5,6 +5,7 @@ from .scoring import baseline, adjusted, rank_rows
 from .fx import fx_metrics, _anniversary
 from .regimes import regimes
 from .publication import yield_reuse_allowed
+from .yield_selection import validate_yield, yield_contract, observation_warnings
 
 NUMERIC_FIELDS=('yield_5y','yield_10y','net_debt_current','net_debt_future','gross_debt_current',
                 'balance_mean','balance_trajectory','inflation_mean','real_yield','fiscal','baseline','adjusted',
@@ -18,7 +19,7 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
     system_errors=list(bundle.get('errors',[]))
     for c in config['countries']['countries']:
         iso=c['iso3']
-        row=dict(iso3=iso,name=c['name'],currency=c['currency'],errors=[],usable_baseline=False,
+        row=dict(iso3=iso,name=c['name'],currency=c['currency'],errors=[],warnings=[],usable_baseline=False,
                  usable_adjusted=False,market_quality_status='UNAVAILABLE',provenance=[],
                  yield_type=c['yield']['yield_type'],edition=fiscal['edition'] if fiscal else '',
                  redistribution_status='pending')
@@ -26,19 +27,22 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
         y5=bundle.get('yields',{}).get(iso+':5')
         y10=bundle.get('yields',{}).get(iso+':10')
         if y5: row['yield_type']=y5.yield_type
+        baseline_compatible=False
         currency_start=date.fromisoformat(c['currency_from'])
         for tenor,obs in [(5,y5),(10,y10)]:
             if obs:
                 row['provenance'].append(obs.to_dict())
                 row[f'yield_{tenor}y_date']=obs.period
+                row[f'yield_{tenor}y_provider']=obs.provider
+                row[f'yield_{tenor}y_fallback']=obs.provider=='wgb'
+                row[f'yield_{tenor}y_selection_reason']=obs.selection_reason
+                row['warnings'].extend(observation_warnings(obs))
                 try:
-                    obs.valid_on(as_of,config['scoring']['stale_days'])
-                    if obs.metric!=f'yield_{tenor}y' or obs.yield_type!=c['yield']['yield_type']:
-                        raise DataError('YIELD_DEFINITION_MISMATCH')
+                    validate_yield(c,obs,config,as_of,tenor)
                     if currency_start>as_of: raise DataError('CURRENCY_ASSIGNMENT_UNAVAILABLE')
-                    if obs.iso3!=iso or obs.currency!=c['currency'] or obs.tenor_years!=tenor:
-                        raise DataError('COUNTRY_CURRENCY_TENOR_MISMATCH')
                     row[f'yield_{tenor}y']=obs.value
+                    row[f'yield_{tenor}y_age_days']=(as_of-date.fromisoformat(obs.period)).days
+                    if tenor==5: baseline_compatible=yield_contract(c,obs,config).get('baseline_compatible',False)
                 except DataError as exc: row['errors'].append(f'YIELD_{tenor}Y:'+str(exc))
             elif tenor==5 or iso in config['scoring']['watch_markets']:
                 row['errors'].append(f'YIELD_{tenor}Y_UNAVAILABLE')
@@ -73,7 +77,7 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
         if fscore is not None and row['yield_5y'] is not None:
             try:
                 row['baseline']=baseline(row['net_debt_current'],row['net_debt_future'],balances,row['yield_5y'])['baseline']
-                if c['yield']['baseline_compatible'] and 'FISCAL_YEAR_ROLLOVER' not in row['errors']:
+                if baseline_compatible and 'FISCAL_YEAR_ROLLOVER' not in row['errors']:
                     row['usable_baseline']=True
                 else: row['errors'].append('BASELINE_DEFINITION_UNAPPROVED')
             except DataError as exc: row['errors'].append(str(exc))
@@ -120,7 +124,10 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                 for key in ('fiscal_trend','real_yield_regime','fx_risk','carry','discount_rate'): row[key]='UNAVAILABLE'
                 row['usable_baseline']=False;row['usable_adjusted']=False
                 row['errors'].append('REDISTRIBUTION_PENDING_REDACTED')
-                for provenance in row['provenance']: provenance.pop('value',None)
+                for provenance in row['provenance']:
+                    provenance.pop('value',None)
+                    # Source notes may contain cross-check values as serialized JSON.
+                    provenance.pop('notes',None)
             else:
                 row['redistribution_status']='allowed'
                 review=country['yield'].get('redistribution_review')

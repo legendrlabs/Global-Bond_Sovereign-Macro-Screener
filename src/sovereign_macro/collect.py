@@ -1,7 +1,8 @@
 """Failure-isolated collection: absence stays absence."""
 from datetime import date
 from .fiscal import collect_fiscal
-from .sources import collect_yield, parse_ecb
+from .sources import parse_ecb
+from .yield_selection import collect_preferred_yield
 
 def collect(config,client,as_of):
     countries=config['countries']['countries']
@@ -21,7 +22,7 @@ def collect(config,client,as_of):
     for country in countries:
         for tenor in ([5,10] if country['iso3'] in config['scoring']['watch_markets'] else [5]):
             key=country['iso3']+f':{tenor}'
-            try: bundle['yields'][key]=collect_yield(client,country,as_of,tenor)
+            try: bundle['yields'][key]=collect_preferred_yield(client,country,config,as_of,tenor)
             except Exception as exc:
                 bundle['errors'].append(key+':'+type(exc).__name__+':'+str(exc)[:180])
     bundle['http_records']=client.records

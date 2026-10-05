@@ -19,6 +19,7 @@ def matches_scope(url, scope):
 def yield_reuse_allowed(country, observations):
     route=country['yield']
     if route['redistribution']!='allowed': return False
+    if any(obs.redistribution!='allowed' or obs.provider=='wgb' for obs in observations): return False
     if 'redistribution_review' not in route: return True  # Existing unscoped configuration contract.
     review=route['redistribution_review']
     if not isinstance(review,dict) or not all(review.get(k) for k in ('scope','evidence_url','notice')):

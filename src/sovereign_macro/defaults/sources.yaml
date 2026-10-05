@@ -1,3 +1,9 @@
+yield_fallback:
+  enabled: true
+  yield_type: annualized_government_yield
+  baseline_compatible: false
+  redistribution: pending
+  request_budget: 240
 fiscal:
   api: https://www.imf.org/external/datamapper/api/v2/
   redistribution: pending

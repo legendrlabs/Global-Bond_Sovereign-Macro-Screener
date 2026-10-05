@@ -26,8 +26,9 @@ class HttpClient:
         self.attempts=attempts
         self.records=[]
 
-    def fetch(self, url, method='GET', body=None):
-        key=hashlib.sha256((method+url+(body or '')).encode()).hexdigest()
+    def fetch(self, url, method='GET', body=None, headers=None):
+        extra_headers=dict(headers or {})
+        key=hashlib.sha256((method+url+(body or '')+json.dumps(extra_headers,sort_keys=True)).encode()).hexdigest()
         meta_file=self.cache/(key+'.json')
         old={}
         if meta_file.exists():
@@ -35,6 +36,7 @@ class HttpClient:
             except (ValueError,OSError): pass
         headers={'User-Agent':'SovereignMacroScreener/0.1 (public statistics research)'}
         if body is not None: headers['Content-Type']='application/x-www-form-urlencoded; charset=UTF-8'
+        headers.update(extra_headers)
         if old.get('etag'): headers['If-None-Match']=old['etag']
         if old.get('last_modified'): headers['If-Modified-Since']=old['last_modified']
         for attempt in range(self.attempts):
@@ -54,12 +56,12 @@ class HttpClient:
                 sha=hashlib.sha256(content).hexdigest()
                 self.cache.mkdir(parents=True,exist_ok=True)
                 (self.cache/(sha+'.bin')).write_bytes(content)
-                meta={'url':url,'sha256':sha,'retrieved_at':now,
+                meta={'url':response.url or url,'sha256':sha,'retrieved_at':now,
                       'etag':response.headers.get('ETag',old.get('etag','')),
                       'last_modified':response.headers.get('Last-Modified',old.get('last_modified',''))}
                 meta_file.write_text(json.dumps(meta),encoding='utf8')
                 self.records.append({**meta,'status':response.status_code})
-                return Payload(content,url,now,sha,meta['last_modified'])
+                return Payload(content,meta['url'],now,sha,meta['last_modified'])
             except requests.RequestException as exc:
                 status=getattr(getattr(exc,'response',None),'status_code',None)
                 retryable=status is None or status==429 or status>=500

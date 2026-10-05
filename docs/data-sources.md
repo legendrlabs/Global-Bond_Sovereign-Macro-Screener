@@ -84,3 +84,12 @@ required before any row's provider-derived numbers may be published.
 
 Scoring, maturity definitions, stale/unit checks and Adjusted availability are
 unchanged. See [approval scope and verification](research/2026-10-05-publication-gate-update.md).
+# 2026-10-05: official-first selection with WGB fallback
+
+All 27 countries now have an explicit `wgb_slug` in both development and packaged country configuration. Existing official routes remain primary. Selection accepts an official observation only after country/currency/tenor/metric, definition, unit, daily period and seven-calendar-day freshness validation. Failed, invalid, monthly or stale official observations trigger the same-country, same-tenor WGB adapter. Successful fallback carries the official failure in `selection_reason`; it is a warning, not an unresolved collection error. An invalid fallback is never replaced with a stale official value.
+
+WGB requests the country page, `/wp-json/country/v1/main`, its exact maturity historical page, and `/wp-json/common/v1/historical`. These are website internal interfaces, not a guaranteed public API contract. JSON requests include Origin/Referer and JSON Content-Type. The adapter verifies page context, government-yield units, maturity, domestic country identity, exact historical URL, curve headers, unique active maturity row, history duplicates and finite numbers. Curve/history/price yields must agree within 0.0005 percentage points. A missing price table is disclosed as a warning; curve and history remain required.
+
+For matching values with different dates, use the older curve-row/history date. A yearless row date is resolved against the history year, including the previous December at a year boundary, then must pass the seven-day gate. Preserve provider update timestamps separately. Neither HTTP modification timestamps nor current collection time supply the observation date. The raw payloads are hashed and cached, and every selected WGB observation links all four request hashes in its notes.
+
+WGB is a separate `annualized_government_yield` definition. No exact benchmark/par/zero-coupon equivalence or redistribution permission is inferred. Existing definition approvals remain unchanged; default WGB Baseline compatibility and redistribution remain false/pending. In public output, both values and value-bearing notes are removed. The official-first policy applies to US 10Y monitoring as well as all-country 5Y collection.
