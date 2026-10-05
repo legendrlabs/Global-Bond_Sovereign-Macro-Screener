@@ -151,7 +151,8 @@ class ReleaseWorkflowTests(unittest.TestCase):
             def git(*args):return subprocess.run(['git',*args],cwd=root,check=True,capture_output=True)
             git('init');git('-c','user.name=Test','-c','user.email=test@example.invalid','commit','--allow-empty','-m','base')
             git('update-ref','refs/remotes/origin/main','HEAD')
-            env={**os.environ,'GITHUB_REF_NAME':'v0.1.0'}
+            env={**os.environ,'GITHUB_REF_NAME':'v0.1.0','GITHUB_REF_TYPE':'tag'}
+            env.pop('GITHUB_OUTPUT',None)
             valid=subprocess.run(['bash','-e','-c',step['run']],cwd=root,env=env,capture_output=True,text=True)
             self.assertEqual(valid.returncode,0,valid.stderr)
             main_env={**env,'GITHUB_REF_NAME':'main','GITHUB_REF_TYPE':'branch'}
