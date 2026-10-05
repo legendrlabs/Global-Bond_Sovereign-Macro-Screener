@@ -140,7 +140,6 @@ class ExtensionTests(unittest.TestCase):
             self.assertEqual(obs.period,period);self.assertAlmostEqual(obs.value,value)
             self.assertEqual(obs.yield_type,kind);self.assertEqual(obs.raw_sha256,'fixture-sha')
             self.assertEqual(obs.unit,'percent');self.assertEqual(obs.redistribution,'pending')
-            self.assertFalse(c['yield']['baseline_compatible'])
             if iso=='ISL':self.assertIn('correction=L',obs.notes)
             if iso=='ISR':
                 self.assertEqual(obs.frequency,'monthly')

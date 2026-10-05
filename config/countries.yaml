@@ -10,7 +10,9 @@ countries:
     adapter: iceland
     series: FLV:nominal:par:5Y
     yield_type: par_constant_maturity
-    baseline_compatible: false
+    baseline_compatible: true
+    baseline_definition_note: 연구용 5년물 비교; 명목 par constant maturity 합성 국채의 5년 지점, 물가연동·무이표 금리 및 특정 발행채 YTM과 다름
+    baseline_definition_source: https://sedlabanki.is/gagnatorg/vextir/
     redistribution: pending
 - iso3: NOR
   wgb_slug: norway
@@ -36,7 +38,9 @@ countries:
     adapter: rba
     series: FCMYGBAG5D
     yield_type: interpolated_constant_maturity
-    baseline_compatible: false
+    baseline_compatible: true
+    baseline_definition_note: 연구용 5년물 비교; RBA 평가 종가를 바탕으로 보간한 명목 5년 만기 금리, 단일 발행채 YTM 또는 RBA 지정 금융 benchmark와 다름
+    baseline_definition_source: https://www.rba.gov.au/statistics/tables/csv/f2-data.csv
     redistribution: pending
 - iso3: NZL
   wgb_slug: new-zealand

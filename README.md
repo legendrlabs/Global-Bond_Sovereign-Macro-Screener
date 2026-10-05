@@ -2,14 +2,14 @@
 
 한국 투자자의 KRW 기준 비교를 위한 **공식 자료 우선 연구용 스크리너**입니다. API 키 없이 수집하고, 공식 경로가 실패하거나 유효하지 않으면 WorldGovernmentBonds(WGB)로 보완합니다. 원자료 관측일·발행판·만기·결측과 계산 가능 여부를 함께 기록합니다.
 
-v0.1.1은 preview.5의 검수된 기능을 포함한 연구용 사용판입니다. 실행 완료와 27개국 전체 비교 가능 여부는 구분합니다. Market Quality 종합 점수와 Adjusted 모델은 아직 준비되지 않았습니다. 결측을 임의로 채우거나 가중치를 재분배하지 않습니다.
+v0.1.2는 기존 사용판에 아이슬란드·호주의 공식 5년물 탐색용 비교 승인을 추가합니다. 원래 금리 정의와 차이 경고를 유지합니다. 실행 완료와 27개국 전체 비교 가능 여부는 구분합니다. Market Quality 종합 점수와 Adjusted 모델은 아직 준비되지 않았습니다. 결측을 임의로 채우거나 가중치를 재분배하지 않습니다.
 
 ## 실행
 
-Python 3.11 이상. [v0.1.1 릴리스](https://github.com/legendrlabs/Global-Bond_Sovereign-Macro-Screener/releases/tag/v0.1.1)에서 wheel과 SHA256SUMS.txt를 다운로드하고 파일 해시를 확인한 뒤 설치합니다. API 키 등록은 필요하지 않습니다.
+Python 3.11 이상. [v0.1.2 릴리스](https://github.com/legendrlabs/Global-Bond_Sovereign-Macro-Screener/releases/tag/v0.1.2)에서 wheel과 SHA256SUMS.txt를 다운로드하고 파일 해시를 확인한 뒤 설치합니다. API 키 등록은 필요하지 않습니다.
 
 ```bash
-python -m pip install sovereign_macro_screener-0.1.1-py3-none-any.whl
+python -m pip install sovereign_macro_screener-0.1.2-py3-none-any.whl
 python -m sovereign_macro app
 ```
 

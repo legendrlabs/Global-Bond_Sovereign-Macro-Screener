@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sovereign-macro-screener"
-version = "0.1.1"
+version = "0.1.2"
 description = "Keyless sovereign macro research screener with explicit data-quality gates"
 requires-python = ">=3.11"
 dependencies = ["requests>=2.31,<3", "curl-cffi>=0.16,<0.17", "PyYAML>=6,<7", "openpyxl>=3.1,<4", "pypdf>=5,<7", "beautifulsoup4>=4.12,<5", "tzdata>=2024.1; platform_system == 'Windows'"]
