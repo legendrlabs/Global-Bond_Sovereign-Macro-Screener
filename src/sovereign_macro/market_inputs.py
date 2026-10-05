@@ -2,6 +2,7 @@
 from calendar import monthrange
 from copy import deepcopy
 from datetime import date
+import json
 import re
 import xml.etree.ElementTree as ET
 
@@ -84,9 +85,21 @@ def country_market_inputs(iso,bundle,demo=False,public_output=False):
         size.update(value=None,status='SYNTHETIC_DEMO')
     elif public_output and size.get('value') is not None and size.get('redistribution','pending')!='allowed':
         size.update(value=None,status='REDISTRIBUTION_PENDING')
+    credit=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Same-agency long-term local-currency rating and dated source not verified')
+    observation=bundle.get('yields',{}).get(iso+':5')
+    if observation is not None and observation.provider=='wgb':
+        try:
+            reported=json.loads(observation.notes).get('reported_credit')
+            if isinstance(reported,dict): credit=deepcopy(reported)
+        except (ValueError,TypeError,AttributeError): pass
+    if demo:
+        credit=dict(value=None,status='SYNTHETIC_DEMO',reason='No real reported rating in synthetic demo')
+    elif public_output and credit.get('rating'):
+        credit={k:v for k,v in credit.items() if k not in ('rating','outlook','action')}
+        credit.update(status='REDISTRIBUTION_PENDING',reason='Reported rating omitted from public output')
     result=dict(size=size,
         liquidity=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Comparable sovereign liquidity level / turnover not verified'),
-        credit=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Same-agency long-term local-currency rating and dated source not verified'),
+        credit=credit,
         accessibility=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Dated bond-market accessibility input not connected'),
         composite_status='MODEL_NOT_IMPLEMENTED')
     if public_output:

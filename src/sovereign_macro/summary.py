@@ -124,7 +124,8 @@ def sections(s):
             ['Refresh failure',f.get('refresh_failure','')]]))
     if s.get('market_inputs'):
         content.append(('Market Quality Input Gaps',['Scope','Reason'],[
-            [axis,s['market_inputs'][0][axis]['reason']] for axis in ('liquidity','credit','accessibility')]))
+            [axis,'; '.join(dict.fromkeys(r[axis].get('reason','') for r in s['market_inputs']))]
+            for axis in ('liquidity','credit','accessibility')]))
         content.append(('Market Quality Inputs',
             ['Country','Size (USD bn)','Period / scope','Size status / reason','Liquidity','Credit','Accessibility','Composite'],
             [[r['iso3'],r['size'].get('value'),
@@ -132,6 +133,12 @@ def sections(s):
               '; '.join([r['size']['status'],r['size'].get('reason','')]).strip('; '),
               r['liquidity']['status'],r['credit']['status'],r['accessibility']['status'],r['composite_status']]
              for r in s['market_inputs']]))
+        content.append(('Reported Credit Ratings',
+            ['Country','Agency','Reported rating','Outlook','Last reported action date','Status / reason','Source'],
+            [[r['iso3'],r['credit'].get('agency'),r['credit'].get('rating'),r['credit'].get('outlook'),
+              r['credit'].get('last_action_date'),
+              '; '.join([r['credit']['status'],r['credit'].get('reason','')]).strip('; '),
+              r['credit'].get('url')] for r in s['market_inputs']]))
     if s.get('source_notices'):
         content.append(('Source / Reuse Notices',['Attribution and conditions'],[[n] for n in s['source_notices']]))
     content.append(('Decision',['Data use','Status'],list(map(list,s['decision'].items()))))

@@ -55,3 +55,11 @@ Editable package install succeeded in a fresh environment. All 149 tests passed,
 One fresh direct request per official Korea, US and Japan route on 2026-10-05 ended in `HTTP_FAILURE:ReadTimeout` for all three in this execution environment. No new successful live values or complete live ranking are claimed. This does not negate the user's separately reported successful run.
 
 Structural-input follow-up validation: all 157 tests passed. Eight additional tests cover scope/valuation separation, quarterly units, latest completed-quarter selection, future/stale periods, invalid/conflicting/truncated inputs, optional failure isolation, collector provenance and nested public/entire-row redaction. Private and public demo reports each contain 27 input rows; all generated file hashes were verified. Demo inputs are explicitly synthetic and unavailable for real rankings.
+
+## Reported credit follow-up
+
+Validated WGB 5Y fallback observations now preserve the S&P row from their existing country API response in source notes. The inventory and shared report show grade, outlook, reported last action date, source and `REPORTED_TYPE_UNVERIFIED`. Country identity comes from the existing validated page context; the rating uses the main-response hash and retrieval time. No additional requests, official-yield replacement, currency/term inference, credit-score conversion or composite activation occurs. Invalid/missing rating diagnostics do not invalidate a valid yield. Public redistribution gates suppress the grade, outlook and action; synthetic demos suppress real ratings.
+
+Stored country contexts and exact request-cache keys were replayed on 2026-10-05. All 19 matching saved main responses supplied a parseable S&P row; none is eligible for credit scoring. ISL, NOR, KOR, NLD, DEU, SVK, GBR and FRA had no matching saved context in that cache. This is saved-evidence replay, not a successful fresh download or proof of global coverage. New fixtures exercise mixed agencies, duplicate/malformed rows, unsupported grades, future/yearless dates, failure isolation, official-source separation and report/public/demo behavior.
+
+Validation after this follow-up: all 162 tests passed. Public synthetic demo report generation also completed with the new diagnostic table and no real reported rating.
