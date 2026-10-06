@@ -90,7 +90,20 @@ countries:
   currency: EUR
   pdf_label: Bulgaria
   currency_from: '2026-01-01'
-  fx_continuity: false
+  fx_continuity: true
+  fx_transition:
+    kind: fixed_peg_redenomination
+    verified: true
+    old_currency: BGN
+    new_currency: EUR
+    effective_date: '2026-01-01'
+    history_from: '2020-07-10'
+    old_units_per_new: 1.95583
+    reference_decimals: 4
+    evidence_urls:
+    - https://www.ecb.europa.eu/press/economic-bulletin/focus/2020/html/ecb.ebbox202006_01~db5e37768d.en.html
+    - https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260101~c830245e42.en.html
+    - https://www.ecb.europa.eu/services/using-our-site/technical-updates/html/ecb.mid_update251217.et.html
   yield:
     adapter: unavailable
     series: ''
@@ -241,8 +254,8 @@ countries:
     adapter: slovakia
     series: ZCY5Y
     yield_type: estimated_zero_coupon
-    baseline_compatible: false
-    baseline_definition_note: NBS 추정 5년 무이표 금리; 이표채 YTM·par 금리와 구별, 현재 파일의 복리 규약 검증 전에는 par 변환 및 Baseline 순위 제외
+    baseline_compatible: true
+    baseline_definition_note: 연구용 명목 5년 금리 비교에 한정; NBS NSS 추정 무이표 금리, 이표채 YTM·단일 지표물·par 금리와 정의 차이 있음; 현재 파일의 복리 규약 미확인, par 변환 없음
     baseline_definition_source: https://nbs.sk/en/statistics/financial-markets/interest-rates/estimated-yield-curve/
     redistribution: pending
 - iso3: AUT

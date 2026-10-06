@@ -26,6 +26,7 @@ class QualityScopeTests(unittest.TestCase):
             self.assertIn('BASELINE_DEFINITION_DIFFERENCE', row['warnings'])
 
     def test_iceland_and_australia_research_proxies_rank_with_original_definitions(self):
+        next(c for c in self.config['countries']['countries'] if c['iso3']=='SVK')['yield']['baseline_compatible']=False
         bundle = demo_bundle(self.config, self.day)
         for iso, provider, definition in [('ISL', 'iceland', 'par_constant_maturity'),
                                            ('AUS', 'rba', 'interpolated_constant_maturity')]:
@@ -67,7 +68,8 @@ class QualityScopeTests(unittest.TestCase):
         self.assertIn('BASELINE_DEFINITION_DIFFERENCE', row['warnings'])
         self.assertFalse(row['usable_adjusted'])
 
-    def test_slovakia_zero_coupon_stays_visible_but_unranked_with_reason(self):
+    def test_slovakia_explicit_definition_hold_stays_visible_but_unranked(self):
+        next(c for c in self.config['countries']['countries'] if c['iso3']=='SVK')['yield']['baseline_compatible']=False
         bundle = demo_bundle(self.config, self.day)
         bundle['yields']['SVK:5'] = replace(bundle['yields']['SVK:5'],
             provider='slovakia', yield_type='estimated_zero_coupon')

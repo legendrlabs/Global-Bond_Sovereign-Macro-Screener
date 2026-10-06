@@ -45,6 +45,9 @@ def build_executive_summary(result):
                     yield5_observations_parsed=None if demo else coverage.get('yield5_observations_parsed')),
                 baseline_ranking=metrics,top_country_metrics=metrics,holds=holds,
                 quality_scopes=quality_scopes(rows,demo),
+                fx_history=[dict(iso3=r['iso3'],latest_date=r.get('fx_date'),
+                    count_1y=r.get('fx_count_1y'),count_3y=r.get('fx_count_3y'),
+                    **r['fx_history']) for r in rows if r.get('fx_history')],
                 market_inputs=[dict(iso3=r['iso3'],**r['market_inputs']) for r in rows if r.get('market_inputs')],
                 system_holds=[e for e in system if not any(e.startswith(r['iso3']+':') for r in rows)],
                 adjusted_status='AVAILABLE' if adjusted else 'NOT AVAILABLE',decision=decision,
@@ -114,6 +117,13 @@ def sections(s):
             [[r['iso3'],r['provider'],r['observation_date'],r['age_days'],r['fallback'],
               '; '.join([r['definition'],r['definition_note']]).strip('; '),
               '; '.join([r['selection_reason']]+r['warnings']).strip('; ')] for r in s['yield_sources']]))
+    if s.get('fx_history'):
+        content.append(('FX Currency History',
+            ['Country','Currency chain','Effective date','Old units per new','Status',
+             '1Y / 3Y observations','Latest observation','Evidence'],
+            [[r['iso3'],r['old_currency']+' → '+r['new_currency'],r['effective_date'],
+              r['old_units_per_new'],r['status'],str(r['count_1y'])+' / '+str(r['count_3y']),
+              r['latest_date'],'; '.join(r['evidence_urls'])] for r in s['fx_history']]))
     if s.get('fiscal_source'):
         f=s['fiscal_source']
         content.append(('IMF Fiscal / Inflation Edition',['Field','Value'],[
