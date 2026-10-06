@@ -2,20 +2,20 @@
 
 한국 투자자의 KRW 기준 비교를 위한 **공식 자료 우선 연구용 스크리너**입니다. API 키 없이 수집하고, 공식 경로가 실패하거나 유효하지 않으면 WorldGovernmentBonds(WGB)로 보완합니다. 원자료 관측일·발행판·만기·결측과 계산 가능 여부를 함께 기록합니다.
 
-v0.1.5는 영국 DMO 분기 거래금액과 스웨덴 중앙은행 일별 정부채 현물 조정 거래금액을 별도 유동성 진단으로 추가합니다. 한국·일본 ADB 분기 회전율도 유지합니다. 기존 미국 NY Fed·일본 JSDA 거래량과 아이슬란드·호주·스페인 공식 5년물 탐색용 비교 승인을 유지합니다. 원래 금리 정의와 차이 경고를 표시합니다. 실행 완료와 27개국 전체 비교 가능 여부는 구분합니다. Market Quality 종합 점수와 Adjusted 모델은 아직 준비되지 않았습니다. 결측을 임의로 채우거나 가중치를 재분배하지 않습니다.
+v0.1.6은 불가리아의 검증된 BGN→EUR 환율 이력 연결과 슬로바키아 추정 5년 무이표 금리의 연구용 조건부 비교를 포함합니다. 원래 금리 정의와 차이 경고를 표시하며 27개국 전체 Baseline 비교는 실행별 필수 입력·최신성·품질 검사가 모두 통과할 때만 열립니다. 미국·일본·영국·스웨덴 거래량 및 한국·일본 ADB 분기 회전율 진단도 유지합니다. Market Quality 종합 점수와 Adjusted 모델은 아직 준비되지 않았습니다. 결측을 임의로 채우거나 가중치를 재분배하지 않습니다.
 
-개발 브랜치에는 프랑스·독일·뉴질랜드 공식 신용등급 진단 수집기를 추가했습니다. 등급 기준과 평가일을 구분하며 점수에는 반영하지 않습니다. 상세 검증은 [공식 등급 수집 확인](docs/research/2026-10-07-issuer-credit-source-check.md)에 있습니다. 배포된 v0.1.5 설치 파일과는 별도입니다.
+프랑스·독일·뉴질랜드·벨기에·덴마크·슬로바키아의 공식 신용등급 진단을 수집합니다. 통화·만기 확인 수준과 평가·확인·변경일의 의미를 구분하며 점수에는 반영하지 않습니다. Trading Economics는 27개국 공식 출처 탐색을 돕는 보조 링크로만 사용합니다. 상세 검증은 [공식 등급 수집 확인](docs/research/2026-10-07-issuer-credit-source-check.md)과 [v0.1.6 변경 내용](docs/releases/v0.1.6.md)에 있습니다.
 
 ## 실행
 
-Python 3.11 이상. [v0.1.5 릴리스](https://github.com/legendrlabs/Global-Bond_Sovereign-Macro-Screener/releases/tag/v0.1.5)에서 wheel과 SHA256SUMS.txt를 다운로드하고 파일 해시를 확인한 뒤 설치합니다. API 키 등록은 필요하지 않습니다.
+Python 3.11 이상. [v0.1.6 릴리스](https://github.com/legendrlabs/Global-Bond_Sovereign-Macro-Screener/releases/tag/v0.1.6)에서 wheel과 SHA256SUMS.txt를 다운로드하고 파일 해시를 확인한 뒤 설치합니다. API 키 등록은 필요하지 않습니다.
 
 ```bash
-python -m pip install sovereign_macro_screener-0.1.2-py3-none-any.whl
+python -m pip install sovereign_macro_screener-0.1.6-py3-none-any.whl
 python -m sovereign_macro app
 ```
 
-`app`은 새 프로그램 확인과 자료 갱신을 각각 묻습니다. 무입력 실행은 아래 `run`을 사용합니다. 이전 시험판 내부 버전은 0.1.0이므로 정식 0.1.1 업데이트를 구분할 수 있습니다.
+`app`은 새 프로그램 확인과 자료 갱신을 각각 묻습니다. 무입력 실행은 아래 `run`을 사용합니다. 자동 업데이트는 설치된 버전보다 높은 정식 버전만 제안합니다.
 
 소스에서 설치하려면:
 
@@ -82,7 +82,7 @@ py -3 -m venv .venv
 
 터미널 입력이 없는 환경에서는 `app`이 설치·수집을 건너뜁니다. 기존 `run`/`demo`와 주간 GitHub Actions는 명시적으로 요청된 비대화형 작업이므로 확인 질문을 넣지 않았습니다. 자료 갱신 승인 뒤 수집이 일부 실패하면 새 진단 보고서에 DATA_HOLD를 기록하며, 이전 자료를 최신 값으로 대체하지 않습니다.
 
-배포 관리자는 main에 병합된 버전에 대해 `pyproject.toml`과 `__version__`을 함께 올린 뒤 `vX.Y.Z` 태그를 게시합니다. `Stable program release`가 main 포함 여부·버전 일치·설치 wheel 테스트를 검증한 후 설치 파일을 GitHub Release에 올립니다.
+배포 관리자는 main에 병합할 `pyproject.toml`과 `__version__`을 함께 올립니다. `Stable program release`가 main 포함 여부·버전 일치·설치 wheel 테스트를 검증한 후 `vX.Y.Z` 태그와 설치 파일을 GitHub Release에 게시합니다. main에 속한 버전에 대한 명시적 태그 게시로도 같은 검증을 실행할 수 있습니다.
 
 첫 시험판 `v0.1.0-preview.1`은 `release-preview/v0.1.0-preview.1` 브랜치의 검증된 커밋에서 별도로 게시합니다. `Preview program release`가 wheel 설치·테스트·공개 demo를 통과한 뒤 wheel, 설치 안내가 포함된 소스 ZIP, SHA-256 목록을 올립니다. GitHub에서 반드시 프리릴리스로 표시하며 main 병합을 요구하지 않습니다. 시험판 내부 패키지 버전은 `0.1.0`이며 자동 업데이트는 시험판을 설치하지 않습니다. 후속 시험판은 직접 설치하고, 정식 버전으로 자동 전환할 때는 더 높은 패키지 버전을 사용합니다. `v0.1.0-preview.3`부터 IMF DataMapper에는 `curl-cffi` 브라우저 호환 전송을 우선 적용하고 기존 `requests` fallback을 유지합니다.
 
@@ -123,7 +123,7 @@ python -m sovereign_macro run --output results/local
 
 현재 공식 경로는 18개국이며 공식 미연결 9개국에도 WGB 보완 경로가 있습니다. ISR·CZE의 월평균 공식 자료가 일별 최신성 검사를 통과하지 못하면 WGB 보완을 시도하고, SVK도 실제 관측일로 최신성을 검사합니다. 정의 호환성과 재배포 승인 상태는 출처별로 유지합니다. 연결 수는 최신 수집 성공이나 점수 사용 가능 수와 다릅니다.
 
-전체는 **DATA_HOLD**입니다. 2026-10-03 최초 점검에서 정의가 호환되는 7개국만 Baseline 순위에 사용할 수 있었고, 이탈리아는 오래된 관측일, 벨기에는 단위 검증 보류로 제외했습니다. Market Quality의 검증된 입력이 없어 Adjusted는 모두 비어 있습니다. [추가 연결 검증](docs/research/2026-10-04-connected-sources.md), [체코 및 남은 국가 조사](docs/research/2026-10-04-czech-publication.md), [데이터 경로](docs/data-sources.md), [방법론](docs/methodology.md)을 참고하세요.
+전체 상태는 최신 실행의 `quality.json`으로 확인합니다. 2026-10-03 최초 점검은 7개국 부분 Baseline과 DATA_HOLD였으며 현재 버전의 고정 상태가 아닙니다. v0.1.6은 27개국 전체 비교 경로를 갖추었지만 수집 실패·오래된 입력이 있으면 계속 DATA_HOLD입니다. Market Quality의 검증된 입력과 종합 산식이 없어 Adjusted는 모두 비어 있습니다. [추가 연결 검증](docs/research/2026-10-04-connected-sources.md), [체코 및 남은 국가 조사](docs/research/2026-10-04-czech-publication.md), [데이터 경로](docs/data-sources.md), [방법론](docs/methodology.md)을 참고하세요.
 
 ## 품질과 자동 실행
 
@@ -138,7 +138,7 @@ python -m sovereign_macro run --output results/local
 1. 미연결 9개국의 공식 5Y 자료와 단위·주기·만기 검증
 2. benchmark / par / interpolated / fixed residual 정의의 비교 가능성 확정
 3. 공급자별 커뮤니티 재배포 조건 확인
-4. Market Quality 입력 표의 BIS 분기 규모 수집 경로를 검증하고, 신용·유동성·접근성 자료 및 정규화 기준 연결. 규모는 중앙정부·명목가·전체 통화의 발행잔액(십억 달러)이며 유동성 점수나 5년물 거래 가능성이 아닙니다. WGB 5년물 보완 수집에 성공한 국가는 같은 응답의 S&P 등급·전망·최근 조치일을 참고 정보로 표시합니다. 등급의 통화·장기 여부는 미확인이므로 점수에는 사용하지 않으며, 공식 금리를 선택한 국가는 등급이 비어 있을 수 있습니다. 미연결 항목과 수집 실패는 별도로 표시하며 Adjusted는 계속 비워 둡니다.
+4. Market Quality 입력 표의 BIS 분기 규모 수집 경로를 검증하고, 신용·유동성·접근성 자료 및 정규화 기준 연결. 규모는 중앙정부·명목가·전체 통화의 발행잔액(십억 달러)이며 유동성 점수나 5년물 거래 가능성이 아닙니다. 6개국 공식 신용등급 진단은 금리 공급자와 별개로 수집하며 공식 출처가 우선합니다. 공식 수집 실패 시 WGB 응답의 등급을 보완 진단으로 표시할 수 있으며 공식 실패 사유도 보존합니다. 미확인 통화·만기·날짜 기준을 명시하고 등급은 점수에 사용하지 않습니다. 미연결 항목과 수집 실패는 별도로 표시하며 Adjusted는 계속 비워 둡니다.
 5. 정식 라이선스를 확보한 실제 April 2026 회귀 자료 추가
 
 한국·일본은 ADB 정부채 분기 회전율을 별도 진단으로 수집합니다. 분기 거래액/평균 잔액을 검산하고 관측일·범위·출처를 표시합니다. 일본 JSDA 월간 거래량은 함께 유지합니다. 국가별 채권 범위가 달라 회전율은 Market Quality나 Adjusted 순위에 사용하지 않습니다. `market_inputs.adb_turnover_enabled`와 `turnover_max_age_days`로 이 수집 및 진단 최신성을 제어합니다. 자세한 정의와 공개 출력 규칙은 [자료 계약](docs/data-sources.md#adb-government-bond-turnover-korea-and-japan)을 참조하세요.
