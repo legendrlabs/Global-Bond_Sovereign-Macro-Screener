@@ -147,6 +147,17 @@ def sections(s):
               '; '.join([r['liquidity']['status'],r['liquidity'].get('definition',''),
                          r['liquidity'].get('reason','')]).strip('; '),r['liquidity'].get('url')]
              for r in s['market_inputs']]))
+        turnover=[r for r in s['market_inputs'] if r.get('turnover',{}).get('provider')=='adb']
+        if turnover:
+            content.append(('ADB Government Bond Turnover — diagnostics only',
+                ['Country','Ratio (turns / quarter)','Period / observation date','Traded value (LCY bn)',
+                 'Average outstanding (LCY bn)','Status / scope','Source'],
+                [[r['iso3'],f"{r['turnover']['value']:.2f}" if r['turnover'].get('value') is not None else None,
+                  '; '.join([r['turnover'].get('period',''),r['turnover'].get('observation_date','')]).strip('; '),
+                  r['turnover'].get('traded_value'),r['turnover'].get('average_outstanding'),
+                  '; '.join([r['turnover']['status'],r['turnover'].get('definition',''),
+                             r['turnover'].get('reason','')]).strip('; '),r['turnover'].get('url')]
+                 for r in turnover]))
         candidates={}
         for row in s['market_inputs']:
             for axis in ('liquidity','accessibility'):

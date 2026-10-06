@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 from .models import DataError, finite
 from .market_research import research_links
 from .liquidity import collect_liquidity, parse_nyfed_liquidity, parse_jsda_liquidity
+from .adb_turnover import collect_adb_turnover, redact_turnover
 
 AREA_TO_ISO3=dict(zip(
     'IS NO AU NZ KR CZ BG CA IE DK LT SE HR NL SI DE SK AT PT IL ES GB FR IT BE US JP'.split(),
@@ -88,6 +89,8 @@ def collect_market_inputs(client,settings,as_of):
             result=dict(size={},errors=['SIZE:'+type(exc).__name__+':'+str(exc)[:180]])
     if settings.get('liquidity_enabled',False):
         result['liquidity']=collect_liquidity(client,settings,as_of)
+        if settings.get('adb_turnover_enabled',True):
+            result['turnover']=collect_adb_turnover(client,settings,as_of)
     return result
 
 
@@ -121,13 +124,21 @@ def country_market_inputs(iso,bundle,demo=False,public_output=False):
         liquidity=dict(value=None,status='SYNTHETIC_DEMO',reason='No real transaction volume in synthetic demo')
     elif public_output and liquidity.get('value') is not None and liquidity.get('redistribution','pending')!='allowed':
         liquidity.update(value=None,status='REDISTRIBUTION_PENDING')
-    result=dict(size=size,liquidity=liquidity,
+    turnover=deepcopy(inputs.get('turnover',{}).get(iso))
+    if turnover is None:
+        turnover=dict(value=None,status='SOURCE_NOT_CONNECTED',
+                      reason='ADB government-bond turnover connected only for Korea and Japan')
+    if demo:
+        turnover=dict(value=None,status='SYNTHETIC_DEMO',reason='No real turnover in synthetic demo')
+    elif public_output and turnover.get('redistribution','pending')!='allowed':
+        redact_turnover(turnover,'REDISTRIBUTION_PENDING')
+    result=dict(size=size,liquidity=liquidity,turnover=turnover,
         credit=credit,
         accessibility=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Dated bond-market accessibility input not connected'),
         composite_status='MODEL_NOT_IMPLEMENTED')
     for axis in ('liquidity','accessibility'):
         result[axis]['candidate_sources']=research_links(iso,axis)
     if public_output:
-        for component in ('size','liquidity','credit','accessibility'):
+        for component in ('size','liquidity','turnover','credit','accessibility'):
             if result[component].get('value') is None: result[component].pop('value',None)
     return result

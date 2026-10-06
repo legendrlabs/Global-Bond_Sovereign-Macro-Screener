@@ -2,11 +2,11 @@
 
 한국 투자자의 KRW 기준 비교를 위한 **공식 자료 우선 연구용 스크리너**입니다. API 키 없이 수집하고, 공식 경로가 실패하거나 유효하지 않으면 WorldGovernmentBonds(WGB)로 보완합니다. 원자료 관측일·발행판·만기·결측과 계산 가능 여부를 함께 기록합니다.
 
-v0.1.2는 기존 사용판에 아이슬란드·호주의 공식 5년물 탐색용 비교 승인을 추가합니다. 원래 금리 정의와 차이 경고를 유지합니다. 실행 완료와 27개국 전체 비교 가능 여부는 구분합니다. Market Quality 종합 점수와 Adjusted 모델은 아직 준비되지 않았습니다. 결측을 임의로 채우거나 가중치를 재분배하지 않습니다.
+v0.1.4는 한국·일본 ADB 정부채 분기 회전율을 별도 진단으로 추가합니다. 기존 미국 NY Fed·일본 JSDA 거래량과 아이슬란드·호주·스페인 공식 5년물 탐색용 비교 승인을 유지합니다. 원래 금리 정의와 차이 경고를 표시합니다. 실행 완료와 27개국 전체 비교 가능 여부는 구분합니다. Market Quality 종합 점수와 Adjusted 모델은 아직 준비되지 않았습니다. 결측을 임의로 채우거나 가중치를 재분배하지 않습니다.
 
 ## 실행
 
-Python 3.11 이상. [v0.1.2 릴리스](https://github.com/legendrlabs/Global-Bond_Sovereign-Macro-Screener/releases/tag/v0.1.2)에서 wheel과 SHA256SUMS.txt를 다운로드하고 파일 해시를 확인한 뒤 설치합니다. API 키 등록은 필요하지 않습니다.
+Python 3.11 이상. [v0.1.4 릴리스](https://github.com/legendrlabs/Global-Bond_Sovereign-Macro-Screener/releases/tag/v0.1.4)에서 wheel과 SHA256SUMS.txt를 다운로드하고 파일 해시를 확인한 뒤 설치합니다. API 키 등록은 필요하지 않습니다.
 
 ```bash
 python -m pip install sovereign_macro_screener-0.1.2-py3-none-any.whl
@@ -138,6 +138,8 @@ python -m sovereign_macro run --output results/local
 3. 공급자별 커뮤니티 재배포 조건 확인
 4. Market Quality 입력 표의 BIS 분기 규모 수집 경로를 검증하고, 신용·유동성·접근성 자료 및 정규화 기준 연결. 규모는 중앙정부·명목가·전체 통화의 발행잔액(십억 달러)이며 유동성 점수나 5년물 거래 가능성이 아닙니다. WGB 5년물 보완 수집에 성공한 국가는 같은 응답의 S&P 등급·전망·최근 조치일을 참고 정보로 표시합니다. 등급의 통화·장기 여부는 미확인이므로 점수에는 사용하지 않으며, 공식 금리를 선택한 국가는 등급이 비어 있을 수 있습니다. 미연결 항목과 수집 실패는 별도로 표시하며 Adjusted는 계속 비워 둡니다.
 5. 정식 라이선스를 확보한 실제 April 2026 회귀 자료 추가
+
+한국·일본은 ADB 정부채 분기 회전율을 별도 진단으로 수집합니다. 분기 거래액/평균 잔액을 검산하고 관측일·범위·출처를 표시합니다. 일본 JSDA 월간 거래량은 함께 유지합니다. 국가별 채권 범위가 달라 회전율은 Market Quality나 Adjusted 순위에 사용하지 않습니다. `market_inputs.adb_turnover_enabled`와 `turnover_max_age_days`로 이 수집 및 진단 최신성을 제어합니다. 자세한 정의와 공개 출력 규칙은 [자료 계약](docs/data-sources.md#adb-government-bond-turnover-korea-and-japan)을 참조하세요.
 
 국가를 추가하거나 경로를 바꿀 때 숫자 예외를 넣지 말고 `config/`의 메타데이터 계약과 원자료 파서를 보강하세요. 설치 배포본의 `src/sovereign_macro/defaults/`도 함께 갱신해야 합니다.
 

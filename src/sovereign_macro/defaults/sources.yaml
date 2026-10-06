@@ -5,6 +5,8 @@ market_inputs:
   liquidity_enabled: true
   weekly_max_age_days: 30
   monthly_max_age_days: 120
+  adb_turnover_enabled: true
+  turnover_max_age_days: 185
   redistribution: pending
 yield_fallback:
   enabled: true
