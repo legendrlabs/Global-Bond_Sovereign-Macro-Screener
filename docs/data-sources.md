@@ -11,6 +11,7 @@ This initial release deliberately distinguishes researched candidates from calla
 | FX | ECB eurofxref-hist.xml | Foreign units per EUR, converted to KRW per currency | Matched valid dates only |
 | CAN | BoC BD.CDN.5YR.DQ.YLD | 5Y government benchmark | Yes |
 | NOR | Norges GOVT_GENERIC_RATES 5Y GBON | Government benchmark | Yes |
+| NZL | RBNZ B2 INM.DG105.NZZCF | Indicative secondary-market 5Y benchmark close; not exact 5Y CMT, one-business-day publication lag | Yes, disclosed research proxy |
 | SWE | Riksbank SEGVB5YC | Government benchmark | Yes |
 | DEU / NLD / FRA / GBR | Riksbank DEGVB5Y / NLGVB5Y / FRGVB5Y / GBGVB5Y | Government benchmark via Riksbank; underlying Refinitiv rights require review | Yes locally |
 | AUS | RBA FCMYGBAG5D | Interpolated constant maturity | Pending definition decision |
@@ -26,7 +27,9 @@ This initial release deliberately distinguishes researched candidates from calla
 
 | CZE | CNB monthly bulletin TABLE_2B:5Y:monthly_average | Published narrative of monthly residual-maturity basket; reference month distinct from edition | Monthly frequency fails daily gate |
 
-NZL, BGR, IRL, DNK, LTU, HRV, SVN, AUT, PRT remain unimplemented slots. Some already have promising researched files, but research coverage is not implementation coverage. The source research document contains those candidates.
+BGR, IRL, DNK, LTU, HRV, SVN, AUT, PRT remain unimplemented official yield slots. Some already have promising researched files, but research coverage is not implementation coverage. The source research document contains those candidates. Bulgaria's FX history is separately implemented: before 2026-01-01, KRW/BGN is multiplied by 1.95583 to express predecessor units in EUR-equivalent units; after that date, KRW/EUR is used. Missing BGN observations are not replaced by historical EUR observations. Existing sample-count, gap and stale checks remain mandatory, and the report labels the redenominated history.
+
+RBNZ validates the workbook publisher, B2 table, exact series ID, maturity and percent unit. The supplier's understated A1:A1 dimensions are reset under bounded row/column and ZIP-size limits. Actual observation dates and file publication dates are retained separately; future publications and stale yields fail validation. The 2025-08-25 change to NZFMA closing rates and one-day lag is disclosed. A failed official request may use validated WGB fallback, without claiming official success. See [implementation validation](research/2026-10-06-bgr-nzl-implementation.md).
 
 ## Provenance and fallback
 
