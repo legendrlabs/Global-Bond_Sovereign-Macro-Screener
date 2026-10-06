@@ -40,19 +40,44 @@ class QualityScopeTests(unittest.TestCase):
             self.assertTrue(row['baseline_definition_source'])
             self.assertIn('BASELINE_DEFINITION_DIFFERENCE', row['warnings'])
             self.assertFalse(row['usable_adjusted'])
-        for iso in ('SVK', 'ESP'):
+        for iso in ('SVK',):
             row = next(r for r in result['rows'] if r['iso3'] == iso)
             self.assertFalse(row['usable_baseline'])
             self.assertIsNone(row['baseline_rank'])
 
     def test_new_research_proxy_approvals_keep_stale_unit_and_definition_gates(self):
-        for iso in ('ISL', 'AUS'):
+        for iso in ('ISL', 'AUS', 'ESP'):
             for changes in ({'period': '2026-09-27'}, {'yield_type': 'estimated_zero_coupon'}, {'unit': 'bp'}):
                 bundle = demo_bundle(self.config, self.day)
                 bundle['yields'][iso + ':5'] = replace(bundle['yields'][iso + ':5'], **changes)
                 row = next(r for r in evaluate(self.config, bundle, self.day)['rows'] if r['iso3'] == iso)
                 self.assertFalse(row['usable_baseline'])
                 self.assertIsNone(row['baseline_rank'])
+
+    def test_spain_official_secondary_market_proxy_ranks_with_caveat(self):
+        bundle = demo_bundle(self.config, self.day)
+        bundle['yields']['ESP:5'] = replace(bundle['yields']['ESP:5'],
+            provider='spain', yield_type='secondary_market_bucket')
+        row = next(r for r in evaluate(self.config, bundle, self.day)['rows'] if r['iso3'] == 'ESP')
+        self.assertTrue(row['usable_baseline'])
+        self.assertIsNotNone(row['baseline_rank'])
+        self.assertEqual(row['yield_type'], 'secondary_market_bucket')
+        self.assertTrue(row['baseline_definition_note'])
+        self.assertTrue(row['baseline_definition_source'])
+        self.assertIn('BASELINE_DEFINITION_DIFFERENCE', row['warnings'])
+        self.assertFalse(row['usable_adjusted'])
+
+    def test_slovakia_zero_coupon_stays_visible_but_unranked_with_reason(self):
+        bundle = demo_bundle(self.config, self.day)
+        bundle['yields']['SVK:5'] = replace(bundle['yields']['SVK:5'],
+            provider='slovakia', yield_type='estimated_zero_coupon')
+        row = next(r for r in evaluate(self.config, bundle, self.day)['rows'] if r['iso3'] == 'SVK')
+        self.assertIsNotNone(row['yield_5y'])
+        self.assertFalse(row['usable_baseline'])
+        self.assertIsNone(row['baseline_rank'])
+        self.assertIn('BASELINE_DEFINITION_UNAPPROVED', row['errors'])
+        self.assertTrue(row['baseline_definition_note'])
+        self.assertTrue(row['baseline_definition_source'])
 
     def test_baseline_remains_available_when_fx_and_market_quality_are_missing(self):
         bundle = demo_bundle(self.config, self.day)

@@ -242,6 +242,8 @@ countries:
     series: ZCY5Y
     yield_type: estimated_zero_coupon
     baseline_compatible: false
+    baseline_definition_note: NBS 추정 5년 무이표 금리; 이표채 YTM·par 금리와 구별, 현재 파일의 복리 규약 검증 전에는 par 변환 및 Baseline 순위 제외
+    baseline_definition_source: https://nbs.sk/en/statistics/financial-markets/interest-rates/estimated-yield-curve/
     redistribution: pending
 - iso3: AUT
   wgb_slug: austria
@@ -304,7 +306,9 @@ countries:
     adapter: spain
     series: D_G0B1F0ZO
     yield_type: secondary_market_bucket
-    baseline_compatible: false
+    baseline_compatible: true
+    baseline_definition_note: 연구용 5년물 비교; 스페인 중앙은행의 일반 국채 현물 유통시장 5년 금리, 종목 선정·가중 방식 미확인으로 단일 benchmark 또는 constant maturity와 동일하다고 보지 않음
+    baseline_definition_source: https://www.bde.es/webbe/en/estadisticas/compartido/datos/pdf/ti_1_3e.pdf
     redistribution: pending
 - iso3: GBR
   wgb_slug: united-kingdom
