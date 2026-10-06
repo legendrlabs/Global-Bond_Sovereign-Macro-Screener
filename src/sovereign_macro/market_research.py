@@ -1,4 +1,6 @@
 """Reviewed source links, never observations or scoring inputs."""
+from .credit_research import TE_INDEX, official_credit_links
+
 LIQUIDITY_LINKS = {
     'AUS': dict(provider='Australian Office of Financial Management',
         url='https://www.aofm.gov.au/data-hub',
@@ -46,10 +48,13 @@ CREDIT_LINKS = {
 }
 
 
+CREDIT_LINKS.update(official_credit_links())
+
+
 def research_links(iso, axis):
     if axis=='liquidity':
         sources=([LIQUIDITY_LINKS[iso]] if iso in LIQUIDITY_LINKS else [])+[OECD_LINK]
     elif axis=='accessibility': sources=[ACCESS_LINK]
-    elif axis=='credit': sources=[CREDIT_LINKS[iso]] if iso in CREDIT_LINKS else []
+    elif axis=='credit': sources=([CREDIT_LINKS[iso], TE_INDEX] if iso in CREDIT_LINKS else [])
     else: sources=[]
     return [dict(row,kind='RESEARCH_LINK',reviewed_on=row.get('reviewed_on','2026-10-05'),usable_for_scoring=False) for row in sources]

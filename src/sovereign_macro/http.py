@@ -16,7 +16,8 @@ except ImportError:
 
 IMF_HOSTS = {'imf.org', 'www.imf.org'}
 LIQUIDITY_HOSTS = {'markets.newyorkfed.org', 'www.jsda.or.jp'}
-ISSUER_HOSTS = {'debtmanagement.treasury.govt.nz', 'www.deutsche-finanzagentur.de', 'www.aft.gouv.fr'}
+ISSUER_HOSTS = {'debtmanagement.treasury.govt.nz', 'www.deutsche-finanzagentur.de', 'www.aft.gouv.fr',
+                'www.debtagency.be', 'www.nationalbanken.dk', 'nbs.sk'}
 BROWSER_HOSTS = LIQUIDITY_HOSTS | ISSUER_HOSTS
 DEFAULT_TIMEOUT = (5, 15)
 IMF_TIMEOUT = (10, 30)

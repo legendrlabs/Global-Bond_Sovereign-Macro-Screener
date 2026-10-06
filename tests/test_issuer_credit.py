@@ -162,7 +162,10 @@ class IssuerIntegrationTests(unittest.TestCase):
                 return Payload(bodies[url],url,'2026-10-06T19:00:00Z','hash')
         client=Client();settings=dict(enabled=True,size_enabled=False,liquidity_enabled=False,credit_enabled=True)
         self.assertEqual(collect_market_inputs(client,settings,DAY)['credit']['NZL']['rating'],'AA')
-        self.assertEqual(set(client.calls),{NZ,BASIS,DE,FR})
+        self.assertEqual(set(client.calls),{NZ,BASIS,DE,FR,
+            'https://www.debtagency.be/en/datafederalstaterating',
+            'https://www.nationalbanken.dk/en/government-debt/investor-relations/rating',
+            'https://nbs.sk/en/about-the-bank/international-relations/international-institutions/rating/'})
         for changes in ({'credit_enabled':False},{'enabled':False}):
             client=Client();collect_market_inputs(client,dict(settings,**changes),DAY)
             self.assertEqual(client.calls,[])
@@ -216,7 +219,9 @@ class IssuerIntegrationTests(unittest.TestCase):
         import tempfile
         from sovereign_macro.http import HttpClient
         from test_http import Browser,Session,response
-        for url in (NZ,DE,FR):
+        for url in (NZ,DE,FR,'https://www.debtagency.be/en/datafederalstaterating',
+                    'https://www.nationalbanken.dk/en/government-debt/investor-relations/rating',
+                    'https://nbs.sk/en/about-the-bank/international-relations/international-institutions/rating/'):
             with self.subTest(url=url),tempfile.TemporaryDirectory() as tmp:
                 browser=Browser([response(200,b'issuer')]);session=Session([])
                 payload=HttpClient(tmp,session,browser_transport=browser.request).fetch(url)

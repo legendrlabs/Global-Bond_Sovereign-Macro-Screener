@@ -107,7 +107,8 @@ Successful reuse preserves original per-source retrieval timestamps and source d
 ### Issuer-published sovereign credit diagnostics
 
 `market_inputs.credit_enabled=true` connects free, keyless official AFT (France),
-Finanzagentur (Germany) and NZDM (New Zealand) pages independently of liquidity and
+Finanzagentur (Germany), NZDM (New Zealand), Belgian Debt Agency, Danmarks Nationalbank
+and NBS (Slovakia) pages independently of liquidity and
 BIS size. `market_inputs.enabled` still gates all structural requests. Exact headings,
 headers, one S&P row, grade/outlook vocabulary and actual assessment dates are checked.
 A future scheduled review is not an assessment. Per-country errors remain isolated;
@@ -130,12 +131,22 @@ conflicting overview keeps the reported domestic rating with term unverified.
 Germany's summary establishes long-term but not currency. Its S&P link labelled
 2026-04-24 points to a 2025-06-13 PDF, so that PDF is not used to certify the current
 row. France's summary specifies neither term nor currency. These two rows remain
-`REPORTED_TYPE_UNVERIFIED`. All three retain `value=None` and `usable_for_scoring=false`.
+`REPORTED_TYPE_UNVERIFIED`. Belgium uses the current confirmation date, not the next
+review. Denmark separates domestic/foreign debt and term, retaining currency-unverified
+scope until the linked PDF is independently matched. Slovakia's date is Last change,
+stored separately from latest assessment. All six retain `value=None` and
+`usable_for_scoring=false`. Reports display the date basis explicitly.
+
+TE's summary is a secondary discovery link for all 27 countries, not an imported
+same-agency LT-LC rating feed. Each country also has a reviewed official research route,
+which can be a historical action or annual snapshot instead of a current observation.
+See [the complete route inventory](research/2026-10-07-credit-route-expansion.md) for
+missing dates, types, stale tables, inaccessible downloads and gated pages.
 
 A successfully collected issuer diagnostic takes priority over WGB's unspecified
 reported rating, including when the selected yield is from an official provider.
 If the issuer fails, a valid WGB reported rating can remain visible with the issuer
-failure attached. Reports show rating kind and assessment/action date. Hash, retrieval
+failure attached. Reports show rating kind, assessment/action date and date basis. Hash, retrieval
 time, transport and optional basis metadata remain in provenance. Public output hides
 all local/foreign ratings, outlooks and action values; synthetic output discards real
 issuer download metadata. No credit, Market Quality or Adjusted score is created.
@@ -169,7 +180,7 @@ The CSV's indicator, quarterly definition, frequency and complete government/cor
 
 Country notes identify OTC coverage and upstream JSDA (Japan) / KG Zeroin (Korea). Japan's government category includes municipal, government-guaranteed, FILP-agency and transportation/NHK bonds; Korea's precise category composition remains unverified. Both cover all maturities. These differences preclude a comparable sovereign-only or 5Y liquidity ranking, Market Quality normalization or Adjusted score. Private reports show the turnover diagnostic separately. Public output suppresses the ratio **and its numerator/denominator**, including provenance, when either component or whole-row reuse gates block release. Synthetic demo output discards real values and download metadata. Test fixtures are synthetic, not redistributed supplier observations.
 
-See [live source checks](research/2026-10-06-liquidity-live-source-check.md). Requests use browser-compatible transport only on exact approved IMF, NY Fed Markets, JSDA and the three issuer hosts, with requests fallback; compatibility is not a guarantee that any execution environment can reach a source.
+See [live source checks](research/2026-10-06-liquidity-live-source-check.md). Requests use browser-compatible transport only on exact approved IMF, NY Fed Markets, JSDA and the six issuer hosts, with requests fallback; compatibility is not a guarantee that any execution environment can reach a source.
 
 ## 2026-10-06 Spain definition decision and Slovakia hold
 
