@@ -20,3 +20,10 @@ Scope: research ranking and trends, accepting existing seven-calendar-day freshn
 - Decision: retain the raw displayed estimate and Baseline exclusion, adding a source-backed explanation. Official-first selection remains unchanged.
 
 No new market collection is claimed by these source-document checks. Provider values and private cached downloads are not bundled in this document.
+
+## 2026-10-07 conditional comparison follow-up
+
+The [SVK/BGR integration proposal](2026-10-07-svk-bgr-full-comparison.md)
+supersedes the SVK ranking exclusion above for exploratory nominal comparisons
+with explicit warnings. It preserves the zero-rate identity and unresolved
+workbook compounding convention; it does not approve par conversion.

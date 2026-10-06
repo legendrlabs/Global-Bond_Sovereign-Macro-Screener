@@ -41,6 +41,7 @@ class CurrencyTransitionTests(unittest.TestCase):
 
     def test_bgr_pipeline_uses_observed_old_currency_history(self):
         config=load_config()
+        next(c for c in config['countries']['countries'] if c['iso3']=='SVK')['yield']['baseline_compatible']=False
         bundle=demo_bundle(config, DAY)
         bundle['fx']=history()
         result=evaluate(config, bundle, DAY)

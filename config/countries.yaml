@@ -254,8 +254,8 @@ countries:
     adapter: slovakia
     series: ZCY5Y
     yield_type: estimated_zero_coupon
-    baseline_compatible: false
-    baseline_definition_note: NBS 추정 5년 무이표 금리; 이표채 YTM·par 금리와 구별, 현재 파일의 복리 규약 검증 전에는 par 변환 및 Baseline 순위 제외
+    baseline_compatible: true
+    baseline_definition_note: 연구용 명목 5년 금리 비교에 한정; NBS NSS 추정 무이표 금리, 이표채 YTM·단일 지표물·par 금리와 정의 차이 있음; 현재 파일의 복리 규약 미확인, par 변환 없음
     baseline_definition_source: https://nbs.sk/en/statistics/financial-markets/interest-rates/estimated-yield-curve/
     redistribution: pending
 - iso3: AUT
