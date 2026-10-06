@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 import math
 import statistics
+import re
 from .models import DataError, finite
 
 
@@ -25,7 +26,27 @@ def _weekday_gap(a,b):
     return weeks*5+sum((a+timedelta(days=7*weeks+i)).weekday()<5 for i in range(1,tail+1))
 
 
-def fx_metrics(points, currency, as_of, continuity=True, min_1y=200, min_3y=600):
+def redenominated_points(points, currency, as_of, transition):
+    """Express predecessor units in successor units; never fill missing FX."""
+    try:
+        effective=date.fromisoformat(transition['effective_date'])
+        old=transition['from_currency'];new=transition['to_currency'];factor=transition['old_units_per_new_unit']
+        if currency!=new or new!='EUR' or old in ('EUR','KRW') or not re.fullmatch(r'[A-Z]{3}',old) or \
+           not finite(factor) or factor<=0 or not transition.get('evidence_url','').startswith('https://'):
+            raise ValueError
+    except (KeyError,TypeError,ValueError,AttributeError) as exc:
+        raise DataError('FX_TRANSITION_CONTRACT') from exc
+    if as_of<effective: raise DataError('FX_TRANSITION_NOT_EFFECTIVE')
+    converted={}
+    for day,rates in points.items():
+        if day>as_of: continue
+        try: value=cross_rate(rates,old)*factor if day<effective else cross_rate(rates,new)
+        except DataError: converted[day]={};continue
+        converted[day]={'KRW':value}
+    return converted
+
+
+def fx_metrics(points, currency, as_of, continuity=True, min_1y=200, min_3y=600, transition=None):
     out = dict(vol_1y=None,vol_3y=None,max_drawdown=None,count_1y=0,count_3y=0,
                latest_date=None,errors=[])
     if currency == 'KRW':
@@ -34,6 +55,8 @@ def fx_metrics(points, currency, as_of, continuity=True, min_1y=200, min_3y=600)
     if not continuity:
         out['errors'].append('CURRENCY_TRANSITION_UNVERIFIED')
         return out
+    if transition is not None:
+        points=redenominated_points(points,currency,as_of,transition)
     dated = sorted(d for d in points if d <= as_of)
     valid = []
     for i,d in enumerate(dated):

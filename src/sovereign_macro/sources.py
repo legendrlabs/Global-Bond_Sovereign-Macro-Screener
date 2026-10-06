@@ -12,6 +12,7 @@ from pypdf import PdfReader
 import openpyxl
 import xml.etree.ElementTree as ET
 from .models import DataError, Observation, finite
+from .rbnz import RBNZ_WORKBOOK, RBNZ_DEFINITION, parse_rbnz
 
 def local(tag):
     return tag.rsplit('}',1)[-1]
@@ -356,6 +357,16 @@ def collect_yield(client,country,as_of,tenor=5):
     elif adapter=='rba':
         url='https://www.rba.gov.au/statistics/tables/csv/f2-data.csv'
         parser=lambda p:parse_rba(p.body,series)
+    elif adapter=='rbnz':
+        url=RBNZ_WORKBOOK
+        def parser(p):
+            rows,published=parse_rbnz(p.body,series)
+            if date.fromisoformat(published)>as_of: raise DataError('RBNZ_FUTURE_PUBLICATION')
+            notes['published_date']=published
+            for period,_ in rows:
+                notes[period]='RBNZ B2 indicative 5Y benchmark closing yield; one-business-day publication lag; '
+                notes[period]+='benchmark bond can differ from exact 5Y maturity; 2025-08-25 collection-time break; '+RBNZ_DEFINITION
+            return rows
     elif adapter=='treasury':
         url=f'https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value={as_of.year}'
         series=f'BC_{tenor}YEAR'
@@ -404,9 +415,10 @@ def collect_yield(client,country,as_of,tenor=5):
     else: raise DataError(route.get('reason','ADAPTER_UNAVAILABLE'))
     p=client.fetch(url,method='POST' if body else 'GET',body=body)
     period,value=(select_latest_month if frequency=='monthly' else select_latest)(parser(p),as_of)
+    if adapter=='rbnz' and p.url!=url: raise DataError('RBNZ_UNEXPECTED_REDIRECT')
     return Observation(country['iso3'],f'yield_{tenor}y',value,period,country['currency'],
                        unit='unverified' if adapter=='belgium' else 'percent',
-                       provider=adapter,dataset=adapter,series=series,source_date=p.source_date,
+                       provider=adapter,dataset=adapter,series=series,source_date=notes.get('published_date',p.source_date),
                        retrieved_at=p.retrieved_at,url=p.url,raw_sha256=p.sha256,
                        tenor_years=tenor,yield_type=route['yield_type'],redistribution=route['redistribution'],
                        frequency=frequency,notes=('publication_edition='+notes['edition']) if adapter=='czech' else notes.get(period,''))

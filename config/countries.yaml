@@ -50,12 +50,13 @@ countries:
   currency_from: '2000-01-01'
   fx_continuity: true
   yield:
-    adapter: unavailable
-    series: ''
-    yield_type: unverified
-    baseline_compatible: false
+    adapter: rbnz
+    series: INM.DG105.NZZCF
+    yield_type: benchmark
+    baseline_compatible: true
     redistribution: pending
-    reason: SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED
+    baseline_definition_note: 연구용 명목 5년물 비교; RBNZ B2의 NZFMA 지표 종가, 지정 benchmark 채권으로 정확한 5년 CMT와 다름; 2025-08-25 수집 시각 변경
+    baseline_definition_source: https://www.rbnz.govt.nz/en/statistics/series/exchange-and-interest-rates/wholesale-interest-rates
 - iso3: KOR
   wgb_slug: south-korea
   name: 한국
@@ -90,7 +91,13 @@ countries:
   currency: EUR
   pdf_label: Bulgaria
   currency_from: '2026-01-01'
-  fx_continuity: false
+  fx_continuity: true
+  fx_transition:
+    from_currency: BGN
+    to_currency: EUR
+    effective_date: '2026-01-01'
+    old_units_per_new_unit: 1.95583
+    evidence_url: https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260101~c830245e42.en.html
   yield:
     adapter: unavailable
     series: ''

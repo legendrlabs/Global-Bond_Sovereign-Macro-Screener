@@ -99,9 +99,17 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                 elif not baseline_compatible: row['errors'].append('BASELINE_DEFINITION_UNAPPROVED')
             except DataError as exc: row['errors'].append(str(exc))
         try:
-            fx=fx_metrics(bundle.get('fx',{}),c['currency'],as_of,continuity=c['fx_continuity'])
+            transition=c.get('fx_transition')
+            if transition is not None and transition.get('effective_date')!=c['currency_from']:
+                raise DataError('FX_TRANSITION_EFFECTIVE_DATE_MISMATCH')
+            fx=fx_metrics(bundle.get('fx',{}),c['currency'],as_of,continuity=c['fx_continuity'],transition=transition)
+            if transition is not None and c['fx_continuity']:
+                row['warnings'].append('FX_REDENOMINATED_HISTORY')
+                row['fx_history_note']='Pre-transition predecessor FX converted into successor units at the official fixed conversion rate; not historical EUR observations'
+                row['provenance'].append(dict(transition,provider='currency_redenomination',
+                                               method='pre: KRW per predecessor × old_units_per_new_unit; post: KRW per EUR'))
             for years in (1,3):
-                if currency_start>_anniversary(as_of,years):
+                if transition is None and currency_start>_anniversary(as_of,years):
                     fx[f'vol_{years}y']=None
                     if years==1: fx['max_drawdown']=None
                     fx['errors'].append(f'CURRENCY_{years}Y_HISTORY_UNAVAILABLE')

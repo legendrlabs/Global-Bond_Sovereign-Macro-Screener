@@ -36,7 +36,9 @@ def build_html(result,run_id):
         if r.get('yield_5y_age_days') is not None: observed+=f" · {r['yield_5y_age_days']}일 전"
         fields=[r['name']+' · '+r['iso3'],r['currency'],r['yield_5y'],source,observed,r['baseline'],r['baseline_rank'],r['adjusted'],r['fx_vol_1y'],r['carry'],r['redistribution_status']]
         cells=''.join('<td>'+esc(format_value(v))+'</td>' for v in fields)
-        details=esc(json.dumps({'errors':r['errors'],'warnings':r.get('warnings',[]),'provenance':r['provenance']},ensure_ascii=False,indent=2))
+        details=esc(json.dumps({'errors':r['errors'],'warnings':r.get('warnings',[]),
+                               'fx_history_note':r.get('fx_history_note',''),
+                               'provenance':r['provenance']},ensure_ascii=False,indent=2))
         body.append('<tr>'+cells+'<td><details><summary>근거·상태</summary><pre>'+details+'</pre></details></td></tr>')
     summary=build_executive_summary(result)
     title=summary['usage_mode']+' · '+quality['status'] if not quality['demo'] else 'SYNTHETIC DEMO'

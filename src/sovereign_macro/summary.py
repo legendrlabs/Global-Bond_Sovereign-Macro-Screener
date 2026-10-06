@@ -50,6 +50,8 @@ def build_executive_summary(result):
                 adjusted_status='AVAILABLE' if adjusted else 'NOT AVAILABLE',decision=decision,
                 source_notices=result.get('source_notices',[]),
                 fiscal_source=result.get('fiscal_source',{}),
+                fx_history_notes=[dict(iso3=r['iso3'],note=r['fx_history_note'])
+                                  for r in rows if r.get('fx_history_note')],
                 yield_sources=[dict(iso3=r['iso3'],name=r.get('name',r['iso3']),
                     provider=r.get('yield_5y_provider'),observation_date=r.get('yield_5y_date'),
                     age_days=r.get('yield_5y_age_days'),fallback=r.get('yield_5y_fallback',False),
@@ -122,6 +124,9 @@ def sections(s):
             ['Retrieval age (calendar days)',f.get('age_days')],
             ['Latest release checked successfully',f.get('latest_release_verified')],
             ['Refresh failure',f.get('refresh_failure','')]]))
+    if s.get('fx_history_notes'):
+        content.append(('FX History Definitions',['Country','History treatment'],
+                        [[r['iso3'],r['note']] for r in s['fx_history_notes']]))
     if s.get('market_inputs'):
         content.append(('Market Quality Input Gaps',['Scope','Reason'],[
             [axis,'; '.join(dict.fromkeys(r[axis].get('reason','') for r in s['market_inputs']))]
