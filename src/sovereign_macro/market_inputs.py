@@ -10,6 +10,7 @@ from .models import DataError, finite
 from .market_research import research_links
 from .liquidity import collect_liquidity, parse_nyfed_liquidity, parse_jsda_liquidity
 from .adb_turnover import collect_adb_turnover, redact_turnover
+from .issuer_credit import collect_issuer_credit, redact_credit
 
 AREA_TO_ISO3=dict(zip(
     'IS NO AU NZ KR CZ BG CA IE DK LT SE HR NL SI DE SK AT PT IL ES GB FR IT BE US JP'.split(),
@@ -91,6 +92,8 @@ def collect_market_inputs(client,settings,as_of):
         result['liquidity']=collect_liquidity(client,settings,as_of)
         if settings.get('adb_turnover_enabled',True):
             result['turnover']=collect_adb_turnover(client,settings,as_of)
+    if settings.get('credit_enabled',False):
+        result['credit']=collect_issuer_credit(client,settings,as_of)
     return result
 
 
@@ -105,18 +108,21 @@ def country_market_inputs(iso,bundle,demo=False,public_output=False):
                   reason='No real size observation in synthetic demo')
     elif public_output and size.get('value') is not None and size.get('redistribution','pending')!='allowed':
         size.update(value=None,status='REDISTRIBUTION_PENDING')
-    credit=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Same-agency long-term local-currency rating and dated source not verified')
+    issuer=deepcopy(inputs.get('credit',{}).get(iso))
+    credit=issuer or dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Same-agency long-term local-currency rating and dated source not verified')
     observation=bundle.get('yields',{}).get(iso+':5')
-    if observation is not None and observation.provider=='wgb':
+    if not credit.get('rating') and observation is not None and observation.provider=='wgb':
         try:
             reported=json.loads(observation.notes).get('reported_credit')
-            if isinstance(reported,dict): credit=deepcopy(reported)
+            if isinstance(reported,dict) and (reported.get('rating') or issuer is None):
+                credit=deepcopy(reported)
+                if issuer is not None:
+                    credit['issuer_failure']={k:issuer[k] for k in ('provider','url','status','reason') if k in issuer}
         except (ValueError,TypeError,AttributeError): pass
     if demo:
         credit=dict(value=None,status='SYNTHETIC_DEMO',reason='No real reported rating in synthetic demo')
-    elif public_output and credit.get('rating'):
-        credit={k:v for k,v in credit.items() if k not in ('rating','outlook','action')}
-        credit.update(status='REDISTRIBUTION_PENDING',reason='Reported rating omitted from public output')
+    elif public_output:
+        redact_credit(credit)
     liquidity=deepcopy(inputs.get('liquidity',{}).get(iso))
     if liquidity is None:
         liquidity=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Comparable sovereign liquidity level / turnover not verified')
@@ -136,7 +142,7 @@ def country_market_inputs(iso,bundle,demo=False,public_output=False):
         credit=credit,
         accessibility=dict(value=None,status='SOURCE_NOT_CONNECTED',reason='Dated bond-market accessibility input not connected'),
         composite_status='MODEL_NOT_IMPLEMENTED')
-    for axis in ('liquidity','accessibility'):
+    for axis in ('liquidity','accessibility','credit'):
         result[axis]['candidate_sources']=research_links(iso,axis)
     if public_output:
         for component in ('size','liquidity','turnover','credit','accessibility'):

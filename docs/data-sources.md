@@ -104,6 +104,49 @@ Successful reuse preserves original per-source retrieval timestamps and source d
 
 ## Source-specific liquidity diagnostics
 
+### Issuer-published sovereign credit diagnostics
+
+`market_inputs.credit_enabled=true` connects free, keyless official AFT (France),
+Finanzagentur (Germany) and NZDM (New Zealand) pages independently of liquidity and
+BIS size. `market_inputs.enabled` still gates all structural requests. Exact headings,
+headers, one S&P row, grade/outlook vocabulary and actual assessment dates are checked.
+A future scheduled review is not an assessment. Per-country errors remain isolated;
+failed refreshes do not reuse cached success. Retrieval time and last rating assessment
+are separate, and an old assessment is not automatically an expired rating.
+
+Only NZDM's domestic column has explicit currency classification. Its separate official
+[2026/27 securities overview](https://debtmanagement.treasury.govt.nz/resource/new-zealand-government-securities-overview-2026-27)
+establishes long-term basis when both domestic/foreign grades and outlooks agree with
+the current ratings page. The older overview assessment date is retained as basis evidence,
+never substituted for the current agency-row date. Missing or conflicting basis evidence
+keeps a reported domestic-currency diagnostic with unverified term. This comparison
+uses the issuer's own reported values; it does not certify an agency's full methodology.
+
+The overview URL and expected heading are pinned to the verified 2026/27 edition.
+At annual source review, verify a new official edition and update both contracts,
+then rerun parser and live checks. Do not infer a future URL. An unavailable or
+conflicting overview keeps the reported domestic rating with term unverified.
+
+Germany's summary establishes long-term but not currency. Its S&P link labelled
+2026-04-24 points to a 2025-06-13 PDF, so that PDF is not used to certify the current
+row. France's summary specifies neither term nor currency. These two rows remain
+`REPORTED_TYPE_UNVERIFIED`. All three retain `value=None` and `usable_for_scoring=false`.
+
+A successfully collected issuer diagnostic takes priority over WGB's unspecified
+reported rating, including when the selected yield is from an official provider.
+If the issuer fails, a valid WGB reported rating can remain visible with the issuer
+failure attached. Reports show rating kind and assessment/action date. Hash, retrieval
+time, transport and optional basis metadata remain in provenance. Public output hides
+all local/foreign ratings, outlooks and action values; synthetic output discards real
+issuer download metadata. No credit, Market Quality or Adjusted score is created.
+
+AOFM's actual new Treasury Bonds workbook link is registered in the research catalogue,
+but 502/timeouts prevented acquisition in this runtime. No numeric AOFM parser is
+implemented without the actual workbook's schema and units.
+
+See [the Gemini source verification](research/2026-10-06-gemini-source-verification.md)
+and [the issuer implementation check](research/2026-10-07-issuer-credit-source-check.md).
+
 With `market_inputs.liquidity_enabled=true`, bounded requests collect the NY Fed series catalogue and current SBN2024 survey, JSDA's current OTC workbook, and ADB's government-bond turnover CSV. Each country's failure is isolated from BIS size, other liquidity sources and Baseline. No stale response is reused after a failed refresh.
 
 `market_inputs.enabled` remains the global switch (disabled when absent). Set `enabled=true`, `size_enabled=false`, `liquidity_enabled=true` to collect liquidity without requesting BIS; old configurations default `size_enabled` to true. The legacy positional/keyword `imf_transport` injection is IMF-only. New `browser_transport` injection serves general approved browser-compatible hosts; an explicit IMF override takes precedence for IMF requests.
@@ -126,7 +169,7 @@ The CSV's indicator, quarterly definition, frequency and complete government/cor
 
 Country notes identify OTC coverage and upstream JSDA (Japan) / KG Zeroin (Korea). Japan's government category includes municipal, government-guaranteed, FILP-agency and transportation/NHK bonds; Korea's precise category composition remains unverified. Both cover all maturities. These differences preclude a comparable sovereign-only or 5Y liquidity ranking, Market Quality normalization or Adjusted score. Private reports show the turnover diagnostic separately. Public output suppresses the ratio **and its numerator/denominator**, including provenance, when either component or whole-row reuse gates block release. Synthetic demo output discards real values and download metadata. Test fixtures are synthetic, not redistributed supplier observations.
 
-See [live source checks](research/2026-10-06-liquidity-live-source-check.md). Requests use browser-compatible transport only on exact approved IMF, NY Fed Markets and JSDA hosts, with requests fallback; compatibility is not a guarantee that any execution environment can reach a source.
+See [live source checks](research/2026-10-06-liquidity-live-source-check.md). Requests use browser-compatible transport only on exact approved IMF, NY Fed Markets, JSDA and the three issuer hosts, with requests fallback; compatibility is not a guarantee that any execution environment can reach a source.
 
 ## 2026-10-06 Spain definition decision and Slovakia hold
 

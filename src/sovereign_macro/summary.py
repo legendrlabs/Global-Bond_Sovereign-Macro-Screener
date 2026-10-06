@@ -134,10 +134,12 @@ def sections(s):
               r['liquidity']['status'],r['credit']['status'],r['accessibility']['status'],r['composite_status']]
              for r in s['market_inputs']]))
         content.append(('Reported Credit Ratings',
-            ['Country','Agency','Reported rating','Outlook','Last reported action date','Status / reason','Source'],
+            ['Country','Agency','Reported rating','Outlook','Rating kind','Assessment / action date','Status / reason','Source'],
             [[r['iso3'],r['credit'].get('agency'),r['credit'].get('rating'),r['credit'].get('outlook'),
-              r['credit'].get('last_action_date'),
-              '; '.join([r['credit']['status'],r['credit'].get('reason','')]).strip('; '),
+              r['credit'].get('rating_kind','unverified'),
+              r['credit'].get('assessment_date') or r['credit'].get('last_action_date'),
+              '; '.join(filter(None,[r['credit']['status'],r['credit'].get('reason',''),
+                  r['credit'].get('basis_verification_error',''),r['credit'].get('issuer_failure',{}).get('reason','')])).strip('; '),
               r['credit'].get('url')] for r in s['market_inputs']]))
         content.append(('Source-specific Liquidity Diagnostics — not a cross-country score',
             ['Country','Provider','Value','Unit','Period / observation date','Status / limitation','Source'],
@@ -160,7 +162,7 @@ def sections(s):
                  for r in turnover]))
         candidates={}
         for row in s['market_inputs']:
-            for axis in ('liquidity','accessibility'):
+            for axis in ('liquidity','accessibility','credit'):
                 for source in row[axis].get('candidate_sources',[]):
                     key=(axis,source['url'])
                     if key not in candidates: candidates[key]=dict(source,axis=axis,countries=[])
