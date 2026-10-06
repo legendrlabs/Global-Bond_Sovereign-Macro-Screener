@@ -8,6 +8,7 @@ from .regimes import regimes
 from .publication import yield_reuse_allowed
 from .yield_selection import validate_yield, yield_contract, observation_warnings
 from .market_inputs import country_market_inputs
+from .adb_turnover import redact_turnover
 
 NUMERIC_FIELDS=('yield_5y','yield_10y','net_debt_current','net_debt_future','gross_debt_current',
                 'balance_mean','balance_trajectory','inflation_mean','real_yield','fiscal','baseline','adjusted',
@@ -27,7 +28,7 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                  redistribution_status='pending')
         row.update({k:None for k in NUMERIC_FIELDS})
         row['market_inputs']=country_market_inputs(iso,bundle,demo,public_output)
-        for component in ('size','liquidity'):
+        for component in ('size','liquidity','turnover'):
             if row['market_inputs'][component].get('raw_sha256'):
                 row['provenance'].append(dict(row['market_inputs'][component]))
         if fiscal:
@@ -146,11 +147,13 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                 for component in ('size','liquidity'):
                     item=row['market_inputs'][component]
                     if item.pop('value',None) is not None: item['status']='ROW_REDACTED'
+                redact_turnover(row['market_inputs']['turnover'],'ROW_REDACTED')
                 for key in NUMERIC_FIELDS: row[key]=None
                 for key in ('fiscal_trend','real_yield_regime','fx_risk','carry','discount_rate'): row[key]='UNAVAILABLE'
                 row['usable_baseline']=False;row['usable_adjusted']=False
                 row['errors'].append('REDISTRIBUTION_PENDING_REDACTED')
                 for provenance in row['provenance']:
+                    if provenance.get('provider')=='adb': redact_turnover(provenance,'ROW_REDACTED')
                     provenance.pop('value',None)
                     # Source notes may contain cross-check values as serialized JSON.
                     provenance.pop('notes',None)
