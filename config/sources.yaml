@@ -5,6 +5,10 @@ market_inputs:
   liquidity_enabled: true
   weekly_max_age_days: 30
   monthly_max_age_days: 120
+  uk_dmo_enabled: true
+  riksbank_enabled: true
+  quarterly_max_age_days: 185
+  daily_max_age_days: 7
   adb_turnover_enabled: true
   turnover_max_age_days: 185
   redistribution: pending

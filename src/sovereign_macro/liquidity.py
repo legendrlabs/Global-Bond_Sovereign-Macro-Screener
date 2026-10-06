@@ -129,4 +129,6 @@ def collect_liquidity(client,settings,as_of):
             result[iso]=dict(value=None,status='UNAVAILABLE',usable_for_scoring=False,
                 provider='nyfed' if iso=='USA' else 'jsda',url=url,
                 reason=type(exc).__name__+':'+str(exc)[:180])
+    from .europe_liquidity import collect_europe_liquidity
+    result.update(collect_europe_liquidity(client,settings,as_of))
     return result
