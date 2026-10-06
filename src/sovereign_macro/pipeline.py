@@ -28,7 +28,7 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                  redistribution_status='pending')
         row.update({k:None for k in NUMERIC_FIELDS})
         row['market_inputs']=country_market_inputs(iso,bundle,demo,public_output)
-        for component in ('size','liquidity','turnover'):
+        for component in ('size','liquidity','turnover','credit'):
             if row['market_inputs'][component].get('raw_sha256'):
                 row['provenance'].append(dict(row['market_inputs'][component]))
         if fiscal:

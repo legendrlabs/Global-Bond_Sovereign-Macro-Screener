@@ -2,6 +2,7 @@ market_inputs:
   enabled: true
   size_enabled: true
   size_max_age_days: 365
+  credit_enabled: true
   liquidity_enabled: true
   weekly_max_age_days: 30
   monthly_max_age_days: 120

@@ -16,6 +16,8 @@ except ImportError:
 
 IMF_HOSTS = {'imf.org', 'www.imf.org'}
 LIQUIDITY_HOSTS = {'markets.newyorkfed.org', 'www.jsda.or.jp'}
+ISSUER_HOSTS = {'debtmanagement.treasury.govt.nz', 'www.deutsche-finanzagentur.de', 'www.aft.gouv.fr'}
+BROWSER_HOSTS = LIQUIDITY_HOSTS | ISSUER_HOSTS
 DEFAULT_TIMEOUT = (5, 15)
 IMF_TIMEOUT = (10, 30)
 LIQUIDITY_TIMEOUT = 20
@@ -49,8 +51,8 @@ class HttpClient:
 
     def _request(self, method, url, body, headers):
         host=(urlparse(url).hostname or '').lower()
-        timeout=IMF_TIMEOUT if self._is_imf(url) else LIQUIDITY_TIMEOUT if host in LIQUIDITY_HOSTS else DEFAULT_TIMEOUT
-        transport=self.imf_transport if self._is_imf(url) else self.browser_transport if host in LIQUIDITY_HOSTS else None
+        timeout=IMF_TIMEOUT if self._is_imf(url) else LIQUIDITY_TIMEOUT if host in BROWSER_HOSTS else DEFAULT_TIMEOUT
+        transport=self.imf_transport if self._is_imf(url) else self.browser_transport if host in BROWSER_HOSTS else None
         if transport is not None:
             try:
                 response=transport(method=method,url=url,data=body,headers=headers,
