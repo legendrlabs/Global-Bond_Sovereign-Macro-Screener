@@ -70,6 +70,27 @@ class IssuerCreditTests(unittest.TestCase):
             self.assertEqual(row['rating_kind'],'domestic_currency_term_unverified')
             self.assertEqual(row['status'],'REPORTED_TYPE_UNVERIFIED')
 
+    def test_nz_foreign_outlook_and_basis_date_conflicts_keep_current_diagnostic(self):
+        cases=[
+            ('foreign grade',nz(foreign='A+',basis=True),'ISSUER_BASIS_RATING_MISMATCH'),
+            ('local outlook',nz(basis=True).replace(b'AA (stable outlook)',b'AA (positive outlook)'),
+             'ISSUER_BASIS_RATING_MISMATCH'),
+            ('foreign outlook',nz(basis=True).replace(b'AA- (stable outlook)',b'AA- (negative outlook)'),
+             'ISSUER_BASIS_RATING_MISMATCH'),
+            ('newer basis date',nz(day='15 September 2026',basis=True),'ISSUER_BASIS_NEWER_THAN_CURRENT'),
+        ]
+        for label,basis,error in cases:
+            with self.subTest(conflict=label):
+                row=self.parse('NZL',nz(),DAY,basis_body=basis)
+                self.assertEqual(row['rating_kind'],'domestic_currency_term_unverified')
+                self.assertEqual(row['status'],'REPORTED_TYPE_UNVERIFIED')
+                self.assertEqual(row['basis_verification_error'],error)
+                self.assertEqual(row['rating'],'AA');self.assertEqual(row['foreign_rating'],'AA-')
+                self.assertEqual(row['outlook'],'Stable');self.assertEqual(row['foreign_outlook'],'Stable')
+                self.assertEqual(row['assessment_date'],'2026-09-11')
+                self.assertNotIn('basis_assessment_date',row)
+                self.assertIsNone(row['value']);self.assertFalse(row['usable_for_scoring'])
+
     def test_france_next_review_is_not_an_observation_and_types_remain_unspecified(self):
         row=self.parse('FRA',fr(),DAY)
         self.assertEqual(row['assessment_date'],'2026-09-13')
@@ -184,6 +205,8 @@ class IssuerIntegrationTests(unittest.TestCase):
             for item in [row['market_inputs']['credit']]+row['provenance']:
                 for key in ('rating','foreign_rating','outlook','foreign_outlook','action'):
                     self.assertNotIn(key,item)
+            if options.get('public_output'):
+                self.assertTrue(any(p.get('raw_sha256')=='issuer-hash' for p in row['provenance']))
             if options.get('demo'):
                 self.assertNotIn('raw_sha256',row['market_inputs']['credit'])
                 self.assertFalse(any(p.get('raw_sha256')=='issuer-hash' for p in row['provenance']))

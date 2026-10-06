@@ -61,9 +61,9 @@ classification and date evidence only; it is not a rating recommendation.
 ## Whole-branch review and decisions
 
 A fresh reviewer independently ran the 219-test suite and found no Critical or
-Important issues. One Minor is deferred: explicit synthetic tests for foreign-only,
-outlook-only and newer-basis-date mismatches would improve regression coverage; the
-implemented parser already rejects those conflicts.
+Important issues. One Minor was initially deferred: explicit synthetic tests for
+foreign-only, outlook-only and newer-basis-date mismatches. The follow-up below now
+protects those implemented safeguards against regression.
 
 The review retained the following decisions:
 
@@ -90,3 +90,29 @@ cover the complete code/documentation payload. No workaround was attempted.
 On 2026-10-07 at 04:13 KST, the user explicitly approved publishing the reviewed
 branch and creating a draft PR. Delivery proceeds under that approval; no package
 release or main-branch merge is included.
+
+
+## External review follow-up
+
+The supplied Gemini review was checked against the actual implementation. A dedicated
+regression test now isolates four conflicts: foreign grade only, local outlook only,
+foreign outlook only, and a basis date newer than the current assessment (but not
+future relative to the run). Each must retain both current grades/outlooks and the
+current assessment date, report the exact verification error, keep term unverified,
+and remain ineligible for scoring.
+
+The 14-test issuer suite passes. In isolated in-memory mutations, disabling the
+rating/outlook comparison causes three subcases to fail; disabling the date-order
+guard causes one to fail. No production parser behavior was changed.
+
+The review's statement that public output removes all source hashes is incorrect.
+An actual publish check confirmed the public manifest retains the issuer raw hash
+without grade/outlook/action keys. Demo output has no real issuer provenance. The
+integration test now explicitly protects public hash preservation. Hashes identify
+source objects for verification; they do not contain the original rating table.
+
+The fixed 2026/27 overview is a reviewed source edition. On fiscal-year rollover,
+check the newly issued official page and update **both** BASIS_URL and its expected
+heading/table contract; do not fabricate the next URL from the calendar. A missing
+or conflicting edition retains the current domestic-currency diagnostic with term
+unverified and a basis_verification_error.

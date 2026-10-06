@@ -122,6 +122,11 @@ never substituted for the current agency-row date. Missing or conflicting basis 
 keeps a reported domestic-currency diagnostic with unverified term. This comparison
 uses the issuer's own reported values; it does not certify an agency's full methodology.
 
+The overview URL and expected heading are pinned to the verified 2026/27 edition.
+At annual source review, verify a new official edition and update both contracts,
+then rerun parser and live checks. Do not infer a future URL. An unavailable or
+conflicting overview keeps the reported domestic rating with term unverified.
+
 Germany's summary establishes long-term but not currency. Its S&P link labelled
 2026-04-24 points to a 2025-06-13 PDF, so that PDF is not used to certify the current
 row. France's summary specifies neither term nor currency. These two rows remain
