@@ -139,3 +139,13 @@ See [source evidence and limits](research/2026-10-06-spain-slovakia-definition.m
 ## UK and Sweden source-specific liquidity diagnostics
 
 UK DMO quarterly GEMM purchases plus sales and Riksbank daily secondary-market GVB/SP adjusted turnover are collected independently. Their definitions, period-specific freshness gates, discovery, validation and redistribution limits are documented in [the UK/Sweden evidence](research/2026-10-06-uk-sweden-liquidity.md). Neither measure creates cross-country scores; stale or incomplete Swedish observations are not displayed as current values.
+
+## Bulgaria FX currency continuity
+
+BGR's current currency remains EUR from 2026-01-01. A reviewed fixed-peg
+redenomination contract rebases actual earlier ECB BGN/KRW observations at
+1 EUR = 1.95583 BGN, with four-decimal publication tolerance, window coverage,
+parity, gap and freshness checks. Missing BGN observations are not synthesized.
+Reports disclose the currency chain and conversion evidence. This does not
+approve SVK's yield definition or populate Market Quality.
+See [the calculation and actual-source replay](research/2026-10-07-bulgaria-fx-continuity.md).

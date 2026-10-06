@@ -99,9 +99,15 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
                 elif not baseline_compatible: row['errors'].append('BASELINE_DEFINITION_UNAPPROVED')
             except DataError as exc: row['errors'].append(str(exc))
         try:
-            fx=fx_metrics(bundle.get('fx',{}),c['currency'],as_of,continuity=c['fx_continuity'])
+            transition=c.get('fx_transition')
+            if transition is not None and (not isinstance(transition,dict)
+                    or transition.get('effective_date')!=c['currency_from']):
+                raise DataError('CURRENCY_TRANSITION_DATE_MISMATCH')
+            fx=fx_metrics(bundle.get('fx',{}),c['currency'],as_of,continuity=c['fx_continuity'],
+                          transition=transition)
+            history_start=date.fromisoformat(fx['transition']['history_from']) if fx.get('transition') else currency_start
             for years in (1,3):
-                if currency_start>_anniversary(as_of,years):
+                if history_start>_anniversary(as_of,years):
                     fx[f'vol_{years}y']=None
                     if years==1: fx['max_drawdown']=None
                     fx['errors'].append(f'CURRENCY_{years}Y_HISTORY_UNAVAILABLE')
@@ -110,6 +116,11 @@ def evaluate(config,bundle,as_of,public_output=False,demo=False):
         row.update(fx_vol_1y=fx['vol_1y'],fx_vol_3y=fx['vol_3y'],fx_drawdown=fx['max_drawdown'],
                    fx_count_1y=fx['count_1y'],fx_count_3y=fx['count_3y'],fx_date=fx.get('latest_date'))
         row['errors'].extend(fx['errors'])
+        if fx.get('transition'):
+            row['fx_history']=deepcopy(fx['transition'])
+            row['warnings'].append('FX_HISTORY_REBASED')
+            row['provenance'].append(dict(provider='ecb',metric='fx_currency_transition',
+                                          **deepcopy(fx['transition'])))
         if bundle.get('provenance',{}).get('fx'): row['provenance'].append(bundle['provenance']['fx'])
         row.update(adjusted(fscore,row['real_yield'],row['fx_vol_1y'],None,config['scoring']))
         row.update(regimes(row['net_debt_current'],row['net_debt_future'],row['real_yield'],row['fx_vol_1y'],row['yield_5y'],row['yield_10y']))

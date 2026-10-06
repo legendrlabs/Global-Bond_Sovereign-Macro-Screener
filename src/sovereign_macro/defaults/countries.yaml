@@ -90,7 +90,20 @@ countries:
   currency: EUR
   pdf_label: Bulgaria
   currency_from: '2026-01-01'
-  fx_continuity: false
+  fx_continuity: true
+  fx_transition:
+    kind: fixed_peg_redenomination
+    verified: true
+    old_currency: BGN
+    new_currency: EUR
+    effective_date: '2026-01-01'
+    history_from: '2020-07-10'
+    old_units_per_new: 1.95583
+    reference_decimals: 4
+    evidence_urls:
+    - https://www.ecb.europa.eu/press/economic-bulletin/focus/2020/html/ecb.ebbox202006_01~db5e37768d.en.html
+    - https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260101~c830245e42.en.html
+    - https://www.ecb.europa.eu/services/using-our-site/technical-updates/html/ecb.mid_update251217.et.html
   yield:
     adapter: unavailable
     series: ''

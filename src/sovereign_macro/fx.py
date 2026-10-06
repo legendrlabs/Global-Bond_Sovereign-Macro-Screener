@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 import math
 import statistics
+from urllib.parse import urlparse
 from .models import DataError, finite
 
 
@@ -25,7 +26,28 @@ def _weekday_gap(a,b):
     return weeks*5+sum((a+timedelta(days=7*weeks+i)).weekday()<5 for i in range(1,tail+1))
 
 
-def fx_metrics(points, currency, as_of, continuity=True, min_1y=200, min_3y=600):
+def _transition_contract(transition, currency, as_of):
+    """A reviewed fixed-peg contract is separate from current currency assignment."""
+    try:
+        old=transition['old_currency'];new=transition['new_currency']
+        start=date.fromisoformat(transition['history_from'])
+        effective=date.fromisoformat(transition['effective_date'])
+        ratio=transition['old_units_per_new'];decimals=transition['reference_decimals']
+        urls=transition['evidence_urls']
+        valid=(transition['kind']=='fixed_peg_redenomination' and transition['verified'] is True
+               and isinstance(old,str) and len(old)==3 and old.isupper() and old!=new
+               and new==currency and new=='EUR' and start<effective<=as_of
+               and finite(ratio) and not isinstance(ratio,bool) and ratio>0
+               and type(decimals) is int and 0<=decimals<=8
+               and isinstance(urls,list) and bool(urls)
+               and all(isinstance(u,str) and urlparse(u).scheme=='https' and urlparse(u).hostname for u in urls))
+    except (KeyError,TypeError,ValueError,AttributeError):
+        valid=False
+    if not valid: raise DataError('CURRENCY_TRANSITION_CONTRACT_INVALID')
+    return start,effective,old,ratio,0.5*10**(-decimals)+1e-12
+
+
+def fx_metrics(points, currency, as_of, continuity=True, min_1y=200, min_3y=600, transition=None):
     out = dict(vol_1y=None,vol_3y=None,max_drawdown=None,count_1y=0,count_3y=0,
                latest_date=None,errors=[])
     if currency == 'KRW':
@@ -34,16 +56,43 @@ def fx_metrics(points, currency, as_of, continuity=True, min_1y=200, min_3y=600)
     if not continuity:
         out['errors'].append('CURRENCY_TRANSITION_UNVERIFIED')
         return out
+    contract=_transition_contract(transition,currency,as_of) if transition is not None else None
+    if contract:
+        start,effective,old,ratio,tolerance=contract
+        out['transition']={k:transition[k] for k in ('kind','old_currency','new_currency','history_from',
+                            'effective_date','old_units_per_new','reference_decimals','evidence_urls')}
+        out['transition'].update(status='VERIFIED_CONTINUITY',rebased_count=0)
+    peg_breaks=[]
     dated = sorted(d for d in points if d <= as_of)
     valid = []
     for i,d in enumerate(dated):
         try:
-            valid.append((d,cross_rate(points[d],currency),i))
+            if contract and d<effective:
+                if d<start or d<_anniversary(as_of,3): continue
+                observed=points[d].get(old)
+                if not finite(observed) or observed<=0: raise DataError('FX_MISSING_OR_INVALID')
+                if abs(observed-ratio)>tolerance:
+                    peg_breaks.append(d)
+                    continue
+                value=cross_rate(points[d],old)*ratio
+                out['transition']['rebased_count']+=1
+            else:
+                value=cross_rate(points[d],currency)
+            valid.append((d,value,i))
         except DataError:
             pass
     for years,minimum in [(1,min_1y),(3,min_3y)]:
-        subset = [(d,v,i) for d,v,i in valid if d >= _anniversary(as_of,years)]
+        boundary=_anniversary(as_of,years)
+        subset = [(d,v,i) for d,v,i in valid if d >= boundary]
         out[f'count_{years}y']=len(subset)
+        if any(d>=boundary for d in peg_breaks):
+            out['errors'].append(f'FX_PEG_MISMATCH_{years}Y')
+            continue
+        # Enough recent EUR points cannot stand in for missing pre-transition BGN.
+        if contract and boundary<effective and (boundary<start or not subset
+                or (subset[0][0]-boundary).days>7 or subset[0][0]>=effective):
+            out['errors'].append(f'FX_TRANSITION_COVERAGE_{years}Y')
+            continue
         if len(subset) < minimum:
             out['errors'].append(f'FX_INSUFFICIENT_{years}Y')
             continue
@@ -66,4 +115,6 @@ def fx_metrics(points, currency, as_of, continuity=True, min_1y=200, min_3y=600)
         if (as_of-latest).days > 7:
             out.update(vol_1y=None,vol_3y=None,max_drawdown=None)
             out['errors'].append('FX_STALE')
+    if contract and out['errors']:
+        out['transition']['status']='INCOMPLETE_OR_INVALID_HISTORY'
     return out
