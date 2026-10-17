@@ -1,0 +1,16 @@
+{
+  "status": "DATA_HOLD",
+  "safe_to_use": false,
+  "core_inputs_complete": true,
+  "safe_to_use_adjusted": false,
+  "baseline_usable": 0,
+  "adjusted_usable": 0,
+  "country_count": 27,
+  "demo": false,
+  "public_output": true,
+  "system_errors": [],
+  "warnings": [],
+  "run_id": "20261017T171001-7572ef99",
+  "as_of": "2026-10-18",
+  "generated_at": "2026-10-17T17:10:01.694186+00:00"
+}
