@@ -1,0 +1,3162 @@
+{
+  "global_status": "DATA_HOLD",
+  "safe_to_use": false,
+  "usage_mode": "DATA HOLD",
+  "demo": false,
+  "public_output": true,
+  "as_of": "2026-10-25",
+  "model_version": "0.1.1-provisional",
+  "coverage": {
+    "universe": 27,
+    "baseline_usable": 0,
+    "adjusted_usable": 0,
+    "yield5_routes_registered": null,
+    "yield5_observations_parsed": 27
+  },
+  "baseline_ranking": [],
+  "top_country_metrics": [],
+  "holds": [
+    {
+      "iso3": "ISL",
+      "name": "아이슬란드",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "NOR",
+      "name": "노르웨이",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "AUS",
+      "name": "호주",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "NZL",
+      "name": "뉴질랜드",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "KOR",
+      "name": "한국",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "CZE",
+      "name": "체코",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "BGR",
+      "name": "불가리아",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "CAN",
+      "name": "캐나다",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "IRL",
+      "name": "아일랜드",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "DNK",
+      "name": "덴마크",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "LTU",
+      "name": "리투아니아",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "SWE",
+      "name": "스웨덴",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "HRV",
+      "name": "크로아티아",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "NLD",
+      "name": "네덜란드",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "SVN",
+      "name": "슬로베니아",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "DEU",
+      "name": "독일",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "SVK",
+      "name": "슬로바키아",
+      "reasons": [
+        "FISCAL_HORIZON_INCOMPLETE",
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "AUT",
+      "name": "오스트리아",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "PRT",
+      "name": "포르투갈",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "ISR",
+      "name": "이스라엘",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "ESP",
+      "name": "스페인",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "GBR",
+      "name": "영국",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "FRA",
+      "name": "프랑스",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "ITA",
+      "name": "이탈리아",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "BEL",
+      "name": "벨기에",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "USA",
+      "name": "미국",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    },
+    {
+      "iso3": "JPN",
+      "name": "일본",
+      "reasons": [
+        "MARKET_QUALITY_UNAVAILABLE",
+        "REDISTRIBUTION_PENDING_REDACTED"
+      ]
+    }
+  ],
+  "quality_scopes": [
+    {
+      "scope": "BASELINE",
+      "status": "UNAVAILABLE",
+      "available": 0,
+      "total": 27,
+      "unavailable_countries": [
+        "ISL",
+        "NOR",
+        "AUS",
+        "NZL",
+        "KOR",
+        "CZE",
+        "BGR",
+        "CAN",
+        "IRL",
+        "DNK",
+        "LTU",
+        "SWE",
+        "HRV",
+        "NLD",
+        "SVN",
+        "DEU",
+        "SVK",
+        "AUT",
+        "PRT",
+        "ISR",
+        "ESP",
+        "GBR",
+        "FRA",
+        "ITA",
+        "BEL",
+        "USA",
+        "JPN"
+      ]
+    },
+    {
+      "scope": "REAL_YIELD",
+      "status": "UNAVAILABLE",
+      "available": 0,
+      "total": 27,
+      "unavailable_countries": [
+        "ISL",
+        "NOR",
+        "AUS",
+        "NZL",
+        "KOR",
+        "CZE",
+        "BGR",
+        "CAN",
+        "IRL",
+        "DNK",
+        "LTU",
+        "SWE",
+        "HRV",
+        "NLD",
+        "SVN",
+        "DEU",
+        "SVK",
+        "AUT",
+        "PRT",
+        "ISR",
+        "ESP",
+        "GBR",
+        "FRA",
+        "ITA",
+        "BEL",
+        "USA",
+        "JPN"
+      ]
+    },
+    {
+      "scope": "FX_1Y",
+      "status": "UNAVAILABLE",
+      "available": 0,
+      "total": 27,
+      "unavailable_countries": [
+        "ISL",
+        "NOR",
+        "AUS",
+        "NZL",
+        "KOR",
+        "CZE",
+        "BGR",
+        "CAN",
+        "IRL",
+        "DNK",
+        "LTU",
+        "SWE",
+        "HRV",
+        "NLD",
+        "SVN",
+        "DEU",
+        "SVK",
+        "AUT",
+        "PRT",
+        "ISR",
+        "ESP",
+        "GBR",
+        "FRA",
+        "ITA",
+        "BEL",
+        "USA",
+        "JPN"
+      ]
+    },
+    {
+      "scope": "MARKET_QUALITY",
+      "status": "UNAVAILABLE",
+      "available": 0,
+      "total": 27,
+      "unavailable_countries": [
+        "ISL",
+        "NOR",
+        "AUS",
+        "NZL",
+        "KOR",
+        "CZE",
+        "BGR",
+        "CAN",
+        "IRL",
+        "DNK",
+        "LTU",
+        "SWE",
+        "HRV",
+        "NLD",
+        "SVN",
+        "DEU",
+        "SVK",
+        "AUT",
+        "PRT",
+        "ISR",
+        "ESP",
+        "GBR",
+        "FRA",
+        "ITA",
+        "BEL",
+        "USA",
+        "JPN"
+      ]
+    },
+    {
+      "scope": "ADJUSTED",
+      "status": "UNAVAILABLE",
+      "available": 0,
+      "total": 27,
+      "unavailable_countries": [
+        "ISL",
+        "NOR",
+        "AUS",
+        "NZL",
+        "KOR",
+        "CZE",
+        "BGR",
+        "CAN",
+        "IRL",
+        "DNK",
+        "LTU",
+        "SWE",
+        "HRV",
+        "NLD",
+        "SVN",
+        "DEU",
+        "SVK",
+        "AUT",
+        "PRT",
+        "ISR",
+        "ESP",
+        "GBR",
+        "FRA",
+        "ITA",
+        "BEL",
+        "USA",
+        "JPN"
+      ]
+    }
+  ],
+  "fx_history": [
+    {
+      "iso3": "BGR",
+      "latest_date": "2026-10-23",
+      "count_1y": 254,
+      "count_3y": 765,
+      "kind": "fixed_peg_redenomination",
+      "old_currency": "BGN",
+      "new_currency": "EUR",
+      "history_from": "2020-07-10",
+      "effective_date": "2026-01-01",
+      "old_units_per_new": 1.95583,
+      "reference_decimals": 4,
+      "evidence_urls": [
+        "https://www.ecb.europa.eu/press/economic-bulletin/focus/2020/html/ecb.ebbox202006_01~db5e37768d.en.html",
+        "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.pr260101~c830245e42.en.html",
+        "https://www.ecb.europa.eu/services/using-our-site/technical-updates/html/ecb.mid_update251217.et.html"
+      ],
+      "status": "VERIFIED_CONTINUITY",
+      "rebased_count": 557
+    }
+  ],
+  "market_inputs": [
+    {
+      "iso3": "ISL",
+      "size": {
+        "unit": "USD_billion",
+        "period": "",
+        "provider": "bis",
+        "status": "UNAVAILABLE",
+        "reason": "BIS_SERIES_NOT_REPORTED_IN_SELECTED_SCOPE"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "Iceland Government Debt Management",
+            "url": "https://www.lanamal.is/EN/investors/credit-rating",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Explicit domestic/foreign currency and term; last-change date has month precision only; not latest assessment",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "NOR",
+      "size": {
+        "unit": "USD_billion",
+        "period": "",
+        "provider": "bis",
+        "status": "UNAVAILABLE",
+        "reason": "BIS_SERIES_NOT_REPORTED_IN_SELECTED_SCOPE"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "Norges Bank",
+            "url": "https://www.norges-bank.no/tema/Statsgjeld/Investorrelasjoner/",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Long-term table dates mean rating effective since, not latest assessment; currency unverified",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "AUS",
+      "size": {
+        "unit": "USD_billion",
+        "period": "",
+        "provider": "bis",
+        "status": "UNAVAILABLE",
+        "reason": "BIS_SERIES_NOT_REPORTED_IN_SELECTED_SCOPE"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "Australian Office of Financial Management",
+            "url": "https://www.aofm.gov.au/data-hub",
+            "download_url": "https://www.aofm.gov.au/sites/default/files/2026-05-29/new_turnover_-_treasury_bonds.xlsx",
+            "scope": "Market-intermediary survey of AGS secondary-market turnover; Treasury Bonds and Treasury Indexed Bonds are separate datasets",
+            "limitation": "Use new turnover files from 2026 Q1, not the historical 2016–2025 files; observed new Treasury Bonds XLSX returned 502/timeouts in this runtime; schema not verified; verify counterparties, units and matching outstanding before deriving a ratio; not a 5Y bid-ask measure",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "Australian Treasury",
+            "url": "https://ministers.treasury.gov.au/ministers/jim-chalmers-2022/media-releases/sp-global-reaffirms-aaa-credit-rating",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Dated 2026-08-06 historical affirmation release; no current table, explicit currency/term or outlook established here",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "NZL",
+      "size": {
+        "unit": "USD_billion",
+        "period": "",
+        "provider": "bis",
+        "status": "UNAVAILABLE",
+        "reason": "BIS_SERIES_NOT_REPORTED_IN_SELECTED_SCOPE"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2021-02-22",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/new-zealand/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "3f07589c41a061e061f40a2893e5c5108109b17bca039f1a2a805c10d83f1cb2",
+        "retrieved_at": "2026-10-25T11:38:28.178766+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "issuer_failure": {
+          "provider": "nzdm",
+          "url": "https://debtmanagement.treasury.govt.nz/investor-resources/credit-ratings",
+          "status": "UNAVAILABLE",
+          "reason": "DataError:HTTP_FAILURE:403"
+        },
+        "candidate_sources": [
+          {
+            "provider": "New Zealand Debt Management / The Treasury",
+            "url": "https://debtmanagement.treasury.govt.nz/investor-resources/credit-ratings",
+            "scope": "Issuer-published domestic- and foreign-currency sovereign ratings, outlooks and per-agency update dates",
+            "limitation": "collector uses the agency row date, not the footer; the official 2026/27 securities overview establishes long-term basis only if both currency grades and outlooks match; no credit score",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "KOR",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "MOFE / KRX / KOFIA",
+            "url": "https://ktb.moef.go.kr/curbSrviveExprtnNtpbnDdelngQy.do",
+            "scope": "OTC Korean Treasury trading volume, amount and count by residual-maturity bucket",
+            "limitation": "Dynamic KRX table; 3–5Y bucket is not a single 5Y benchmark; current observations not collected",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "provider": "adb",
+        "metric": "government_bond_turnover_ratio",
+        "frequency": "quarterly",
+        "unit": "turns_per_quarter",
+        "amount_unit": "LCY_billion",
+        "currency": "KRW",
+        "upstream_provider": "KG Zeroin",
+        "definition": "Quarterly government-bond traded value / average outstanding at previous and current quarter ends; local currency; repo excluded; published ratio rounded to two decimals. ADB already halves reported sales plus purchases; no further division applied. OTC only; precise government-category composition remains unverified; all maturities",
+        "definition_url": "https://asianbondsonline.adb.org/xml/get-indicator.php?code=Bond_turn_ratio",
+        "country_notes_url": "https://asianbondsonline.adb.org/charts/bond_turn_ratio.php?module=data-portal&economies=KR%5EJP&years=2025%5E2026&frequency=Quarterly",
+        "usable_for_scoring": false,
+        "reason": "Source-specific government categories and OTC coverage are not harmonized; not a single-5Y measure",
+        "status": "REDISTRIBUTION_PENDING",
+        "period": "2026-Q2",
+        "observation_date": "2026-06-30",
+        "age_days": 117,
+        "url": "https://asianbondsonline.adb.org/downloads/bond_turn_ratio_csv.php?economies=KR%5EJP&years=2025%5E2026&frequency=Quarterly",
+        "raw_sha256": "369ecc2cd70a4cba651df31b8e147ba39c25df592d37c64b35ae2d98525a8e43",
+        "retrieved_at": "2026-10-25T11:40:33.405985+00:00",
+        "transport": "requests",
+        "redistribution": "pending"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "Korean Ministry of Finance and Economy",
+            "url": "https://english.mofe.go.kr/pc/selectTbPressCenterDtl.do?boardCd=N0001&seq=6398",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Dated 2026-04-29 affirmation release; currency and term unverified; not an automatically refreshed table",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "CZE",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2011-08-24",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/czech-republic/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "ad3afa34948408a79efb52112c847c2fa100954d2583e6c0df342994d28551d4",
+        "retrieved_at": "2026-10-25T11:38:31.373840+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "Czech Ministry of Finance",
+            "url": "https://mf.gov.cz/en/fiscal-policy/state-debt/basic-information/rating",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Explicit LC/FC long-term tables lack assessment dates and retain older outlook; compare the 2026-09-25 official announcement; no current observation imported",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "BGR",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2026-05-24",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/bulgaria/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "7a918c83bccd66b8d9c0ca4e0866982c1a61214856b4bff5c8d81622ece327b3",
+        "retrieved_at": "2026-10-25T11:38:32.652648+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "Bulgarian Ministry of Finance",
+            "url": "https://www.minfin.bg/bg/69",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Workbook link reported on official landing page; direct access returned 403 and workbook schema was not inspected",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "CAN",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "Canadian Department of Finance",
+            "url": "https://www.canada.ca/en/department-finance/services/publications/debt-management-report/2024-2025.html",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Annual LC/FC LT/ST snapshot as at 2025-03-31; previous action date and footer are not latest assessment",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "IRL",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2026-03-23",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/ireland/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "b82f3439f92990dfcf82bd9413d9b667cb3c83cb0cf283f7d4168edb3af1d86f",
+        "retrieved_at": "2026-10-25T11:38:34.370948+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "National Treasury Management Agency",
+            "url": "https://www.ntma.ie/business-areas/funding-and-debt-management/investor-relations/credit-ratings",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Current LT/ST table has no assessment date or currency scope",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "DNK",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "provider": "nationalbanken",
+        "url": "https://www.nationalbanken.dk/en/government-debt/investor-relations/rating",
+        "agency": "Standard & Poor's",
+        "usable_for_scoring": false,
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "currency": null,
+        "rating_kind": "long_term_domestic_debt_currency_unverified",
+        "assessment_date_type": "issuer_most_recently_confirmed",
+        "assessment_date": "2026-08-10",
+        "assessment_age_days": 76,
+        "reason": "Reported rating omitted from public output",
+        "raw_sha256": "41fbf3354c8d4623f529de89a5106ded94458994b0674e374c6cad4e5f18bbc4",
+        "retrieved_at": "2026-10-25T11:40:39.215686+00:00",
+        "transport": "curl_cffi",
+        "candidate_sources": [
+          {
+            "provider": "Danmarks Nationalbank",
+            "url": "https://www.nationalbanken.dk/en/government-debt/investor-relations/rating",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Collected long-term domestic/foreign debt diagnostic; most recently confirmed is not rating action; currency needs separate linked PDF verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "LTU",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2024-06-03",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/lithuania/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "9a5a67c633ada515e627f8751b3b6cd08aef97103406829c2b4250592f21efe9",
+        "retrieved_at": "2026-10-25T11:38:36.656689+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "Lithuanian Ministry of Finance",
+            "url": "https://finmin.lrv.lt/en/competence-areas/state-debt-management/credit-ratings/lithuania-s-credit-ratings-history/",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "LC/FC and LT/ST history has month-only action dates; current-page calendar dates are future schedules, not assessments",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "SWE",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "provider": "riksbank",
+        "frequency": "daily",
+        "unit": "SEK_million_daily_adjusted_turnover",
+        "definition": "SELMA reporting-counterparty sample; GVB government bonds, SP spot; excludes primary market (PRIMM), repo, forwards, inflation-linked bonds and bills; adjusted amount already corrects reporter double-counting; all maturities, not a single-5Y or whole-market measure",
+        "period": "2026-10-16",
+        "observation_date": "2026-10-16",
+        "age_days": 9,
+        "status": "STALE",
+        "usable_for_scoring": false,
+        "reason": "Source-specific transaction volume; not harmonized across countries",
+        "url": "https://www.riksbank.se/contentassets/85f87f309cc24932aad47d90448e366e/fixed-income-daily-turnover.xlsx",
+        "raw_sha256": "0e934ae56b81f57c5ea1a8e68b6e3f5bba4637f2e8b564edcbe316721d948e7b",
+        "retrieved_at": "2026-10-25T11:40:28.504934+00:00",
+        "transport": "requests",
+        "index_url": "https://www.riksbank.se/en-gb/statistics/turnover-statistics/fi-market/",
+        "index_sha256": "72ab425f00821f579fd7f67907a5d142566ecb729ed3d73d775660d976f7c42b",
+        "redistribution": "pending",
+        "definition_url": "https://www.riksbank.se/globalassets/media/statistik/omsattningsstatistik/penning_obligationsmarknad/daily_fi_description.xlsx",
+        "definition_sha256": "1959bb5ca0c79e86f86571e71cb86b978d6efc2d21f63a37001dd9248fda0ff4",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "Swedish National Debt Office",
+            "url": "https://www.riksgalden.se/en/our-operations/central-government-borrowing/sweden-as-an-issuer/rating/",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Issuer-grade summary lacks outlook, agency assessment date, currency and term; page review date is not assessment",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "HRV",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2026-03-16",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/croatia/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "26b1c3170c42af017f15fe4b3126f430ed8be9d61cd210723731c0d5bc13f297",
+        "retrieved_at": "2026-10-25T11:38:39.154388+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "Croatian Ministry of Finance",
+            "url": "https://mfin.gov.hr/vijesti/s-p-podigao-kreditni-rejting-hrvatske-s-a-na-a-uz-stabilne-izglede/4118",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "2026-03-14 release reports 2026-03-13 action; LT/ST explicit, currency absent; historical action, not current table",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "NLD",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "Dutch State Treasury Agency",
+            "url": "https://english.dsta.nl/subjects/c/capital-markets",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Generic credit-quality prose; no agency-specific exact dated current table verified",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "SVN",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2025-06-09",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/slovenia/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "1d6ece29976c97c7dc6d4077f42aaded826a9d81ba55cf242e0fa05a65897f5c",
+        "retrieved_at": "2026-10-25T11:38:40.489541+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "Slovenian Ministry of Finance",
+            "url": "https://www.gov.si/en/topics/investor-relations/",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Table separates last change and latest revision, but jurisdiction attestation requires user representations; research only, no collector",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "DEU",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "provider": "finanzagentur",
+        "url": "https://www.deutsche-finanzagentur.de/en/federal-funding/government-as-issuer/ratings",
+        "agency": "Standard & Poor's",
+        "usable_for_scoring": false,
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "currency": null,
+        "rating_kind": "long_term_currency_unverified",
+        "assessment_date_type": "issuer_report_date",
+        "assessment_date": "2026-04-24",
+        "assessment_age_days": 184,
+        "reason": "Reported rating omitted from public output",
+        "raw_sha256": "c726e48974f169b54d99c13c16b9b2bb1556f9fcbd7098f8b9a1af9efd70cbac",
+        "retrieved_at": "2026-10-25T11:40:34.843959+00:00",
+        "transport": "curl_cffi",
+        "candidate_sources": [
+          {
+            "provider": "Deutsche Finanzagentur",
+            "url": "https://www.deutsche-finanzagentur.de/en/federal-funding/government-as-issuer/ratings",
+            "scope": "Issuer-published long-term and short-term sovereign ratings, outlooks, report dates and agency report links",
+            "limitation": "Summary does not separate local and foreign currency; collected as long-term, currency-unverified diagnostic; S&P link labelled 2026-04-24 resolves to a 2025-06-13 PDF and cannot certify the current row",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "SVK",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2026-04-25",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/slovakia/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "8ef07078f9d3770d981ad408c90af888997dc9e718d744c40435bf22470a8d2f",
+        "retrieved_at": "2026-10-25T11:40:04.381370+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "issuer_failure": {
+          "provider": "nbs",
+          "url": "https://nbs.sk/en/about-the-bank/international-relations/international-institutions/rating/",
+          "status": "UNAVAILABLE",
+          "reason": "DataError:HTTP_FAILURE:ReadTimeout"
+        },
+        "candidate_sources": [
+          {
+            "provider": "National Bank of Slovakia",
+            "url": "https://nbs.sk/en/about-the-bank/international-relations/international-institutions/rating/",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Collected current summary with last-change date only; latest assessment, currency and term remain unverified",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "AUT",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2025-02-17",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/austria/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "48d2f3774ac2c1c5821c98a13b184ce9ff934f70b0bed93b922c7720472cc940",
+        "retrieved_at": "2026-10-25T11:40:06.049279+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "Austrian Treasury",
+            "url": "https://www.oebfa.at/en/presse/presseuebersicht/2026/s-p-news-02-2026.html",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Public 2026-02-06 historical release links explicit LC/FC LT/ST PDF; current ratings page requires jurisdiction attestations; no collector",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "PRT",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2026-03-02",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/portugal/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "edd33b9271c5a95c6c13239edd754640a35bfb6f0ed36944e0d23f9021f36f8e",
+        "retrieved_at": "2026-10-25T11:40:07.738271+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "Portuguese Treasury and Debt Management Agency",
+            "url": "https://www.igcp.pt/pt/investidores/ratings",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Jurisdiction attestation page; no automated collection or eligibility representation; ungated bond issue dates are not rating assessments",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "ISR",
+      "size": {
+        "unit": "USD_billion",
+        "period": "",
+        "provider": "bis",
+        "status": "UNAVAILABLE",
+        "reason": "BIS_SERIES_NOT_REPORTED_IN_SELECTED_SCOPE"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2025-11-10",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/israel/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "a24d39d39570ce13cee332a87786350cf9adea6ce4fca541ca12b7051ec92458",
+        "retrieved_at": "2026-10-25T11:40:10.185672+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "Israeli Ministry of Finance",
+            "url": "https://www.gov.il/BlobFolder/news/press_140526a/en/RatingsDirect_ResearchUpdate_Israel_3559560_May-8-2026.pdf",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Explicit LC/FC LT/ST historical action dated 2026-05-08; ministry announcement May 14 is a separate date; no current table",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "ESP",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "Spanish Treasury",
+            "url": "https://www.tesoro.es/en/deuda-publica/calificacion-crediticia",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Indexed transposed LT/ST table with As at date, currency absent; production request returned 502, no numeric collector",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "GBR",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "provider": "uk_dmo",
+        "frequency": "quarterly",
+        "unit": "GBP_million_quarterly_purchase_plus_sale",
+        "definition": "GEMM-reported gilt purchases plus sales at market value; all maturities including index-linked; repo and derivatives excluded; non-GEMM/non-GEMM trades absent; reporter sums can double-count; not unique-trade volume or a single-5Y measure",
+        "period": "2026-Q2",
+        "observation_date": "2026-06-30",
+        "age_days": 117,
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Source-specific transaction volume; not harmonized across countries",
+        "url": "https://www.dmo.gov.uk/media/f5mhs5ek/gemm-turnover-by-maturity-band-18092026.xlsx",
+        "raw_sha256": "5d1ee506cbf424a2d9d8ea756a86f97c2e383fa15209c331d1ed39f110791179",
+        "retrieved_at": "2026-10-25T11:40:25.589521+00:00",
+        "transport": "requests",
+        "index_url": "https://www.dmo.gov.uk/data/gilt-market/turnover-data/",
+        "index_sha256": "20a79c82f5c0c11ef1517dfd269218cbbf0fc4be2a366abac5f2de6a8c3450ad",
+        "redistribution": "pending",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "S&P Global Ratings",
+            "url": "https://www.spglobal.com/ratings/en/regulatory/article/-/view/sourceId/101677731",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Historical 2026-04-10 action explicitly separates term and LC/FC; no current DMO rating table found",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "FRA",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "provider": "aft",
+        "url": "https://www.aft.gouv.fr/en/frances-credit-ratings",
+        "agency": "Standard & Poor's",
+        "usable_for_scoring": false,
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "currency": null,
+        "rating_kind": "currency_and_term_unverified",
+        "assessment_date_type": "issuer_latest_rating",
+        "assessment_date": "2026-05-29",
+        "assessment_age_days": 149,
+        "reason": "Reported rating omitted from public output",
+        "raw_sha256": "e24d5a07e251abc15d22ef13debdab280e4f203c69b76249c71dea83ddb8f49e",
+        "retrieved_at": "2026-10-25T11:40:36.688496+00:00",
+        "transport": "requests",
+        "candidate_sources": [
+          {
+            "provider": "Agence France Tresor",
+            "url": "https://www.aft.gouv.fr/en/frances-credit-ratings",
+            "scope": "Issuer-published sovereign ratings, outlooks and agency review dates",
+            "limitation": "Currency and rating term are not separated in the summary; collected as a reported diagnostic only; do not infer long-term local-currency classification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "ITA",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "agency": "Standard & Poor's",
+        "last_action_date": "2026-02-02",
+        "provider": "wgb",
+        "url": "https://www.worldgovernmentbonds.com/country/italy/",
+        "api_url": "https://www.worldgovernmentbonds.com/wp-json/country/v1/main",
+        "raw_sha256": "4beb13991704a3042b76414c7c3323437d5e5a7a4c35edfad86100ba516cc634",
+        "retrieved_at": "2026-10-25T11:40:18.121027+00:00",
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Reported rating omitted from public output",
+        "candidate_sources": [
+          {
+            "provider": "S&P Global Ratings",
+            "url": "https://www.spglobal.com/ratings/en/regulatory/article/-/view/type/HTML/id/3352820",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Historical 2025-04-11 action; cannot certify current outlook; no current Ministry rating table verified",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "BEL",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Comparable sovereign liquidity level / turnover not verified",
+        "candidate_sources": [
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "provider": "belgian_debt_agency",
+        "url": "https://www.debtagency.be/en/datafederalstaterating",
+        "agency": "Standard & Poor's",
+        "usable_for_scoring": false,
+        "redistribution": "pending",
+        "status": "REDISTRIBUTION_PENDING",
+        "currency": null,
+        "rating_kind": "currency_and_term_unverified",
+        "assessment_date_type": "issuer_confirmation_date",
+        "assessment_date": "2026-04-24",
+        "assessment_age_days": 184,
+        "reason": "Reported rating omitted from public output",
+        "raw_sha256": "f9c05c0e9c494271f3a277894fecf41a193373c5bd1079be86f5f5f7a5bb54ac",
+        "retrieved_at": "2026-10-25T11:40:38.225057+00:00",
+        "transport": "curl_cffi",
+        "candidate_sources": [
+          {
+            "provider": "Belgian Debt Agency",
+            "url": "https://www.debtagency.be/en/datafederalstaterating",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Collected confirmation date from current row; ignore future review and rating-scale comparison; currency/term absent",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "USA",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "provider": "nyfed",
+        "series": "PDGSWOEXTTOT",
+        "frequency": "weekly_daily_average",
+        "unit": "USD_million_daily_average",
+        "definition": "Primary-dealer Treasury outright purchases plus sales excluding TIPS; all maturities; inter-dealer brokers plus others; trading-day average; includes when-issued/forward delivery; repo excluded; dealer reporting can double-count interdealer activity",
+        "period": "2026-10-14",
+        "observation_date": "2026-10-14",
+        "age_days": 11,
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Source-specific transaction volume; not harmonized across countries",
+        "url": "https://markets.newyorkfed.org/api/pd/latest/SBN2024.json",
+        "raw_sha256": "59d27e47bb722cbaa08568a25136b9fdbc80750883b83154e4cbdd93bc853639",
+        "retrieved_at": "2026-10-25T11:40:22.999244+00:00",
+        "transport": "curl_cffi",
+        "redistribution": "pending",
+        "definition_url": "https://markets.newyorkfed.org/api/pd/list/timeseries.json",
+        "definition_sha256": "77a7805ffdf634d259bdc94c8eb4ff9f44acb7c5ea7c1246f05152a971d4c7c0",
+        "candidate_sources": [
+          {
+            "provider": "Federal Reserve Bank of New York",
+            "url": "https://www.newyorkfed.org/markets/counterparties/primary-dealers-statistics",
+            "scope": "Weekly primary-dealer positions, transactions and financing",
+            "limitation": "Dealer reporting perimeter; choose Treasury transaction series and units before collection; not total-market turnover",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "ADB government-bond turnover connected only for Korea and Japan"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "S&P Global Ratings",
+            "url": "https://www.spglobal.com/ratings/en/regulatory/ratings-actions?app=sp",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Agency action-search entry point only; no current US Treasury rating table or country-filtered current observation verified",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    },
+    {
+      "iso3": "JPN",
+      "size": {
+        "provider": "bis",
+        "metric": "central_government_debt_securities_outstanding",
+        "unit": "USD_billion",
+        "period": "2026-Q1",
+        "observation_date": "2026-03-31",
+        "age_days": 208,
+        "status": "REDISTRIBUTION_PENDING",
+        "definition": "central government excluding social security; nominal value; all currencies; all original maturities; all markets",
+        "url": "https://stats.bis.org/api/v1/data/WS_NA_SEC_DSS/Q.N.IS+NO+AU+NZ+KR+CZ+BG+CA+IE+DK+LT+SE+HR+NL+SI+DE+SK+AT+PT+IL+ES+GB+FR+IT+BE+US+JP.XW.S1311.S1.N.L.LE.F3.T._Z.USD._T.N.V.N._T?startPeriod=2025-Q1&endPeriod=2026-Q4",
+        "raw_sha256": "a4e82a1c2075c06de6930e210ddbfe9f6e9f0a8dba639acb0cbea5f23cd83501",
+        "retrieved_at": "2026-10-25T11:40:22.830096+00:00",
+        "redistribution": "pending"
+      },
+      "liquidity": {
+        "provider": "jsda",
+        "frequency": "monthly",
+        "unit": "JPY_100_million_monthly_sell_plus_purchase",
+        "definition": "JSDA regular plus special members; government-bond OTC outright sell plus purchase; face amount; includes Treasury bills, when-issued/GX bonds, auctions and BOJ activity; excludes exchange trades and repo; not a unique-trade or single-5Y measure",
+        "period": "2026-09",
+        "observation_date": "2026-09-30",
+        "age_days": 25,
+        "status": "REDISTRIBUTION_PENDING",
+        "usable_for_scoring": false,
+        "reason": "Source-specific transaction volume; not harmonized across countries",
+        "url": "https://www.jsda.or.jp/shiryoshitsu/toukei/tentoubaibai/koushasai.xlsx",
+        "raw_sha256": "26179f80f32992e85be4b380a9309cf0f7032362cab55d31fc175787c9cdc351",
+        "retrieved_at": "2026-10-25T11:40:24.041976+00:00",
+        "transport": "curl_cffi",
+        "redistribution": "pending",
+        "candidate_sources": [
+          {
+            "provider": "Japan Securities Dealers Association",
+            "url": "https://www.jsda.or.jp/en/statistics/bonds/index.html",
+            "scope": "Monthly member-reported yen-denominated OTC bond transactions",
+            "limitation": "Exchange trades excluded; auction and BOJ purchases included; distinguish outright, repo and JGB basket columns",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "OECD",
+            "url": "https://www.oecd.org/en/publications/global-debt-report-2026_e9d80efd-en/full-report/sovereign-borrowing-outlook_4470147b.html",
+            "scope": "2025 survey of changes in government-bond secondary-market liquidity",
+            "limitation": "Change in liquidity is not an absolute liquidity level; no comparable 27-country observation feed verified",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "turnover": {
+        "provider": "adb",
+        "metric": "government_bond_turnover_ratio",
+        "frequency": "quarterly",
+        "unit": "turns_per_quarter",
+        "amount_unit": "LCY_billion",
+        "currency": "JPY",
+        "upstream_provider": "JSDA",
+        "definition": "Quarterly government-bond traded value / average outstanding at previous and current quarter ends; local currency; repo excluded; published ratio rounded to two decimals. ADB already halves reported sales plus purchases; no further division applied. OTC only; government category includes municipal, government-guaranteed, FILP-agency and transportation/NHK bonds; all maturities",
+        "definition_url": "https://asianbondsonline.adb.org/xml/get-indicator.php?code=Bond_turn_ratio",
+        "country_notes_url": "https://asianbondsonline.adb.org/charts/bond_turn_ratio.php?module=data-portal&economies=KR%5EJP&years=2025%5E2026&frequency=Quarterly",
+        "usable_for_scoring": false,
+        "reason": "Source-specific government categories and OTC coverage are not harmonized; not a single-5Y measure",
+        "status": "REDISTRIBUTION_PENDING",
+        "period": "2026-Q2",
+        "observation_date": "2026-06-30",
+        "age_days": 117,
+        "url": "https://asianbondsonline.adb.org/downloads/bond_turn_ratio_csv.php?economies=KR%5EJP&years=2025%5E2026&frequency=Quarterly",
+        "raw_sha256": "369ecc2cd70a4cba651df31b8e147ba39c25df592d37c64b35ae2d98525a8e43",
+        "retrieved_at": "2026-10-25T11:40:33.405985+00:00",
+        "transport": "requests",
+        "redistribution": "pending"
+      },
+      "credit": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Same-agency long-term local-currency rating and dated source not verified",
+        "candidate_sources": [
+          {
+            "provider": "Japanese Ministry of Finance",
+            "url": "https://www.mof.go.jp/english/policy/jgbs/publication/debt_management_report/2026/index.html",
+            "scope": "Official sovereign credit-rating research route",
+            "limitation": "Annual supplement has long-term home-currency snapshot as at 2026-04-03; historical outlook-change date is not latest assessment; no PDF observation imported",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          },
+          {
+            "provider": "Trading Economics",
+            "url": "https://ko.tradingeconomics.com/country-list/rating",
+            "scope": "Secondary sovereign-rating discovery index; S&P candidates visible for all configured countries",
+            "limitation": "Summary omits currency, term and per-agency assessment dates; TE score is a separate model; no API or grade dataset imported; API credentials and permitted use need separate verification",
+            "reviewed_on": "2026-10-07",
+            "kind": "RESEARCH_LINK",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "accessibility": {
+        "status": "SOURCE_NOT_CONNECTED",
+        "reason": "Dated bond-market accessibility input not connected",
+        "candidate_sources": [
+          {
+            "provider": "FTSE Russell / LSEG",
+            "url": "https://www.lseg.com/en/ftse-russell/fixed-income-country-classification",
+            "scope": "Institutional local-currency government-bond market accessibility classification",
+            "limitation": "Candidate reference only; edition, market coverage and permitted use need verification; no classification dataset imported",
+            "kind": "RESEARCH_LINK",
+            "reviewed_on": "2026-10-05",
+            "usable_for_scoring": false
+          }
+        ]
+      },
+      "composite_status": "MODEL_NOT_IMPLEMENTED"
+    }
+  ],
+  "system_holds": [],
+  "adjusted_status": "NOT AVAILABLE",
+  "decision": {
+    "PARTIAL BASELINE": "DATA_HOLD",
+    "FULL COMPARISON": "DATA_HOLD",
+    "ADJUSTED MODEL": "DATA_HOLD"
+  },
+  "source_notices": [],
+  "fiscal_source": {
+    "used": false,
+    "edition": "October 2026",
+    "original_retrieved_at": "2026-10-25T11:38:18.541195+00:00",
+    "last_retrieved_at": "2026-10-25T11:38:21.489630+00:00",
+    "validated_at": "2026-10-25T11:38:21.504315+00:00",
+    "age_days": 0,
+    "refresh_failure": "",
+    "latest_release_verified": true
+  },
+  "yield_sources": [
+    {
+      "iso3": "ISL",
+      "name": "아이슬란드",
+      "provider": "iceland",
+      "observation_date": "2026-10-22",
+      "age_days": 3,
+      "fallback": false,
+      "definition": "par_constant_maturity",
+      "definition_note": "연구용 5년물 비교; 명목 par constant maturity 합성 국채의 5년 지점, 물가연동·무이표 금리 및 특정 발행채 YTM과 다름",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": [
+        "BASELINE_DEFINITION_DIFFERENCE"
+      ]
+    },
+    {
+      "iso3": "NOR",
+      "name": "노르웨이",
+      "provider": "norway",
+      "observation_date": "2026-10-22",
+      "age_days": 3,
+      "fallback": false,
+      "definition": "benchmark",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": []
+    },
+    {
+      "iso3": "AUS",
+      "name": "호주",
+      "provider": "rba",
+      "observation_date": "2026-10-21",
+      "age_days": 4,
+      "fallback": false,
+      "definition": "interpolated_constant_maturity",
+      "definition_note": "연구용 5년물 비교; RBA 평가 종가를 바탕으로 보간한 명목 5년 만기 금리, 단일 발행채 YTM 또는 RBA 지정 금융 benchmark와 다름",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": [
+        "BASELINE_DEFINITION_DIFFERENCE"
+      ]
+    },
+    {
+      "iso3": "NZL",
+      "name": "뉴질랜드",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "KOR",
+      "name": "한국",
+      "provider": "kofia",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": false,
+      "definition": "final_quotation_basket",
+      "definition_note": "연구용 5년물 비교; 최종호가 바스켓 잔존기간 4년6개월~5년, 단일 5년 benchmark와 다름",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": [
+        "BASELINE_DEFINITION_DIFFERENCE"
+      ]
+    },
+    {
+      "iso3": "CZE",
+      "name": "체코",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:HTTP_FAILURE:404",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "BGR",
+      "name": "불가리아",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY",
+        "FX_HISTORY_REBASED"
+      ]
+    },
+    {
+      "iso3": "CAN",
+      "name": "캐나다",
+      "provider": "canada",
+      "observation_date": "2026-10-22",
+      "age_days": 3,
+      "fallback": false,
+      "definition": "benchmark",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": []
+    },
+    {
+      "iso3": "IRL",
+      "name": "아일랜드",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "DNK",
+      "name": "덴마크",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "LTU",
+      "name": "리투아니아",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "SWE",
+      "name": "스웨덴",
+      "provider": "riksbank",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": false,
+      "definition": "benchmark",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": []
+    },
+    {
+      "iso3": "HRV",
+      "name": "크로아티아",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "NLD",
+      "name": "네덜란드",
+      "provider": "riksbank",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": false,
+      "definition": "benchmark",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": []
+    },
+    {
+      "iso3": "SVN",
+      "name": "슬로베니아",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "DEU",
+      "name": "독일",
+      "provider": "riksbank",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": false,
+      "definition": "benchmark",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": []
+    },
+    {
+      "iso3": "SVK",
+      "name": "슬로바키아",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:HTTP_FAILURE:ReadTimeout",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "AUT",
+      "name": "오스트리아",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "PRT",
+      "name": "포르투갈",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:SOURCE_NOT_IMPLEMENTED_OR_UNVERIFIED",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "ISR",
+      "name": "이스라엘",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:FREQUENCY_OR_DATE",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "ESP",
+      "name": "스페인",
+      "provider": "spain",
+      "observation_date": "2026-10-21",
+      "age_days": 4,
+      "fallback": false,
+      "definition": "secondary_market_bucket",
+      "definition_note": "연구용 5년물 비교; 스페인 중앙은행의 일반 국채 현물 유통시장 5년 금리, 종목 선정·가중 방식 미확인으로 단일 benchmark 또는 constant maturity와 동일하다고 보지 않음",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": [
+        "BASELINE_DEFINITION_DIFFERENCE"
+      ]
+    },
+    {
+      "iso3": "GBR",
+      "name": "영국",
+      "provider": "riksbank",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": false,
+      "definition": "benchmark",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": []
+    },
+    {
+      "iso3": "FRA",
+      "name": "프랑스",
+      "provider": "riksbank",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": false,
+      "definition": "benchmark",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": []
+    },
+    {
+      "iso3": "ITA",
+      "name": "이탈리아",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:STALE",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "BEL",
+      "name": "벨기에",
+      "provider": "wgb",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": true,
+      "definition": "annualized_government_yield",
+      "definition_note": "",
+      "selection_reason": "OFFICIAL_UNAVAILABLE:DataError:YIELD_CONTRACT",
+      "warnings": [
+        "WGB_FALLBACK_USED",
+        "WGB_DATE_DISCREPANCY"
+      ]
+    },
+    {
+      "iso3": "USA",
+      "name": "미국",
+      "provider": "treasury",
+      "observation_date": "2026-10-23",
+      "age_days": 2,
+      "fallback": false,
+      "definition": "par_constant_maturity",
+      "definition_note": "연구용 5년물 비교; par constant maturity 곡선의 5년 지점, 특정 채권의 거래수익률과 다름",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": [
+        "BASELINE_DEFINITION_DIFFERENCE"
+      ]
+    },
+    {
+      "iso3": "JPN",
+      "name": "일본",
+      "provider": "japan",
+      "observation_date": "2026-10-22",
+      "age_days": 3,
+      "fallback": false,
+      "definition": "constant_maturity",
+      "definition_note": "연구용 5년물 비교; 시장가격 기반 constant maturity 반기복리 수익률, 단일 benchmark와 다름",
+      "selection_reason": "OFFICIAL_VALID",
+      "warnings": [
+        "BASELINE_DEFINITION_DIFFERENCE"
+      ]
+    }
+  ]
+}
